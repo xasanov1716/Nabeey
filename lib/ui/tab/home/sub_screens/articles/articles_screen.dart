@@ -13,6 +13,8 @@ class ArticlesScreen extends StatefulWidget {
 }
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
+  int selectedContainer = 0;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -85,37 +87,93 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
               children: [
                 Row(
                   children: [
-                    const GlobalContainer(
-                        image: AppIcons.articleBackground,
-                        imageEdit: AppIcons.article,
-                        text: "Article",
-                        color: AppColors.C_F59C16,
-                        textColor: AppColors.white),
+                    ZoomTapAnimation(
+                      onTap: () {
+                        setState(() {
+                          selectedContainer = 1;
+                        });
+                      },
+                      child: GlobalContainer(
+                          iconColor: selectedContainer == 1
+                              ? AppColors.white
+                              : AppColors.black,
+                          imageBackground: AppIcons.articleBackground,
+                          image: AppIcons.article,
+                          text: "Article",
+                          color: selectedContainer == 1
+                              ? AppColors.C_F59C16
+                              : AppColors.white,
+                          textColor: selectedContainer == 1
+                              ? AppColors.white
+                              : AppColors.black),
+                    ),
                     SizedBox(width: width * (16 / 375)),
-                    const GlobalContainer(
-                        image: AppIcons.youtubeBackground,
-                        imageEdit: AppIcons.youtube,
-                        text: "Video",
-                        color: AppColors.white,
-                        textColor: AppColors.black),
+                    ZoomTapAnimation(
+                      onTap: () {
+                        setState(() {
+                          selectedContainer = 2;
+                        });
+                      },
+                      child: GlobalContainer(
+                          iconColor: selectedContainer == 2
+                              ? AppColors.white
+                              : AppColors.black,
+                          imageBackground: AppIcons.youtubeBackground,
+                          image: AppIcons.youtube,
+                          text: "Video",
+                          color: selectedContainer == 2
+                              ? AppColors.C_F59C16
+                              : AppColors.white,
+                          textColor: selectedContainer == 2
+                              ? AppColors.white
+                              : AppColors.black),
+                    ),
                   ],
                 ),
                 SizedBox(height: height * (16 / 812)),
                 Row(
                   children: [
-                    const GlobalContainer(
-                        image: AppIcons.audioBackground,
-                        imageEdit: AppIcons.audio,
-                        text: "Audio",
-                        color: AppColors.white,
-                        textColor: AppColors.black),
+                    ZoomTapAnimation(
+                      onTap: () {
+                        setState(() {
+                          selectedContainer = 3;
+                        });
+                      },
+                      child: GlobalContainer(
+                          iconColor: selectedContainer == 3
+                              ? AppColors.white
+                              : AppColors.black,
+                          imageBackground: AppIcons.audioBackground,
+                          image: AppIcons.audio,
+                          text: "Audio",
+                          color: selectedContainer == 3
+                              ? AppColors.C_F59C16
+                              : AppColors.white,
+                          textColor: selectedContainer == 3
+                              ? AppColors.white
+                              : AppColors.black),
+                    ),
                     SizedBox(width: width * (16 / 375)),
-                    const GlobalContainer(
-                        image: AppIcons.bookBackground,
-                        imageEdit: AppIcons.book,
-                        text: "Book",
-                        color: AppColors.white,
-                        textColor: AppColors.black),
+                    ZoomTapAnimation(
+                      onTap: () {
+                        setState(() {
+                          selectedContainer = 4;
+                        });
+                      },
+                      child: GlobalContainer(
+                          iconColor: selectedContainer == 4
+                              ? AppColors.white
+                              : AppColors.black,
+                          imageBackground: AppIcons.bookBackground,
+                          image: AppIcons.book,
+                          text: "Book",
+                          color: selectedContainer == 4
+                              ? AppColors.C_F59C16
+                              : AppColors.white,
+                          textColor: selectedContainer == 4
+                              ? AppColors.white
+                              : AppColors.black),
+                    ),
                   ],
                 ),
               ],
