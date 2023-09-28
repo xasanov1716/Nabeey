@@ -1,3 +1,4 @@
+import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/widgets/global_container.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
