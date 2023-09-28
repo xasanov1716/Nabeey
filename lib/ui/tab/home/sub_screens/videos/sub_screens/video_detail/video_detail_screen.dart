@@ -2,14 +2,14 @@ import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BooksScreen extends StatefulWidget {
-  const BooksScreen({super.key});
+class VideoDetailScreen extends StatefulWidget {
+  const VideoDetailScreen({super.key});
 
   @override
-  State<BooksScreen> createState() => _BooksScreenState();
+  State<VideoDetailScreen> createState() => _VideoDetailScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen> {
+class _VideoDetailScreenState extends State<VideoDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

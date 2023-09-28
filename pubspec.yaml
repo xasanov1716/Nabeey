@@ -10,6 +10,21 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cupertino_icons: ^1.0.6
+  flutter_svg: ^2.0.7
+  flutter_screenutil: ^5.9.0
+  easy_localization: ^3.0.3
+  shared_preferences: ^2.2.1
+  zoom_tap_animation: ^1.1.0
+  dio: ^5.3.3
+  http: ^1.1.0
+  cached_network_image: ^3.3.0
+  flutter_bloc: ^8.1.3
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  lottie: ^2.6.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -17,3 +32,25 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svg/
+    - assets/translations/
+
+  fonts:
+    - family: Urbanist
+      fonts:
+        - asset: assets/fonts/Urbanist/Urbanist-Black.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-BlackItalic.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Bold.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-BoldItalic.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Italic.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Medium.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-MediumItalic.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Regular.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-SemiBold.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-SemiBoldItalic.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Thin.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-ThinItalic.ttf
+          style: italic

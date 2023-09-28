@@ -2,32 +2,26 @@ import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BooksScreen extends StatefulWidget {
-  const BooksScreen({super.key});
+class RatingScreen extends StatefulWidget {
+  const RatingScreen({super.key});
 
   @override
-  State<BooksScreen> createState() => _BooksScreenState();
+  State<RatingScreen> createState() => _RatingScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen> {
+class _RatingScreenState extends State<RatingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Lorem Ipsum",
+          "Profile Screen",
           style: TextStyle(
               fontFamily: "Poppins",
               fontSize: 24.sp,
               fontWeight: FontWeight.w700,
               color: AppColors.C_111111),
         ),
-      ),
-
-      body: Column(
-        children: [
-
-        ],
       ),
     );
   }
