@@ -28,6 +28,7 @@ class VideosListWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width / 18),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 videosName,
@@ -38,9 +39,11 @@ class VideosListWidget extends StatelessWidget {
                   fontFamily: "Urbanist",
                 ),
               ),
-              const Spacer(),
               TextButton(
-                style: TextButton.styleFrom(shape: const RoundedRectangleBorder(), padding: EdgeInsets.zero),
+                style: TextButton.styleFrom(
+                  shape: const RoundedRectangleBorder(),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                ),
                 onPressed: onTap,
                 child: Text(
                   "Barchasi",
@@ -57,7 +60,7 @@ class VideosListWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: height / 4.6,
+          height: height / 4,
           child: ListView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -71,8 +74,9 @@ class VideosListWidget extends StatelessWidget {
                       Stack(
                         alignment: Alignment.center,
                         children: [
-                          Image.asset(images[index], width: width / 3.5, height: height / 6),
-                          SvgPicture.asset(AppIcons.play,width: width / 13)
+                          Image.asset(images[index],
+                              width: width / 3.5, height: height / 6),
+                          SvgPicture.asset(AppIcons.play, width: width / 13)
                         ],
                       ),
                       SizedBox(
