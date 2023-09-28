@@ -114,6 +114,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         setState(() {
                           selectedContainer = 2;
                         });
+                        Navigator.pushNamed(context, RouteNames.videoScreen);
                       },
                       child: GlobalContainer(
                           iconColor: selectedContainer == 2
