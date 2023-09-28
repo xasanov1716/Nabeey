@@ -36,8 +36,7 @@ class _VideoItemState extends State<VideoItem> {
     return Column(
       children: [
         Container(
-          height: 215,
-          width: 320,
+          height: 250,
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
