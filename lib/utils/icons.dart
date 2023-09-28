@@ -16,5 +16,8 @@ class AppIcons {
   static const String profile = "assets/svg/profile.svg";
   static const String quiz = "assets/svg/quiz.svg";
   static const String rating = "assets/svg/rating.svg";
-
+  static const String remove = "assets/svg/remove.svg";
+  static const String skipForward = "assets/svg/skip_forward.svg";
+  static const String skipForward1 = "assets/svg/skip_forward_1.svg";
+  static const String subtract = "assets/svg/subtract.svg";
 }

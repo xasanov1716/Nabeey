@@ -1,3 +1,4 @@
+import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/widgets/global_container.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
@@ -103,7 +104,10 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                 SizedBox(height: height * (16 / 812)),
                 Row(
                   children: [
-                    const GlobalContainer(
+                    GlobalContainer(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteNames.audioScreen);
+                        },
                         image: AppIcons.audioBackground,
                         imageEdit: AppIcons.audio,
                         text: "Audio",
