@@ -37,12 +37,12 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: Container(
-        height: height*(70/812),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(20), topLeft: Radius.circular(20)),
           boxShadow: [
-            BoxShadow(color: Colors.grey, spreadRadius: 0, blurRadius: 10),
+            BoxShadow(
+                color: Colors.grey.shade300, spreadRadius: 0, blurRadius: 10),
           ],
         ),
         child: ClipRRect(
@@ -56,7 +56,6 @@ class _TabBoxState extends State<TabBox> {
             selectedItemColor: AppColors.C_F59C16,
             unselectedIconTheme: IconThemeData(color: AppColors.black),
             selectedIconTheme: IconThemeData(color: AppColors.C_F59C16),
-
             items: [
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(AppIcons.home), label: "Home"),
