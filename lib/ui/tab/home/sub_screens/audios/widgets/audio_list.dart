@@ -1,8 +1,10 @@
+import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class AudioList extends StatelessWidget {
   const AudioList({super.key, required this.index, required this.onTap});
+
   final int index;
   final VoidCallback onTap;
 
@@ -12,13 +14,24 @@ class AudioList extends StatelessWidget {
     return ZoomTapAnimation(
       onTap: onTap,
       child: Container(
-        height: (56 / apphight) * 800,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: const BorderRadius.all(Radius.circular(15))),
-        child: Text('Audio $index'),
-      ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              border: Border.all(color: AppColors.black.withOpacity(0.1)),
+              borderRadius: const BorderRadius.all(Radius.circular(15))),
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Text(
+              "Audio $index",
+              style: const TextStyle(
+                fontFamily: "SF Pro Display",
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff111111),
+                height: 20 / 18,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          )),
     );
   }
 }

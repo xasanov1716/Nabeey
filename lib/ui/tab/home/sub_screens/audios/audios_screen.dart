@@ -1,4 +1,5 @@
-import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets1/audio_player_item.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_list.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_player_item.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,13 @@ class _AudioScreenState extends State<AudioScreen> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: const AudioPlayerItem(),
           ),
+          ...List.generate(
+            4,
+            (index) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+              child: AudioList(index: index, onTap: () {}),
+            ),
+          )
         ],
       ),
     );
