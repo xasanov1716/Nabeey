@@ -1,9 +1,13 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class AudioPlayerItem extends StatefulWidget {
   const AudioPlayerItem({super.key});
@@ -14,11 +18,42 @@ class AudioPlayerItem extends StatefulWidget {
 
 class _AudioPlayerItemState extends State<AudioPlayerItem> {
 
-  late AudioPlayer player;
+  final AudioPlayer player = AudioPlayer();
 
   Duration duration = Duration.zero;
   Duration currentDuration = Duration.zero;
-  late String songUrl;
+  bool isPlaying = false;
+
+  bool isCheck = false;
+
+
+  _init() async {
+    player.onDurationChanged.listen((Duration d) {
+      setState(() {
+        duration = d;
+      });
+    });
+
+    player.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+        duration = Duration.zero;
+        currentDuration = Duration.zero;
+      });
+    });
+
+    player.onPositionChanged.listen((Duration d) {
+      currentDuration = d;
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+  _init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,19 +79,22 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  SvgPicture.asset(AppIcons.remove)
+                  ZoomTapAnimation(onTap: (){
+                    isCheck = true;
+                    setState(() {
+
+                    });
+                    StorageRepository.putBool('check', isCheck);
+                    debugPrint(StorageRepository.getBool('check').toString());
+                  },child: SvgPicture.asset(AppIcons.remove))
                 ],
               ),
               Slider(
-                activeColor: AppColors.C_F59C16,
-                inactiveColor: Colors.white30,
+                inactiveColor: Colors.black,
                 value: currentDuration.inSeconds.toDouble(),
                 max: duration.inSeconds.toDouble(),
-                // max: duration.inSeconds.toDouble(),
-                // divisions: 100,
-                //label: _currentSliderValue.round().toString(),
+                activeColor: AppColors.C_F59C16,
                 onChanged: (double value) async {
-                  // print(value);
                   await player.seek(Duration(seconds: value.toInt()));
                   setState(() {});
                 },
@@ -65,7 +103,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "00:35",
+                    '${currentDuration.inSeconds ~/ 60}: ${currentDuration.inSeconds % 60}',
                     style: TextStyle(
                       fontFamily: "SF Pro Display",
                       fontSize: 12,
@@ -76,7 +114,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    "1:35",
+                    '${duration.inSeconds ~/ 60}: ${duration.inSeconds % 60}',
                     style: TextStyle(
                       fontFamily: "SF Pro Display",
                       fontSize: 12,
@@ -98,9 +136,22 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                         AppColors.black.withOpacity(0.5), BlendMode.srcIn),
                   ),
                   SizedBox(width: 13.w),
-                  SvgPicture.asset(
-                    AppIcons.subtract,
-                  ),
+                  ZoomTapAnimation(child: Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 50,
+                  ),onTap: (){
+                    setState(() {
+                      if (!isPlaying) {
+                        // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
+                        player.play(AssetSource('musics/susana.m4a'));
+                        isPlaying = true;
+                      } else {
+                        // context.read<AudioBloc>().add(PauseAudio());
+                        player.pause();
+                        isPlaying = false;
+                      }
+                    });
+                  },),
                   SizedBox(width: 13.w),
                   SvgPicture.asset(
                     AppIcons.skipForward1,
