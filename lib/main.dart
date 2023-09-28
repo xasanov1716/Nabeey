@@ -28,9 +28,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
-          home: const VideosScreen(),
-          // initialRoute: RouteNames.tabBox,
-          // onGenerateRoute: AppRoutes.generateRoute,
+          initialRoute: RouteNames.tabBox,
+          onGenerateRoute: AppRoutes.generateRoute,
         );
       },
     );

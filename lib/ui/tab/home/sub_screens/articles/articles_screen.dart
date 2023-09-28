@@ -140,6 +140,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                         setState(() {
                           selectedContainer = 3;
                         });
+                        Navigator.pushNamed(context, RouteNames.audioScreen);
                       },
                       child: GlobalContainer(
                           iconColor: selectedContainer == 3

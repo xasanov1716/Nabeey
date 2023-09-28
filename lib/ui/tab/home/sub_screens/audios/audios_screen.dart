@@ -19,7 +19,7 @@ class _AudioScreenState extends State<AudioScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           Stack(
             children: [
