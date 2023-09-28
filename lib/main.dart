@@ -1,4 +1,5 @@
 import 'package:contest_app/ui/tab/app_routes.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
 import 'package:contest_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,8 +28,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
-          initialRoute: RouteNames.tabBox,
-          onGenerateRoute: AppRoutes.generateRoute,
+          home: const VideosScreen(),
+          // initialRoute: RouteNames.tabBox,
+          // onGenerateRoute: AppRoutes.generateRoute,
         );
       },
     );
