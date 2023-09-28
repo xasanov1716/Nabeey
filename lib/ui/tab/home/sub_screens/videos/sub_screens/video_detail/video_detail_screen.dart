@@ -14,7 +14,6 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
   final List<String> videoUrls = [
     "https://files.nevomusic.net/video/Klip/Jaloliddin%20Ahmadaliyev%20%20Ozim%20Mood%20video.mp4",
     "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
-    'https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4'
   ];
 
 
