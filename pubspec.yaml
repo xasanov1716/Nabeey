@@ -24,6 +24,8 @@ dependencies:
   path: ^1.8.3
   lottie: ^2.6.0
   audioplayers: ^5.1.0
+  chewie: ^1.7.1
+  video_player: ^2.7.2
 
 
 dev_dependencies:
