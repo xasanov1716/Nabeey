@@ -22,7 +22,7 @@ class AppRoutes {
     switch (settings.name) {
       case RouteNames.tabBox:
         return MaterialPageRoute(
-          builder: (context) => const TabBox(),
+          builder: (context) =>  TabBox(),
         );
       case RouteNames.article:
         return MaterialPageRoute(builder: (context) => const ArticlesScreen());

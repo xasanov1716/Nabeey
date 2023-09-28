@@ -5,17 +5,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 class GlobalContainer extends StatelessWidget {
   const GlobalContainer(
       {super.key,
+      required this.imageBackground,
       required this.image,
-      required this.imageEdit,
       required this.text,
       required this.color,
-      required this.textColor});
+      required this.textColor,
+      required this.iconColor});
 
+  final String imageBackground;
   final String image;
-  final String imageEdit;
   final String text;
   final Color color;
   final Color textColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +35,17 @@ class GlobalContainer extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          SvgPicture.asset(image, width: double.infinity),
+          SvgPicture.asset(imageBackground,
+              colorFilter:
+                  const ColorFilter.mode(Colors.black54, BlendMode.srcIn),
+              width: double.infinity),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: height * (25 / 812)),
-                SvgPicture.asset(imageEdit),
+                SvgPicture.asset(image, color: iconColor),
                 SizedBox(height: height * (15 / 812)),
                 Text(
                   text,
