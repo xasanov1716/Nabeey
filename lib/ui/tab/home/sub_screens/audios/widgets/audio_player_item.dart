@@ -1,12 +1,24 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AudioPlayerItem extends StatelessWidget {
+class AudioPlayerItem extends StatefulWidget {
   const AudioPlayerItem({super.key});
 
+  @override
+  State<AudioPlayerItem> createState() => _AudioPlayerItemState();
+}
+
+class _AudioPlayerItemState extends State<AudioPlayerItem> {
+
+  late AudioPlayer player;
+
+  Duration duration = Duration.zero;
+  Duration currentDuration = Duration.zero;
+  late String songUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +47,20 @@ class AudioPlayerItem extends StatelessWidget {
                   SvgPicture.asset(AppIcons.remove)
                 ],
               ),
-              SizedBox(height: 18.h),
+              Slider(
+                activeColor: AppColors.C_F59C16,
+                inactiveColor: Colors.white30,
+                value: currentDuration.inSeconds.toDouble(),
+                max: duration.inSeconds.toDouble(),
+                // max: duration.inSeconds.toDouble(),
+                // divisions: 100,
+                //label: _currentSliderValue.round().toString(),
+                onChanged: (double value) async {
+                  // print(value);
+                  await player.seek(Duration(seconds: value.toInt()));
+                  setState(() {});
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
