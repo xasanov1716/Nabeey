@@ -1,11 +1,11 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_state.dart';
 import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../../utils/colors.dart';
 
 class ArticleDetailScreen extends StatelessWidget {
   const ArticleDetailScreen({super.key});

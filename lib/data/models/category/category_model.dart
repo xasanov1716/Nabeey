@@ -30,7 +30,13 @@ class CategoryModel {
       id: json['id'] as int? ?? 0,
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      image: HelperModel.fromJson(json['image']),
+      image: json['image'] != null
+          ? HelperModel.fromJson(json['image'])
+          : HelperModel(
+              id: 0,
+              fileName: "",
+              filePath: "",
+            ),
       books: (json["books"] as List?)
               ?.map((e) => BookModel.fromJson(e))
               .toList() ??

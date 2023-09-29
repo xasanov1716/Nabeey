@@ -1,4 +1,6 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/article_detail_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/articles_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/categories_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
@@ -15,6 +17,8 @@ class RouteNames {
   static const String booksScreen = "/books_screen";
   static const String videoScreen = "/video_screen";
   static const String videoDetailScreen = "/video_detail_screen";
+  static const String articleDetail = "/article_detail";
+  static const String articles = "/articles";
 }
 
 class AppRoutes {
@@ -36,6 +40,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const VideosScreen());
       case RouteNames.videoDetailScreen:
         return MaterialPageRoute(builder: (context) => const VideoDetailScreen());
+      case RouteNames.articleDetail:
+        return MaterialPageRoute(builder: (context) => const ArticleDetailScreen());
+      case RouteNames.articles:
+        return MaterialPageRoute(builder: (context) => const ArticlesScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
