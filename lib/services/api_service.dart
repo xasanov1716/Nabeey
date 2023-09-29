@@ -1,3 +1,8 @@
+import 'package:contest_app/data/models/video_model/video_model.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import '../data/models/universal_data.dart';
+import '../utils/constants.dart';
 import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/universal_data.dart';
 import 'package:contest_app/utils/constants.dart';
@@ -59,6 +64,30 @@ class ApiService {
       }
     } catch (e) {
       debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getAllVideos() async {
+    Response response;
+    try {
+      response = await _dio.get("/api/content-videos/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+          data: (response.data['data'] as List?)
+                  ?.map((e) => VideoModel.fromJson(e))
+                  .toList() ??
+              [],
+        );
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
       return UniversalData(error: e.toString());
     }
   }
