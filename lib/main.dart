@@ -6,7 +6,6 @@ import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'data/local/storage_repository/storage_repository.dart';
 
 Future<void> main() async {

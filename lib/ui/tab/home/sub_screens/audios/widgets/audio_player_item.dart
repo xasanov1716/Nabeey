@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
+import '../../../../../../data/local/storage_repository/storage_repository.dart';
+
 class AudioPlayerItem extends StatefulWidget {
   const AudioPlayerItem({super.key});
 

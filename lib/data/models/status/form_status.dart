@@ -1,6 +1,6 @@
-enum FormStatus{
-  loading,
-  failure,
+enum FormStatus {
   pure,
+  loading,
   success,
+  failure,
 }
