@@ -1,8 +1,8 @@
 import 'package:contest_app/data/models/universal_data.dart';
-import 'package:contest_app/services/article_service.dart';
+import 'package:contest_app/services/api_service.dart';
 
 class ArticleRepository {
-  final ArticleService articleService;
+  final ApiService articleService;
 
   ArticleRepository({required this.articleService});
 

@@ -4,7 +4,7 @@ import 'package:contest_app/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-class ArticleService {
+class ApiService {
   final _dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
@@ -15,7 +15,7 @@ class ArticleService {
     ),
   );
 
-  ArticleService() {
+  ApiService() {
     init();
   }
 
