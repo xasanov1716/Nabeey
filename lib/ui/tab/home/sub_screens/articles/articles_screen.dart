@@ -1,5 +1,3 @@
-import 'package:contest_app/ui/tab/app_routes.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/articles/widgets/global_container.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +13,15 @@ class ArticlesScreen extends StatefulWidget {
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
   int selectedContainer = 0;
+
+  int selectedContainerIndex = -1;
+
+  void selectContainer(int index) {
+    setState(() {
+      selectedContainerIndex = index;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,102 +91,32 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
           SizedBox(height: height * (32 / 812)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    ZoomTapAnimation(
-                      onTap: () {
-                        setState(() {
-                          selectedContainer = 1;
-                        });
-                      },
-                      child: GlobalContainer(
-                          iconColor: selectedContainer == 1
-                              ? AppColors.white
-                              : AppColors.black,
-                          imageBackground: AppIcons.articleBackground,
-                          image: AppIcons.article,
-                          text: "Article",
-                          color: selectedContainer == 1
-                              ? AppColors.C_F59C16
-                              : AppColors.white,
-                          textColor: selectedContainer == 1
-                              ? AppColors.white
-                              : AppColors.black),
+            child:  GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // You can adjust the number of columns here
+              ),
+              itemCount: 4, // Number of containers
+              itemBuilder: (context, index) {
+                bool isSelected = index == selectedContainerIndex;
+                return GestureDetector(
+                  onTap: () {
+                    selectContainer(index);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    color: isSelected ? Colors.blue : Colors.grey, // Change color when selected
+                    child: Center(
+                      child: Text(
+                        'Container $index',
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : Colors.black,
+                          fontSize: 18.0,
+                        ),
+                      ),
                     ),
-                    SizedBox(width: width * (16 / 375)),
-                    ZoomTapAnimation(
-                      onTap: () {
-                        setState(() {
-                          selectedContainer = 2;
-                        });
-                        Navigator.pushNamed(context, RouteNames.videoScreen);
-                      },
-                      child: GlobalContainer(
-                          iconColor: selectedContainer == 2
-                              ? AppColors.white
-                              : AppColors.black,
-                          imageBackground: AppIcons.youtubeBackground,
-                          image: AppIcons.youtube,
-                          text: "Video",
-                          color: selectedContainer == 2
-                              ? AppColors.C_F59C16
-                              : AppColors.white,
-                          textColor: selectedContainer == 2
-                              ? AppColors.white
-                              : AppColors.black),
-                    ),
-                  ],
-                ),
-                SizedBox(height: height * (16 / 812)),
-                Row(
-                  children: [
-                    ZoomTapAnimation(
-                      onTap: () {
-                        setState(() {
-                          selectedContainer = 3;
-                        });
-                        Navigator.pushNamed(context, RouteNames.audioScreen);
-                      },
-                      child: GlobalContainer(
-                          iconColor: selectedContainer == 3
-                              ? AppColors.white
-                              : AppColors.black,
-                          imageBackground: AppIcons.audioBackground,
-                          image: AppIcons.audio,
-                          text: "Audio",
-                          color: selectedContainer == 3
-                              ? AppColors.C_F59C16
-                              : AppColors.white,
-                          textColor: selectedContainer == 3
-                              ? AppColors.white
-                              : AppColors.black),
-                    ),
-                    SizedBox(width: width * (16 / 375)),
-                    ZoomTapAnimation(
-                      onTap: () {
-                        setState(() {
-                          selectedContainer = 4;
-                        });
-                      },
-                      child: GlobalContainer(
-                          iconColor: selectedContainer == 4
-                              ? AppColors.white
-                              : AppColors.black,
-                          imageBackground: AppIcons.bookBackground,
-                          image: AppIcons.book,
-                          text: "Book",
-                          color: selectedContainer == 4
-                              ? AppColors.C_F59C16
-                              : AppColors.white,
-                          textColor: selectedContainer == 4
-                              ? AppColors.white
-                              : AppColors.black),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                );
+              },
             ),
           ),
         ],

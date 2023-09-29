@@ -25,7 +25,7 @@ class AppRoutes {
           builder: (context) =>  TabBox(),
         );
       case RouteNames.article:
-        return MaterialPageRoute(builder: (context) => const ArticlesScreen());
+        return MaterialPageRoute(builder: (context) =>  ArticlesScreen());
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:

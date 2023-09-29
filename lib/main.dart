@@ -1,11 +1,10 @@
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
-import 'package:contest_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'local/storage_repository/storage_repository.dart';
+
+import 'data/local/storage_repository/storage_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
