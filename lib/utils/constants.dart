@@ -1,6 +1,9 @@
 const String adminEmail = "admin@gmail.com";
 
+const defaultImageConstant = "Select Image";
+
 const baseUrl = "https://thejama.uz";
+
 
 // const baseUrl = "https://api.restful-api.dev/objects";
 // const baseUrlForImage = "http://159.89.98.34:5545";
@@ -13,3 +16,5 @@ class TimeOutConstants {
 }
 
 const String token = "";
+
+String exampleText = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";

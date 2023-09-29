@@ -3,6 +3,7 @@ class AppIcons {
   static const String image1 = "assets/images/image1.png";
   static const String image2 = "assets/images/image2.png";
   static const String videoImg = "assets/images/img_video.png";
+  static const String articleDetail = "assets/images/article_detail.png";
 
   // svg
   static const String articleBackground = "assets/svg/article_background.svg";
@@ -30,4 +31,6 @@ class AppIcons {
   static const String ellipse = "assets/svg/ellipse.svg";
   static const String nextArrow = "assets/svg/next_arrow.svg";
   static const String send = "assets/svg/send.svg";
+  static const String calendar = "assets/svg/calendar.svg";
+  static const String eye = "assets/svg/eye.svg";
 }
