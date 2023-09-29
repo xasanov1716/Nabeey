@@ -1,4 +1,7 @@
+import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/data/repository/article_repository.dart';
+import 'package:contest_app/services/article_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,17 +12,26 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageRepository.getInstance();
 
-  runApp(const App());
+  runApp(App(
+    articleService: ArticleService(),
+  ));
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({Key? key, required this.articleService}) : super(key: key);
+  final ArticleService articleService;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>AudioBloc()),
-    ], child: const MyApp());
+    return RepositoryProvider(
+      create: (context) => ArticleRepository(articleService: articleService),
+      child: MultiBlocProvider(providers: [
+        BlocProvider(create: (context) => AudioBloc()),
+        BlocProvider(
+            create: (context) => ArticleBloc(
+                articleRepository: context.read<ArticleRepository>())),
+      ], child: const MyApp()),
+    );
   }
 }
 
