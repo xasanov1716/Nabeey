@@ -1,6 +1,8 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
+import 'package:contest_app/data/repository/video_repository.dart';
 import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -13,20 +15,30 @@ Future<void> main() async {
   await StorageRepository.getInstance();
 
   runApp(App(
-    articleService: ApiService(),
+    apiService: ApiService(),
   ));
 }
 
 class App extends StatelessWidget {
-  const App({Key? key, required this.articleService}) : super(key: key);
-  final ApiService articleService;
+  const App({Key? key, required this.apiService}) : super(key: key);
+  final ApiService apiService;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => ArticleRepository(articleService: articleService),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => ArticleRepository(apiService: apiService),
+        ),
+        RepositoryProvider(
+          create: (context) => VideoRepository(apiService: apiService),
+        ),
+      ],
       child: MultiBlocProvider(providers: [
         BlocProvider(create: (context) => AudioBloc()),
+        BlocProvider(
+            create: (context) =>
+                VideoBloc(videoRepository: context.read<VideoRepository>())),
         BlocProvider(
             create: (context) => ArticleBloc(
                 articleRepository: context.read<ArticleRepository>())),
