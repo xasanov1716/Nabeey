@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:contest_app/data/models/book/book_model.dart';
-import 'package:contest_app/data/models/book/file_model.dart';
+import 'package:contest_app/data/helper/helper_model.dart';
 import 'package:contest_app/data/status/form_status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,8 +20,8 @@ class BookBloc extends Bloc<BookEvent, BookState> {
               title: "",
               author: "",
               description: "",
-              file: FileClass(fileName: "", filePath: "", id: 0),
-              image: FileClass(id: 0, fileName: "", filePath: ""),
+              file: HelperModel(fileName: "", filePath: "", id: 0),
+              image: HelperModel(id: 0, fileName: "", filePath: ""),
             ),
             status: FormStatus.pure,
           ),

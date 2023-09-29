@@ -1,11 +1,10 @@
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
 import 'package:contest_app/blocs/article_bloc/article_state.dart';
+import 'package:contest_app/data/helper/helper_model.dart';
 import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
-import 'package:contest_app/data/models/image/image_model.dart';
 import 'package:contest_app/data/models/status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
-import 'package:contest_app/data/models/user/asset_model.dart';
 import 'package:contest_app/data/models/user/user_model.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,23 +17,24 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
               id: 0,
               text: '',
               category: CategoryModel(
-                  id: 0,
-                  name: '',
-                  description: '',
-                  image: '',
-                  books: [],
-                  audios: [],
-                  videos: [],
-                  articles: []),
-              image: ImageModel(id: 0, fileName: '', filePath: ''),
-              user: UserModel(
-                  id: 0,
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  phone: '',
-                  userRole: 0,
-                  asset: AssetModel(id: 0, fileName: '', filePath: '')),
+                id: 0,
+                name: '',
+                description: '',
+                image: HelperModel(id: 0, fileName: '', filePath: ''),
+                books: [],
+                audios: [],
+                videos: [],
+                articles: [],
+              ),
+              image: HelperModel(id: 0, fileName: '', filePath: ''),
+              // user: UserModel(
+              //     id: 0,
+              //     firstName: '',
+              //     lastName: '',
+              //     email: '',
+              //     phone: '',
+              //     userRole: 0,
+              //     asset: HelperModel(id: 0, fileName: '', filePath: '')),
             ),
             articles: const [],
           ),
@@ -67,10 +67,11 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     }
   }
 
-  Future<void> getAllArticleById(
-      GetArticleByIdEvent getArticleByIdEvent, Emitter<ArticleState> emit) async {
+  Future<void> getAllArticleById(GetArticleByIdEvent getArticleByIdEvent,
+      Emitter<ArticleState> emit) async {
     emit(state.copyWith(status: FormStatus.loading, statusText: 'Loading...'));
-    UniversalData response = await articleRepository.getArticleById(getArticleByIdEvent.id);
+    UniversalData response =
+        await articleRepository.getArticleById(getArticleByIdEvent.id);
     if (response.error.isEmpty) {
       emit(
         state.copyWith(

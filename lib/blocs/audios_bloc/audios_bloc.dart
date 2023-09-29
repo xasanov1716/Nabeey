@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:contest_app/data/models/audio/audio.dart';
+import 'package:contest_app/data/helper/helper_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/audio/audio_model.dart';
 import '../../data/models/status/form_status.dart';
@@ -15,7 +15,7 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
               id: 0,
               title: "",
               description: "",
-              audio: Audio(
+              audio: HelperModel(
                 id: 0,
                 fileName: '',
                 filePath: '',

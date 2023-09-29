@@ -1,5 +1,5 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/categories_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/categories_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 class RouteNames {
   static const String tabBox = "/";
-  static const String article = "article";
-  static const String homeScreen = "home_screen";
+  static const String categoryDetail = "/category_detail";
+  static const String homeScreen = "/home_screen";
   static const String audioScreen = "/audio_screen";
   static const String booksScreen = "/books_screen";
   static const String videoScreen = "/video_screen";
@@ -24,8 +24,8 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) =>  TabBox(),
         );
-      case RouteNames.article:
-        return MaterialPageRoute(builder: (context) =>  CategoriesScreen());
+      case RouteNames.categoryDetail:
+        return MaterialPageRoute(builder: (context) =>  CategoriesDetailScreen());
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:

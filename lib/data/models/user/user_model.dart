@@ -1,4 +1,4 @@
-import 'package:contest_app/data/models/user/asset_model.dart';
+import 'package:contest_app/data/helper/helper_model.dart';
 
 class UserModel {
   final int id;
@@ -7,7 +7,7 @@ class UserModel {
   final String email;
   final String phone;
   final int userRole;
-  final AssetModel asset;
+  final HelperModel asset;
 
   UserModel({
     required this.id,
@@ -27,7 +27,7 @@ class UserModel {
       email: json['email'] ?? '',
       phone: json['phone'] ?? '',
       userRole: json['userRole'] ?? 0,
-      asset: AssetModel.fromJson(json['asset']),
+      asset: HelperModel.fromJson(json['asset']),
     );
   }
 }

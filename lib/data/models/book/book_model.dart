@@ -1,12 +1,12 @@
-import 'file_model.dart';
+import 'package:contest_app/data/helper/helper_model.dart';
 
 class BookModel {
   final int id;
   final String title;
   final String author;
   final String description;
-  final FileClass file;
-  final FileClass image;
+  final HelperModel file;
+  final HelperModel image;
 
   BookModel({
     required this.id,
@@ -22,8 +22,8 @@ class BookModel {
     String? title,
     String? author,
     String? description,
-    FileClass? file,
-    FileClass? image,
+    HelperModel? file,
+    HelperModel? image,
   }) =>
       BookModel(
         id: id ?? this.id,
@@ -35,20 +35,11 @@ class BookModel {
       );
 
   factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
-        id: json["id"]as int? ?? 0,
-        title: json["title"]as String? ?? "",
-        author: json["author"]as String? ?? "",
-        description: json["description"]as String? ?? "",
-        file: FileClass.fromJson(json["file"]),
-        image: FileClass.fromJson(json["image"]),
+        id: json["id"] as int? ?? 0,
+        title: json["title"] as String? ?? "",
+        author: json["author"] as String? ?? "",
+        description: json["description"] as String? ?? "",
+        file: HelperModel.fromJson(json["file"]),
+        image: HelperModel.fromJson(json["image"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "author": author,
-        "description": description,
-        "file": file.toJson(),
-        "image": image.toJson(),
-      };
 }

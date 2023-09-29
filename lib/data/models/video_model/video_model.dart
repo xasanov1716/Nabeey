@@ -16,7 +16,7 @@ class VideoModel {
       id: json["id"] as int? ?? 0,
       title: json["title"] as String? ?? "",
       description: json["description"] as String? ?? "",
-      videoLink: json["video_link"] as String? ?? "",
+      videoLink: json["videoLink"] as String? ?? "",
     );
   }
 

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +40,7 @@ class ApiService {
         },
         onResponse: (response, handler) async {
           debugPrint('On Response: ${response.statusCode}');
+          debugPrint('PATH: ${response.requestOptions.path}');
           return handler.next(response);
         },
       ),
@@ -50,8 +54,8 @@ class ApiService {
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return UniversalData(
           data: (response.data['data'] as List?)
-              ?.map((e) => ArticleModel.fromJson(e))
-              .toList() ??
+                  ?.map((e) => ArticleModel.fromJson(e))
+                  .toList() ??
               [],
         );
       }
@@ -99,6 +103,32 @@ class ApiService {
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return UniversalData(
             data: ArticleModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getAllCategories() async {
+    Response response;
+    try {
+      response = await _dio.get("/api/content-categories/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+       // debugPrint(response.data["data"]);
+        return UniversalData(
+          data: (response.data["data"] as List?)
+                  ?.map((e) => CategoryModel.fromJson(e))
+                  .toList() ??
+              [],
+        );
       }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {

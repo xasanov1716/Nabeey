@@ -1,6 +1,9 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
+import 'package:contest_app/data/repository/app_repository.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:contest_app/data/repository/video_repository.dart';
 import 'package:contest_app/services/api_service.dart';
@@ -33,6 +36,9 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => VideoRepository(apiService: apiService),
         ),
+        RepositoryProvider(
+          create: (context) => AppRepository(apiService: apiService),
+        ),
       ],
       child: MultiBlocProvider(providers: [
         BlocProvider(create: (context) => AudioBloc()),
@@ -42,6 +48,10 @@ class App extends StatelessWidget {
         BlocProvider(
             create: (context) => ArticleBloc(
                 articleRepository: context.read<ArticleRepository>())),
+        BlocProvider(
+            create: (context) =>
+                CategoriesBloc(appRepository: context.read<AppRepository>())
+                  ..add(GetCategories())),
       ], child: const MyApp()),
     );
   }
