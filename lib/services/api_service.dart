@@ -3,6 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import '../data/models/universal_data.dart';
 import '../utils/constants.dart';
+import 'package:contest_app/data/models/article/article_model.dart';
+import 'package:contest_app/data/models/universal_data.dart';
+import 'package:contest_app/utils/constants.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ApiService {
   final _dio = Dio(
@@ -38,17 +43,40 @@ class ApiService {
     );
   }
 
-  Future<UniversalData> getAllVideos() async {
+
+Future<UniversalData> getAllVideos() async {
+Response response;
+try {
+response = await _dio.get("/api/content-videos/get-all");
+if (response.statusCode! >= 200 && response.statusCode! < 300) {
+return UniversalData(
+data: (response.data['data'] as List?)
+    ?.map((e) => VideoModel.fromJson(e))
+    .toList() ??
+[],
+);
+}
+return UniversalData(error: 'ERROR');
+} on DioException catch (e) {
+if (e.response != null) {
+return UniversalData(error: e.response!.data['message']);
+} else {
+return UniversalData(error: e.message!);
+}
+} catch (e) {
+return UniversalData(error: e.toString());
+}
+}
+
+
+
+Future<UniversalData> getArticleById(int id) async {
     Response response;
     try {
-      response = await _dio.get("/api/content-videos/get-all");
+      response = await _dio.get("/api/article/get/$id");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return UniversalData(
-          data: (response.data['data'] as List?)
-              ?.map((e) => VideoModel.fromJson(e))
-              .toList() ??
-              [],
-        );
+            data: ArticleModel.fromJson(response.data['data']));
       }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {
@@ -58,8 +86,8 @@ class ApiService {
         return UniversalData(error: e.message!);
       }
     } catch (e) {
+      debugPrint("Caught: $e");
       return UniversalData(error: e.toString());
     }
   }
-
 }

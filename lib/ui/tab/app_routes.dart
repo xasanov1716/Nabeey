@@ -1,5 +1,5 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/articles/articles_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/categories_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
@@ -25,7 +25,7 @@ class AppRoutes {
           builder: (context) =>  TabBox(),
         );
       case RouteNames.article:
-        return MaterialPageRoute(builder: (context) =>  ArticlesScreen());
+        return MaterialPageRoute(builder: (context) =>  CategoriesScreen());
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:

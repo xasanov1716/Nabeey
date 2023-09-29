@@ -1,7 +1,7 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
-import 'package:contest_app/services/article_service.dart';
+import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,13 +13,13 @@ Future<void> main() async {
   await StorageRepository.getInstance();
 
   runApp(App(
-    articleService: ArticleService(),
+    articleService: ApiService(),
   ));
 }
 
 class App extends StatelessWidget {
   const App({Key? key, required this.articleService}) : super(key: key);
-  final ArticleService articleService;
+  final ApiService articleService;
 
   @override
   Widget build(BuildContext context) {
