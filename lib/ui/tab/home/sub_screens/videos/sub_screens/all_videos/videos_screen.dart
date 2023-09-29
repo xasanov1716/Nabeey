@@ -3,6 +3,8 @@ import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_video
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/widgets/videos_list_widget.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../../blocs/video_bloc/video_bloc.dart';
 import '../../../../../../../utils/icons.dart';
 
 class VideosScreen extends StatefulWidget {

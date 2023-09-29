@@ -1,4 +1,7 @@
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
+import 'package:contest_app/data/repository/video_repository.dart';
+import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,17 +12,22 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageRepository.getInstance();
 
-  runApp(const App());
+  runApp(App(apiService: ApiService(),));
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({Key? key, required this.apiService}) : super(key: key);
+  final ApiService apiService;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>AudioBloc()),
-    ], child: const MyApp());
+    return RepositoryProvider(
+      create: (context) => VideoRepository(apiService: apiService),
+      child: MultiBlocProvider(providers: [
+        BlocProvider(create: (context) => AudioBloc()),
+        BlocProvider(create: (context) => VideoBloc(videoRepository: context.read<VideoRepository>()))
+      ], child: const MyApp()),
+    );
   }
 }
 
