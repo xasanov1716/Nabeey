@@ -1,13 +1,12 @@
-import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
-import 'package:contest_app/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_list.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_player_item.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+
+import '../../../../../data/local/storage_repository/storage_repository.dart';
 
 class AudioScreen extends StatefulWidget {
   const AudioScreen({super.key});

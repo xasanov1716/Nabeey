@@ -1,7 +1,6 @@
-import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/video_detail/widgets/chewie.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/video_detail/widgets/video_item.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoDetailScreen extends StatefulWidget {
   const VideoDetailScreen({super.key});
@@ -12,8 +11,8 @@ class VideoDetailScreen extends StatefulWidget {
 
 class _VideoDetailScreenState extends State<VideoDetailScreen> {
   final List<String> videoUrls = [
-    "https://files.nevomusic.net/video/Klip/Jaloliddin%20Ahmadaliyev%20%20Ozim%20Mood%20video.mp4",
-    "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
+    "https://www.youtube.com/watch?v=kxv4-NAmtlY&pp=ygUZUm9zdWx1bGxvaG5pIHR1ZydpbGlzaGFyaQ%3D%3D",
+    "https://www.youtube.com/watch?v=QJdTeo_-sU4&list=PLtnBT_FLbSj8J0Gv0mcUM7OKWTCI5XTkv&index=7&pp=iAQB",
   ];
 
 
@@ -39,9 +38,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
               ),),
             ),
             ...List.generate(videoUrls.length, (index) => VideoItem(
-              videoPlayerController: VideoPlayerController.networkUrl(
-                Uri.parse(videoUrls[index]),
-              ),
+              videoUrl: videoUrls[index]
             ))
           ],
         )

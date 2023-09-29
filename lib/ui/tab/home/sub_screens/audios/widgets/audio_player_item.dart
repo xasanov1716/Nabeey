@@ -1,13 +1,12 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
-import 'package:contest_app/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+
+import '../../../../../../data/local/storage_repository/storage_repository.dart';
 
 class AudioPlayerItem extends StatefulWidget {
   const AudioPlayerItem({super.key});
