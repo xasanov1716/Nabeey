@@ -60,7 +60,7 @@ class VideosListWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: height / 4,
+          height: height / 4.2,
           child: ListView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
