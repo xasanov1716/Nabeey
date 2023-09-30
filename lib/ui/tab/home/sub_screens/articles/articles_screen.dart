@@ -5,17 +5,27 @@ import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/status.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/widgets/article_items_widget.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/widgets/main_bar_widget.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+import '../../../../../utils/colors.dart';
+import '../../../../widgets/global_app_bar.dart';
 
-class ArticlesScreen extends StatelessWidget {
+class ArticlesScreen extends StatefulWidget {
   const ArticlesScreen({super.key});
 
   @override
+  State<ArticlesScreen> createState() => _ArticlesScreenState();
+}
+
+class _ArticlesScreenState extends State<ArticlesScreen> {
+  bool isPin = false;
+
+  @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: BlocBuilder<ArticleBloc, ArticleState>(
         builder: (context, state) {
@@ -29,20 +39,18 @@ class ArticlesScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          return Column(
-            children: [
-              MainBarWidget(
-                image: AppIcons.image2,
-                title: "Lorem Ipsum",
-                subtitle: "Article",
-                buttonText: "Take the quiz",
-                onTab: () {},
-              ),
-              Expanded(
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    ...List.generate(state.articles.length, (index) {
+          return GlobalAppBar(
+            title: "Lorem Ipsum",
+            subtitle: "Article",
+            image: AppIcons.image2,
+            onTap: (){},
+            body: CustomScrollView(
+              slivers: <Widget>[
+                SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812)),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.articles.length,
+                        (BuildContext context, int index) {
                       ArticleModel article = state.articles[index];
                       return ZoomTapAnimation(
                         onTap: () {
@@ -57,11 +65,11 @@ class ArticlesScreen extends StatelessWidget {
                           image: AppIcons.articleDetail,
                         ),
                       );
-                    })
-                  ],
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

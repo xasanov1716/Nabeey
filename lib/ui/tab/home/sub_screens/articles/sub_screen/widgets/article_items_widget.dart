@@ -83,7 +83,7 @@ class ArticleItemsWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 12 * width / 375),
+            SizedBox(height: 20 * width / 375),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'dart:io';
 import 'package:contest_app/ui/tab/profile/profile_buttons.dart';
 import 'package:contest_app/utils/colors.dart';
@@ -141,7 +139,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: 'Profilni tahrirlash',
                     ),
                     ProfileButton(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteNames.articleCreateScreen);
+                      },
                       suffixIcon: AppIcons.nextArrow,
                       prefixIcon: AppIcons.send,
                       text: 'Maqola jo’natish',

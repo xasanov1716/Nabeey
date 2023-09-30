@@ -1,12 +1,13 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/article_detail_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/articles_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/categories_detail_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/articles/articles_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/categories/categories_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/video_detail/video_detail_screen.dart';
 import 'package:contest_app/ui/tab/profile/auth/auth_screen.dart';
+import 'package:contest_app/ui/tab/profile/sub_screens/article_create_screen.dart';
 import 'package:contest_app/ui/tab/tab_box.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class RouteNames {
   static const String articleDetail = "/article_detail";
   static const String articles = "/articles";
   static const String auth = "/auth_screen";
+  static const String articleCreateScreen = "/article_create_screen";
 }
 
 class AppRoutes {
@@ -48,6 +50,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const ArticlesScreen());
       case RouteNames.auth:
         return MaterialPageRoute(builder: (context) => const AuthScreen());
+      case RouteNames.articleCreateScreen:
+        return MaterialPageRoute(builder: (context) => const ArticleCreateScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(

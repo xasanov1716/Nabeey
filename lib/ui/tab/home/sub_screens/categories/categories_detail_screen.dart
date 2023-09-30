@@ -1,7 +1,7 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/articles/widgets/global_container.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/categories/widgets/global_container.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';

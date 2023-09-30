@@ -46,7 +46,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc(apiService)),
         BlocProvider(
             create: (context) =>
-                VideoBloc(videoRepository: context.read<VideoRepository>())),
+                VideoBloc(videoRepository: context.read<VideoRepository>())..add(GetVideosEvent())),
         BlocProvider(
             create: (context) => ArticleBloc(
                 articleRepository: context.read<ArticleRepository>())),

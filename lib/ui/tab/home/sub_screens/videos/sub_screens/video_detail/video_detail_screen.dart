@@ -12,16 +12,16 @@ class VideoDetailScreen extends StatefulWidget {
 }
 
 class _VideoDetailScreenState extends State<VideoDetailScreen> {
-  final List<String> videoUrls = [
-    "https://www.youtube.com/watch?v=kxv4-NAmtlY&pp=ygUZUm9zdWx1bGxvaG5pIHR1ZydpbGlzaGFyaQ%3D%3D",
-    "https://www.youtube.com/watch?v=QJdTeo_-sU4&list=PLtnBT_FLbSj8J0Gv0mcUM7OKWTCI5XTkv&index=7&pp=iAQB",
-  ];
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: Text("Videolar", style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 24,
+              color: AppColors.C_111111
+          ),),
           leading: IconButton(
             onPressed: (){
               Navigator.pop(context);
@@ -33,16 +33,8 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
           builder: (context, state){
             return ListView(
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Text("Ikrom Sharif videolari", style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: AppColors.C_111111
-                  ),),
-                ),
-                ...List.generate(videoUrls.length, (index) => VideoItem(
-                    videoUrl: videoUrls[index]
+                ...List.generate(state.videos.length, (index) => VideoItem(
+                    videoModel: state.videos[index]
                 ))
               ],
             );
