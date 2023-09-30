@@ -17,6 +17,11 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: Text("Videolar", style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 24,
+              color: AppColors.C_111111
+          ),),
           leading: IconButton(
             onPressed: (){
               Navigator.pop(context);
@@ -28,14 +33,6 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
           builder: (context, state){
             return ListView(
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Text("Videolar", style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: AppColors.C_111111
-                  ),),
-                ),
                 ...List.generate(state.videos.length, (index) => VideoItem(
                     videoModel: state.videos[index]
                 ))
