@@ -4,6 +4,7 @@ class AppIcons {
   static const String image2 = "assets/images/image2.png";
   static const String videoImg = "assets/images/img_video.png";
   static const String articleDetail = "assets/images/article_detail.png";
+  static const String profileMan = "assets/images/profile.png";
 
   // svg
   static const String articleBackground = "assets/svg/article_background.svg";
