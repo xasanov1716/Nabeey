@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../../data/local/storage_repository/storage_repository.dart';
+import '../../../../widgets/global_app_bar.dart';
 
 class AudioScreen extends StatefulWidget {
   const AudioScreen({super.key});
@@ -22,88 +23,39 @@ class _AudioScreenState extends State<AudioScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: ListView(
-        children: [
-          Stack(
-            children: [
-              Image.asset(AppIcons.image2, width: double.infinity),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: height * (20 / 812),
-                    top: height * (171 / 812),
-                    right: width * (16 / 375)),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Lorem Ipsum",
-                            style: TextStyle(
-                                fontFamily: "Urbanist",
-                                fontSize: 24.sp,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis),
-                        Text("It is a long established fact",
-                            style: TextStyle(
-                                fontFamily: "Urbanist",
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.white),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis),
-                      ],
-                    ),
-                    SizedBox(width: width * (31 / 375)),
-                    ZoomTapAnimation(
-                      onTap: () {
-                      },
-                      child: Container(
-                        width: width * (132 / 375),
-                        height: height * (56 / 812),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(66.r),
-                            color: AppColors.C_F59C16),
-                        child: Center(
-                          child: Text(
-                            "Take the quiz",
-                            style: TextStyle(
-                                fontFamily: "Urbanist",
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+      body: GlobalAppBar(
+        title: "Lorem Ipsum",
+        subtitle: "Article",
+        image: AppIcons.image2,
+        onTap: () {},
+        body: ListView(
+          children: [
+            SizedBox(height: 23.h),
+            StorageRepository.getBool('check')
+                ? Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                    child: AudioList(index: 1, onTap: () {}),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: const AudioPlayerItem(),
+                  ),
+            ...List.generate(
+              4,
+              (index) => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                child: AudioList(
+                    index: index,
+                    onTap: () {
+                      setState(() {});
+                      StorageRepository.putBool('check', false);
+                      debugPrint(StorageRepository.getBool('check').toString());
+                    }),
               ),
-            ],
-          ),
-          SizedBox(height: 23.h),
-         StorageRepository.getBool('check')?Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-            child: AudioList(index: 1, onTap: (){}),
-          ):Padding(
-           padding: EdgeInsets.symmetric(horizontal: 20.w),
-           child: const AudioPlayerItem(),
-         ),
-          ...List.generate(
-            4,
-            (index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-              child: AudioList(index: index, onTap: () {
-                setState(() {
-
-                });
-                StorageRepository.putBool('check', false);
-                debugPrint(StorageRepository.getBool('check').toString());
-              }),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

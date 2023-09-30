@@ -130,7 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   text: 'Profilni tahrirlash',
                 ),
                 ProfileButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteNames.articleCreateScreen);
+                  },
                   suffixIcon: AppIcons.nextArrow,
                   prefixIcon: AppIcons.send,
                   text: 'Maqola jo’natish',
