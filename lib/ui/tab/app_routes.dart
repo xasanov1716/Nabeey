@@ -1,7 +1,7 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/article_detail_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/articles_screen.dart';
-import 'package:contest_app/ui/tab/home/sub_screens/categories_detail_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/articles/articles_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/categories/categories_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/videos_screen.dart';
