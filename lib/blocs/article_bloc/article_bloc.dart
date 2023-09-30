@@ -5,7 +5,6 @@ import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
-import 'package:contest_app/data/models/user/user_model.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
