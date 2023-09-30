@@ -30,7 +30,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
               children: [
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Text("Ikrom Sharif videolari", style: TextStyle(
+                  child: Text("Videolar", style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
                       color: AppColors.C_111111
