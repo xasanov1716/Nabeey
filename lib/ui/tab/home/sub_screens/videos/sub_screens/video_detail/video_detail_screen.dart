@@ -12,11 +12,6 @@ class VideoDetailScreen extends StatefulWidget {
 }
 
 class _VideoDetailScreenState extends State<VideoDetailScreen> {
-  final List<String> videoUrls = [
-    "https://www.youtube.com/watch?v=kxv4-NAmtlY&pp=ygUZUm9zdWx1bGxvaG5pIHR1ZydpbGlzaGFyaQ%3D%3D",
-    "https://www.youtube.com/watch?v=QJdTeo_-sU4&list=PLtnBT_FLbSj8J0Gv0mcUM7OKWTCI5XTkv&index=7&pp=iAQB",
-  ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +36,8 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                       color: AppColors.C_111111
                   ),),
                 ),
-                ...List.generate(videoUrls.length, (index) => VideoItem(
-                    videoUrl: videoUrls[index]
+                ...List.generate(state.videos.length, (index) => VideoItem(
+                    videoModel: state.videos[index]
                 ))
               ],
             );
