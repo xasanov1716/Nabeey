@@ -1,11 +1,12 @@
+import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class VideoItem extends StatefulWidget {
-  const VideoItem({super.key, required this.videoUrl});
-  final String videoUrl;
+  const VideoItem({super.key, required this.videoModel});
+  final VideoModel videoModel;
   @override
   State<VideoItem> createState() => _VideoItemState();
 }
@@ -15,7 +16,7 @@ class _VideoItemState extends State<VideoItem> {
 
   @override
   void initState() {
-    final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
+    final videoId = YoutubePlayer.convertUrlToId(widget.videoModel.videoLink);
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: videoId!,
       flags: const YoutubePlayerFlags(
@@ -28,6 +29,7 @@ class _VideoItemState extends State<VideoItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           height: 215.h,
@@ -63,7 +65,8 @@ class _VideoItemState extends State<VideoItem> {
         ),
         SizedBox(height: 8.h,),
         Padding(padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text("Ikrom Sharif va Abdukarim Mirzayev bilan suhbat", style: TextStyle(
+          child: Text(widget.videoModel.title,
+            style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w600,
           ),),
