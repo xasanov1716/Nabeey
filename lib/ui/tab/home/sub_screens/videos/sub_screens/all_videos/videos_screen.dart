@@ -47,24 +47,22 @@ class _VideosScreenState extends State<VideosScreen> {
         subtitle: "Video",
         image: AppIcons.image2,
         onTap: () {},
-        body: Expanded(
-          child: ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            itemCount: videoLists.length,
-            separatorBuilder: (context, index) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width / 18),
-                    child: Divider(color: AppColors.black.withOpacity(0.2)),
-                  ),
-                ],
-              );
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return videoLists[index];
-            },
-          ),
+        body: ListView.separated(
+          physics: const BouncingScrollPhysics(),
+          itemCount: videoLists.length,
+          separatorBuilder: (context, index) {
+            return Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width / 18),
+                  child: Divider(color: AppColors.black.withOpacity(0.2)),
+                ),
+              ],
+            );
+          },
+          itemBuilder: (BuildContext context, int index) {
+            return videoLists[index];
+          },
         ),
       ),
     );
