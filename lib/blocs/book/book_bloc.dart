@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/helper/helper_model.dart';
+import 'package:contest_app/data/models/universal_data.dart';
+import 'package:contest_app/data/repository/book_repository.dart';
 import 'package:contest_app/data/status/form_status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +13,10 @@ part 'book_event.dart';
 part 'book_state.dart';
 
 class BookBloc extends Bloc<BookEvent, BookState> {
-  BookBloc()
+  BookBloc({required this.bookRepoSitory})
       : super(
           BookState(
+            errorText: '',
             books: const [],
             bookModel: BookModel(
               id: 0,
@@ -27,37 +30,44 @@ class BookBloc extends Bloc<BookEvent, BookState> {
           ),
         ) {
     on<GetBooksEvent>(getBooks);
-    on<GetByIdBookEvent>(getByIdBook);
+    on<GetByIdBookEvent>(getBookById);
     on<AddBookEvent>(addBook);
     on<UpdateBookEvent>(updateBook);
     on<DeleteBookEvent>(deleteBook);
   }
 
+
+  final BookRepoSitory bookRepoSitory;
+
   Future<void> getBooks(GetBooksEvent event, Emitter<BookState> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
+      UniversalData data = await bookRepoSitory.getBook();
 
-    if (true) {
+    if (data.error.isEmpty) {
       emit(state.copyWith(
+        books: data.data as List<BookModel>,
         status: FormStatus.success,
       ));
     }
-
     emit(state.copyWith(
+      errorText: data.error,
       status: FormStatus.failure,
     ));
   }
 
-  Future<void> getByIdBook(
+  Future<void> getBookById(
       GetByIdBookEvent event, Emitter<BookState> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
-
-    if (true) {
+  UniversalData data = await bookRepoSitory.getBookById(event.bookId);
+    if (data.error.isEmpty) {
       emit(state.copyWith(
+        bookModel: data as BookModel,
         status: FormStatus.success,
       ));
     }
 
     emit(state.copyWith(
+      errorText: data.error,
       status: FormStatus.failure,
     ));
   }

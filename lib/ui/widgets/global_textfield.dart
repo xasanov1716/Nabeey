@@ -114,6 +114,7 @@ class _GlobalTextFieldState extends State<GlobalTextField> {
               // filled: true,
               // fillColor: Colors.black12,
             ),
+            controller: widget.controller,
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction,
             inputFormatters: widget.keyboardType == TextInputType.phone
