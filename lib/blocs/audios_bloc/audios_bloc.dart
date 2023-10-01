@@ -12,6 +12,7 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
   AudiosBloc({required this.audiosRepository})
       : super(
           AudiosStates(
+            statusText: "",
             errorText: "",
             audio: const [],
             audioModel: AudioModel(
@@ -27,7 +28,7 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
             status: FormStatus.pure,
           ),
         ) {
-    on<GetAudiosEvent>(getAudios);
+    on<GetAudiosEvent>(getAllAudios);
     on<GetByIdAudioEvent>(getByIdAudio);
     on<AddAudioEvent>(addAudio);
     on<UpdateAudioEvent>(updateAudio);
@@ -36,20 +37,26 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
 
   final AudiosRepository audiosRepository;
 
-  Future<void> getAudios(GetAudiosEvent event, Emitter<AudiosStates> emit) async {
-    emit(state.copyWith(status: FormStatus.loading));
-    UniversalData data = await audiosRepository.getAudios();
-
-    if (data.error.isEmpty) {
-      emit(state.copyWith(
-        audio: data.data as List<AudioModel>,
-        status: FormStatus.success,
-      ));
+  Future<void> getAllAudios(
+      GetAudiosEvent getAudiosEvent, Emitter<AudiosStates> emit) async {
+    emit(state.copyWith(status: FormStatus.loading, statusText: 'Loading...'));
+    UniversalData response = await audiosRepository.getAudios();
+    if (response.error.isEmpty) {
+      emit(
+        state.copyWith(
+          status: FormStatus.success,
+          statusText: "SUCCESS",
+          audio: response.data as List<AudioModel>,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          status: FormStatus.failure,
+          statusText: response.error,
+        ),
+      );
     }
-    emit(state.copyWith(
-      errorText: data.error,
-      status: FormStatus.failure,
-    ));
   }
 
   Future<void> getByIdAudio(

@@ -56,6 +56,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/article/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        print("object  Articles");
         return UniversalData(
           data: (response.data['data'] as List?)
                   ?.map((e) => ArticleModel.fromJson(e))
@@ -194,18 +195,21 @@ class ApiService {
     }
   }
 
-  Future<UniversalData> getAllAudios()async{
+  Future<UniversalData> getAllAudios() async {
     Response response;
-    try{
-      response = await _dio.get('/api/content-audios/get-all');
-      if(response.statusCode! >= 200 && response.statusCode! < 300){
-        print("DATAAAAAAAAAAAAAA:   ${response.data['data']}");
-        return UniversalData(data: (response.data['data'] as List?)?.map((e) => AudioModel.fromJson(e)).toList());
+    try {
+      response = await _dio.get("/api/content-audios/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        print("api service ${response.data['data']}");
+        return UniversalData(
+          data: (response.data['data'] as List?)
+              ?.map((e) => AudioModel.fromJson(e))
+              .toList() ??
+              [],
+        );
       }
-      print("asssssssssssssssssssssssssssss");
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
+    } on DioException catch (e) {
       if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {

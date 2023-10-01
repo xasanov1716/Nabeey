@@ -27,12 +27,16 @@ class _AudioScreenState extends State<AudioScreen> {
       body: BlocBuilder<AudiosBloc, AudiosStates>(
         builder: (context, state) {
           print(state.audio.length);
-          if(state.status == FormStatus.loading){
-            return const Center(child: CircularProgressIndicator(),);
-          }
-          if(state.status == FormStatus.failure){
-            return Center(child: Text(state.errorText),);
-          }
+          // if (state.status == FormStatus.failure) {
+          //   return Center(
+          //     child: Text(state.statusText),
+          //   );
+          // }
+          // if (state.status == FormStatus.loading) {
+          //   return const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
           return GlobalAppBar(
             title: "Lorem Ipsum",
             subtitle: "Article",
