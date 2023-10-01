@@ -28,8 +28,3 @@ class DeleteBookEvent extends BookEvent {
 
   DeleteBookEvent({required this.videoId});
 }
-class GetBookByIdEvent extends BookEvent {
-  final int videoId;
-
-  GetBookByIdEvent({required this.videoId});
-}

@@ -1,6 +1,7 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/article_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/articles_screen.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/books/subscreen/book_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/categories/categories_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/audios_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/books_screen.dart';
@@ -22,6 +23,7 @@ class RouteNames {
   static const String articleDetail = "/article_detail";
   static const String articles = "/articles";
   static const String auth = "/auth_screen";
+  static const String booksDetail = "/books_detail";
   static const String articleCreateScreen = "/article_create_screen";
 }
 
@@ -34,6 +36,8 @@ class AppRoutes {
         );
       case RouteNames.categoryDetail:
         return MaterialPageRoute(builder: (context) =>  CategoriesDetailScreen());
+      case RouteNames.booksDetail:
+        return MaterialPageRoute(builder: (context) =>  BookDetailScreen());
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:
