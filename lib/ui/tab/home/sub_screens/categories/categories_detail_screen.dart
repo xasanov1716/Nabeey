@@ -1,5 +1,6 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
+import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/categories/widgets/global_container.dart';
 import 'package:contest_app/utils/colors.dart';
@@ -164,7 +165,9 @@ class _CategoriesDetailScreenState extends State<CategoriesDetailScreen> {
                     SizedBox(width: width * (16 / 375)),
                     ZoomTapAnimation(
                       onTap: () {
+                        BlocProvider.of<BookBloc>(context).add(GetBooksEvent());
                         setState(() {
+                          Navigator.pushNamed(context, RouteNames.booksScreen);
                           selectedContainer = 4;
                         });
                       },
