@@ -61,7 +61,9 @@ class _CategoriesDetailScreenState extends State<CategoriesDetailScreen> {
                     ),
                     SizedBox(width: width * (31 / 375)),
                     ZoomTapAnimation(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteNames.auth);
+                      },
                       child: Container(
                         width: width * (132 / 375),
                         height: height * (56 / 812),
