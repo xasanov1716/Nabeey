@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:contest_app/data/helper/helper_model.dart';
+import 'package:contest_app/data/models/universal_data.dart';
+import 'package:contest_app/data/repository/audios_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/audio/audio_model.dart';
 import '../../data/models/status/form_status.dart';
@@ -7,9 +9,10 @@ import 'audios_event.dart';
 import 'audios_state.dart';
 
 class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
-  AudiosBloc()
+  AudiosBloc({required this.audiosRepository})
       : super(
           AudiosStates(
+            errorText: "",
             audio: const [],
             audioModel: AudioModel(
               id: 0,
@@ -31,21 +34,26 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
     on<DeleteAudioEvent>(deleteAudio);
   }
 
+  final AudiosRepository audiosRepository;
+
   Future<void> getAudios(GetAudiosEvent event, Emitter<AudiosStates> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
+    UniversalData data = await audiosRepository.getAudios();
 
-    if (true) {
+    if (data.error.isEmpty) {
       emit(state.copyWith(
+        audio: data.data as List<AudioModel>,
         status: FormStatus.success,
       ));
     }
-
     emit(state.copyWith(
+      errorText: data.error,
       status: FormStatus.failure,
     ));
   }
 
-  Future<void> getByIdAudio(GetByIdAudioEvent event, Emitter<AudiosStates> emit) async {
+  Future<void> getByIdAudio(
+      GetByIdAudioEvent event, Emitter<AudiosStates> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
 
     if (true) {
@@ -73,7 +81,8 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
     ));
   }
 
-  Future<void> updateAudio(UpdateAudioEvent event, Emitter<AudiosStates> emit) async {
+  Future<void> updateAudio(
+      UpdateAudioEvent event, Emitter<AudiosStates> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
 
     if (true) {
@@ -87,7 +96,8 @@ class AudiosBloc extends Bloc<AudiosEvent, AudiosStates> {
     ));
   }
 
-  Future<void> deleteAudio(DeleteAudioEvent event, Emitter<AudiosStates> emit) async {
+  Future<void> deleteAudio(
+      DeleteAudioEvent event, Emitter<AudiosStates> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
 
     if (true) {

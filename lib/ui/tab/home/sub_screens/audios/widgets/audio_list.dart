@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class AudioList extends StatelessWidget {
-  const AudioList({super.key, required this.index, required this.onTap});
+  const AudioList({super.key, required this.title, required this.onTap});
 
-  final int index;
+  final String title;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    double apphight = MediaQuery.of(context).size.height;
     return ZoomTapAnimation(
       onTap: onTap,
       child: Container(
@@ -21,8 +20,9 @@ class AudioList extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(18),
             child: Text(
-              "Audio $index",
+              title,
               style: const TextStyle(
+                overflow: TextOverflow.ellipsis,
                 fontFamily: "SF Pro Display",
                 fontSize: 18,
                 fontWeight: FontWeight.w500,

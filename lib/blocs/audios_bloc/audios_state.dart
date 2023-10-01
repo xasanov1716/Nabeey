@@ -6,8 +6,10 @@ class AudiosStates extends Equatable {
   final List<AudioModel> audio;
   final AudioModel audioModel;
   final FormStatus status;
+  final String errorText;
 
   const AudiosStates({
+    required this.errorText,
     required this.audio,
     required this.audioModel,
     required this.status,
@@ -18,14 +20,17 @@ class AudiosStates extends Equatable {
     audioModel,
     status,
     audio,
+    errorText
   ];
 
   AudiosStates copyWith({
     AudioModel? audioModel,
     FormStatus? status,
     List<AudioModel>? audio,
+    String? errorText
   }) {
     return AudiosStates(
+      errorText: errorText ?? this.errorText,
       audioModel: audioModel ?? this.audioModel,
       status: status ?? this.status,
       audio: audio ?? this.audio,
