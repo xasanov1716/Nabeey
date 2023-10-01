@@ -84,8 +84,8 @@ class _GlobalAppBarState extends State<GlobalAppBar> {
                           fontWeight: FontWeight.w700,
                           color: isPined ? AppColors.black : AppColors.white,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        // maxLines: 1,
+                        // overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         widget.subtitle,

@@ -1,11 +1,13 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
+import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/login_bloc/login_bloc.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
 import 'package:contest_app/data/repository/app_repository.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
+import 'package:contest_app/data/repository/book_repository.dart';
 import 'package:contest_app/data/repository/video_repository.dart';
 import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
@@ -34,6 +36,9 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => ArticleRepository(apiService: apiService),
         ),
+         RepositoryProvider(
+          create: (context) => BookRepoSitory(apiService: apiService),
+        ),
         RepositoryProvider(
           create: (context) => VideoRepository(apiService: apiService),
         ),
@@ -50,6 +55,9 @@ class App extends StatelessWidget {
         BlocProvider(
             create: (context) => ArticleBloc(
                 articleRepository: context.read<ArticleRepository>())),
+        BlocProvider(
+            create: (context) => BookBloc(
+                bookRepoSitory: context.read<BookRepoSitory>())),
         BlocProvider(
             create: (context) =>
                 CategoriesBloc(appRepository: context.read<AppRepository>())
@@ -75,7 +83,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
-          initialRoute: RouteNames.tabBox,
+          initialRoute: RouteNames.booksScreen,
           onGenerateRoute: AppRoutes.generateRoute,
         );
       },
