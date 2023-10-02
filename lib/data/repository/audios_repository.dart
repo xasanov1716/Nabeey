@@ -10,4 +10,6 @@ class AudiosRepository{
 
   Future<UniversalData>  getAudios()async => await apiService.getAllAudios();
 
+  Future<UniversalData> getAudioById(int id) async => await apiService.getAudioById(id);
+
 }

@@ -221,6 +221,27 @@ class ApiService {
     }
   }
 
+  Future<UniversalData> getAudioById(int id) async {
+    Response response;
+    try {
+      response = await _dio.get("/api/content-audios/get/$id");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+            data: AudioModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
 
   Future<UniversalData> getBookById(int id)async{
     Response response;
