@@ -10,6 +10,7 @@ class GlobalAppBar extends StatefulWidget {
     required this.image,
     required this.onTap,
     required this.body,
+    this.showButton,
   });
 
   final String title;
@@ -17,6 +18,7 @@ class GlobalAppBar extends StatefulWidget {
   final String image;
   final VoidCallback onTap;
   final Widget body;
+  final bool ?showButton;
 
   @override
   State<GlobalAppBar> createState() => _GlobalAppBarState();
@@ -106,22 +108,25 @@ class _GlobalAppBarState extends State<GlobalAppBar> {
                       ),
                     ),
                     const Spacer(),
-                    ZoomTapAnimation(
-                      onTap: widget.onTap,
-                      child: Container(
-                        height: 45 * height / 812,
-                        width: 90 * width / 375,
-                        margin: EdgeInsets.only(right: 10 * width / 375),
-                        decoration:
-                            BoxDecoration(borderRadius: BorderRadius.circular(width / 5.5), color: AppColors.C_F59C16),
-                        child: Center(
-                          child: Text(
-                            "Take the quiz",
-                            style: TextStyle(
-                              fontFamily: "Urbanist",
-                              fontSize: 12 * width / 375,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
+                    Visibility(
+                      visible: widget.showButton ?? true,
+                      child: ZoomTapAnimation(
+                        onTap: widget.onTap,
+                        child: Container(
+                          height: 45 * height / 812,
+                          width: 90 * width / 375,
+                          margin: EdgeInsets.only(right: 10 * width / 375),
+                          decoration:
+                              BoxDecoration(borderRadius: BorderRadius.circular(width / 5.5), color: AppColors.C_F59C16),
+                          child: Center(
+                            child: Text(
+                              "Take the quiz",
+                              style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontSize: 12 * width / 375,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.white,
+                              ),
                             ),
                           ),
                         ),

@@ -15,24 +15,30 @@ class BookDetailScreen extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
+        appBar: AppBar(title: Text(title)),
         body: BlocBuilder<BookBloc, BookState>(
           builder: (context, state) {
             if (state.status == FormStatus.success) {
               return ListView(
                 children: [
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                  Expanded(child: Image.asset(AppIcons.books,height: height * 148/812,width: width * 121 / 375)),
-                  Expanded(child: Column(
-                    children: [
-                      Text(state.bookModel.description),
+                      Expanded(
+                        child: Image.asset(
+                          AppIcons.books,
+                          height: height * 148 / 812,
+                          width: width * 121 / 375,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(state.bookModel.description),
+                          ],
+                        ),
+                      ),
                     ],
-                  )),
-                  ],)
+                  )
                 ],
               );
             }
@@ -48,7 +54,6 @@ class BookDetailScreen extends StatelessWidget {
               child: Text("Default"),
             );
           },
-        )
-      );
+        ));
   }
 }
