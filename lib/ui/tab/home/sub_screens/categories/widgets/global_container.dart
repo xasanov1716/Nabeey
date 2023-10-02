@@ -35,10 +35,12 @@ class GlobalContainer extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          SvgPicture.asset(imageBackground,
-              colorFilter:
-                  const ColorFilter.mode(Colors.black54, BlendMode.srcIn),
-              width: double.infinity),
+          SvgPicture.asset(
+            imageBackground,
+            colorFilter: const ColorFilter.mode(Colors.black54, BlendMode.srcIn),
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
@@ -49,11 +51,8 @@ class GlobalContainer extends StatelessWidget {
                 SizedBox(height: height * (15 / 812)),
                 Text(
                   text,
-                  style: TextStyle(
-                      fontFamily: "Urbanist",
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      color: textColor),
+                  style:
+                      TextStyle(fontFamily: "Urbanist", fontSize: 18.sp, fontWeight: FontWeight.w600, color: textColor),
                 ),
               ],
             ),

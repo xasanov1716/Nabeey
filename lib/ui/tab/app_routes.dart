@@ -1,3 +1,4 @@
+import 'package:contest_app/ui/splash/splash_screen.dart';
 import 'package:contest_app/ui/tab/home/home_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/article_detail_screen.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/articles_screen.dart';
@@ -14,7 +15,8 @@ import 'package:contest_app/ui/tab/tab_box.dart';
 import 'package:flutter/material.dart';
 
 class RouteNames {
-  static const String tabBox = "/";
+  static const String splashScreen = "/";
+  static const String tabBox = "/tab_box";
   static const String categoryDetail = "/category_detail";
   static const String homeScreen = "/home_screen";
   static const String audioScreen = "/audio_screen";
@@ -32,14 +34,17 @@ class RouteNames {
 class AppRoutes {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteNames.splashScreen:
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
       case RouteNames.tabBox:
-        return MaterialPageRoute(
-          builder: (context) =>  TabBox(),
-        );
+        return MaterialPageRoute(builder: (context) => const TabBox());
       case RouteNames.categoryDetail:
-        return MaterialPageRoute(builder: (context) =>  CategoriesDetailScreen());
+        return MaterialPageRoute(builder: (context) => const CategoriesDetailScreen());
       case RouteNames.booksDetail:
-        return MaterialPageRoute(builder: (context) =>  BookDetailScreen(title: settings.arguments as String,));
+        return MaterialPageRoute(
+            builder: (context) => BookDetailScreen(
+                  title: settings.arguments as String,
+                ));
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:

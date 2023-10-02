@@ -28,6 +28,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   mask_text_input_formatter: ^2.5.0
   image_picker: ^1.0.4
+  shimmer: ^3.0.0
 
 
 dev_dependencies:

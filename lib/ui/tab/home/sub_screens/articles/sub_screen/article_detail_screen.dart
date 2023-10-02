@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../utils/colors.dart';
+import '../../../../../../utils/shimmers/article_detail_shimmer.dart';
 
 class ArticleDetailScreen extends StatelessWidget {
   const ArticleDetailScreen({super.key});
@@ -19,7 +20,7 @@ class ArticleDetailScreen extends StatelessWidget {
       body: BlocBuilder<ArticleBloc, ArticleState>(
         builder: (context, state) {
           if (state.status == FormStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: ArticleDetailShimmer());
           }
           if (state.status == FormStatus.failure) {
             return Center(child: Text(state.statusText));
