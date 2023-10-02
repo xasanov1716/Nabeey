@@ -10,5 +10,5 @@ class BookRepoSitory{
 
   Future<UniversalData>  getBook()async => await apiService.getAllBook();
 
-  Future<UniversalData>  getBookById(int id)async => await apiService.getArticleById(id);
+  Future<UniversalData>  getBookById(int id)async => await apiService.getBookByIds(id);
 }

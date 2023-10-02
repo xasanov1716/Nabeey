@@ -48,11 +48,13 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         books: data.data as List<BookModel>,
         status: FormStatus.success,
       ));
+      debugPrint('BlOC SUCCESS');
     }
     emit(state.copyWith(
       errorText: data.error,
       status: FormStatus.failure,
     ));
+    debugPrint('BlOC ERROR');
   }
 
   Future<void> getBookById(
@@ -61,15 +63,17 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   UniversalData data = await bookRepoSitory.getBookById(event.bookId);
     if (data.error.isEmpty) {
       emit(state.copyWith(
-        bookModel: data as BookModel,
+        bookModel: data.data as BookModel,
         status: FormStatus.success,
       ));
-    }
-
-    emit(state.copyWith(
+    debugPrint('BlOC SUCCESS');
+    }else{
+       debugPrint('BlOC ERROR');
+       emit(state.copyWith(
       errorText: data.error,
       status: FormStatus.failure,
     ));
+    }
   }
 
   Future<void> addBook(AddBookEvent event, Emitter<BookState> emit) async {

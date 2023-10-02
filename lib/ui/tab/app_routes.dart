@@ -37,7 +37,7 @@ class AppRoutes {
       case RouteNames.categoryDetail:
         return MaterialPageRoute(builder: (context) =>  CategoriesDetailScreen());
       case RouteNames.booksDetail:
-        return MaterialPageRoute(builder: (context) =>  BookDetailScreen());
+        return MaterialPageRoute(builder: (context) =>  BookDetailScreen(title: settings.arguments as String,));
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteNames.audioScreen:
