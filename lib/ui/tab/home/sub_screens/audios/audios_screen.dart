@@ -1,7 +1,6 @@
-import 'package:contest_app/blocs/audios_bloc/audios_bloc.dart';
-import 'package:contest_app/blocs/audios_bloc/audios_state.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
 import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
-import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_list.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_player_item.dart';
 import 'package:contest_app/utils/icons.dart';
@@ -24,19 +23,8 @@ class _AudioScreenState extends State<AudioScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: BlocBuilder<AudiosBloc, AudiosStates>(
+      body: BlocBuilder<CategoriesBloc, CategoriesState>(
         builder: (context, state) {
-          print(state.audio.length);
-          if (state.status == FormStatus.failure) {
-            return Center(
-              child: Text(state.statusText),
-            );
-          }
-          if (state.status == FormStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
           return GlobalAppBar(
             title: "Lorem Ipsum",
             subtitle: "Article",
@@ -50,22 +38,24 @@ class _AudioScreenState extends State<AudioScreen> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.w, vertical: 8.h),
                         child: AudioList(
-                            title: state.audio.first.title, onTap: () {}),
+                          title: "Audio",
+                          onTap: () {},
+                        ),
                       )
                     : Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: AudioPlayerItem(
-                          title: state.audio.first.title,
-                          audioPath: state.audio.first.audio.filePath,
+                          title: "Audio",
+                          audioPath: state.categoryModel.audios.first.audio.filePath,
                         ),
                       ),
                 ...List.generate(
-                  state.audio.length,
+                  state.categoryModel.audios.length,
                   (index) => Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                     child: AudioList(
-                        title: state.audio[index].title,
+                        title: "Audio",
                         onTap: () {
                           setState(() {});
                           StorageRepository.putBool('check', false);

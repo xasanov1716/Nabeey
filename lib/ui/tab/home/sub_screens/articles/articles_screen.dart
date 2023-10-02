@@ -1,8 +1,8 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
-import 'package:contest_app/blocs/article_bloc/article_state.dart';
-import 'package:contest_app/data/models/article/article_model.dart';
-import 'package:contest_app/data/models/status/form_status.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
+import 'package:contest_app/data/models/article/top_article_model.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/widgets/article_items_widget.dart';
 import 'package:contest_app/utils/icons.dart';
@@ -24,20 +24,9 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: BlocBuilder<ArticleBloc, ArticleState>(
+      body: BlocBuilder<CategoriesBloc, CategoriesState>(
         builder: (context, state) {
-          if (state.status == FormStatus.failure) {
-            return Center(
-              child: Text(state.statusText),
-            );
-          }
-          if (state.status == FormStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
           return GlobalAppBar(
             title: "Lorem Ipsum",
             subtitle: "Article",
@@ -50,16 +39,16 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                 SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812)),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    childCount: state.articles.length,
+                    childCount: state.categoryModel.articles.length,
                         (BuildContext context, int index) {
-                      ArticleModel article = state.articles[index];
+                      TopArticleModel article = state.categoryModel.articles[index];
                       return ZoomTapAnimation(
                         onTap: () {
                           context.read<ArticleBloc>().add(GetArticleByIdEvent(id: article.id));
                           Navigator.pushNamed(context, RouteNames.articleDetail);
                         },
                         child: ArticleItemsWidget(
-                          title: article.category.name,
+                          title: "Maqola",
                           dateTime:
                           "${(DateTime.now()).toString().substring(8, 10)}.${(DateTime.now()).toString().substring(5, 7)}.${(DateTime.now()).toString().substring(0, 4)}",
                           views: "2696",

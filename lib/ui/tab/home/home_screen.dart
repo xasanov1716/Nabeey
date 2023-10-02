@@ -47,9 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         state.categories.length,
                         (index) => ZoomTapAnimation(
                           onTap: () {
-                            context.read<CategoriesBloc>().add(
-                                SetCurrentCategory(
-                                    categoryModel: state.categories[index]));
+                            context.read<CategoriesBloc>().add(SetCurrentCategory(categoryModel: state.categories[index]));
                             Navigator.pushNamed(context, RouteNames.categoryDetail);
                           },
                           child: Container(

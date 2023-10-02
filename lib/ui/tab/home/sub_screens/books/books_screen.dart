@@ -1,6 +1,7 @@
 import 'package:contest_app/blocs/book/book_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
+import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
-import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/widgets/book_item.dart';
 import 'package:contest_app/ui/widgets/global_app_bar.dart';
@@ -21,14 +22,8 @@ class _BooksScreenState extends State<BooksScreen> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(body: BlocBuilder<BookBloc, BookState>(
+    return Scaffold(body: BlocBuilder<CategoriesBloc, CategoriesState>(
       builder: (context, state) {
-        // if(state.status == FormStatus.failure){
-        //   return Center(child: Text(state.errorText));
-        // }
-        // if(state.status == FormStatus.loading){
-        //   return const Center(child: CircularProgressIndicator());
-        // }
         return GlobalAppBar(
           title: 'Lorem Ipsum',
           subtitle: 'Kitob',
@@ -38,8 +33,8 @@ class _BooksScreenState extends State<BooksScreen> {
             slivers: [
               SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812)),
               SliverList(
-                  delegate: SliverChildBuilderDelegate(childCount: state.books.length, (context, index) {
-                BookModel book = state.books[index];
+                  delegate: SliverChildBuilderDelegate(childCount:state.categoryModel.books.length, (context, index) {
+                BookModel book = state.categoryModel.books[index];
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20 * width /375, vertical: 24 * height /812),
                   child: BookItem(
