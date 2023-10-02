@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/result_model.dart';
@@ -55,6 +56,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/article/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        print("object  Articles");
         return UniversalData(
           data: (response.data['data'] as List?)
                   ?.map((e) => ArticleModel.fromJson(e))
@@ -183,6 +185,53 @@ class ApiService {
     }
     on DioException catch(e){
        if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getAllAudios() async {
+    Response response;
+    try {
+      response = await _dio.get("/api/content-audios/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        print("api service ${response.data['data']}");
+        return UniversalData(
+          data: (response.data['data'] as List?)
+              ?.map((e) => AudioModel.fromJson(e))
+              .toList() ??
+              [],
+        );
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getAudioById(int id) async {
+    Response response;
+    try {
+      response = await _dio.get("/api/content-audios/get/$id");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+            data: AudioModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {
         return UniversalData(error: e.message!);

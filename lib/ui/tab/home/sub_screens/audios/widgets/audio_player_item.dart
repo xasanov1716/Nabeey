@@ -7,10 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../../../../../../data/local/storage_repository/storage_repository.dart';
 
 class AudioPlayerItem extends StatefulWidget {
-  const AudioPlayerItem({super.key});
+  const AudioPlayerItem({super.key, required this.title, required this.audioPath});
+
+  final String title;
+  final String audioPath;
+
 
   @override
   State<AudioPlayerItem> createState() => _AudioPlayerItemState();
@@ -69,9 +72,9 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Audio 1",
-                    style: TextStyle(
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
                       fontFamily: "SF Pro Display",
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -143,7 +146,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                     setState(() {
                       if (!isPlaying) {
                         // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
-                        player.play(AssetSource('musics/susana.m4a'));
+                        player.play(UrlSource(''));
                         isPlaying = true;
                       } else {
                         // context.read<AudioBloc>().add(PauseAudio());
