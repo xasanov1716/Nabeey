@@ -1,5 +1,5 @@
 import 'package:contest_app/blocs/book/book_bloc.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/status/form_status.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +18,23 @@ class BookDetailScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: BlocConsumer<BookBloc, BookState>(
+        body: BlocBuilder<BookBloc, BookState>(
           builder: (context, state) {
             if (state.status == FormStatus.success) {
-              return Text(state.bookModel.title);
+              return ListView(
+                children: [
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                  Expanded(child: Image.asset(AppIcons.books,height: height * 148/812,width: width * 121 / 375)),
+                  Expanded(child: Column(
+                    children: [
+                      Text(state.bookModel.description),
+                    ],
+                  )),
+                  ],)
+                ],
+              );
             }
             if (state.status == FormStatus.loading) {
               return const Center(child: CircularProgressIndicator());
@@ -31,11 +44,11 @@ class BookDetailScreen extends StatelessWidget {
                 child: Text("Error"),
               );
             }
-            return Center(
+            return const Center(
               child: Text("Default"),
             );
           },
-          listener: (context, state) {},
-        ));
+        )
+      );
   }
 }
