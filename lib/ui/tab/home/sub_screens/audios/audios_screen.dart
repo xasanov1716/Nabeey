@@ -27,16 +27,16 @@ class _AudioScreenState extends State<AudioScreen> {
       body: BlocBuilder<AudiosBloc, AudiosStates>(
         builder: (context, state) {
           print(state.audio.length);
-          // if (state.status == FormStatus.failure) {
-          //   return Center(
-          //     child: Text(state.statusText),
-          //   );
-          // }
-          // if (state.status == FormStatus.loading) {
-          //   return const Center(
-          //     child: CircularProgressIndicator(),
-          //   );
-          // }
+          if (state.status == FormStatus.failure) {
+            return Center(
+              child: Text(state.statusText),
+            );
+          }
+          if (state.status == FormStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return GlobalAppBar(
             title: "Lorem Ipsum",
             subtitle: "Article",
@@ -49,11 +49,15 @@ class _AudioScreenState extends State<AudioScreen> {
                     ? Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.w, vertical: 8.h),
-                        child: AudioList(title: state.audio.first.title, onTap: () {}),
+                        child: AudioList(
+                            title: state.audio.first.title, onTap: () {}),
                       )
                     : Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: const AudioPlayerItem(),
+                        child: AudioPlayerItem(
+                          title: state.audio.first.title,
+                          audioPath: state.audio.first.audio.filePath,
+                        ),
                       ),
                 ...List.generate(
                   state.audio.length,
@@ -61,7 +65,7 @@ class _AudioScreenState extends State<AudioScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                     child: AudioList(
-                      title: state.audio[index].title,
+                        title: state.audio[index].title,
                         onTap: () {
                           setState(() {});
                           StorageRepository.putBool('check', false);

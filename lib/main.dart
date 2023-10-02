@@ -1,11 +1,13 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/audio_bloc/audio_bloc.dart';
 import 'package:contest_app/blocs/audios_bloc/audios_bloc.dart';
+import 'package:contest_app/blocs/audios_bloc/audios_event.dart';
 import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/login_bloc/login_bloc.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
+import 'package:contest_app/cubit/audios/audios_cubit.dart';
 import 'package:contest_app/data/repository/app_repository.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:contest_app/data/repository/audios_repository.dart';
@@ -38,7 +40,7 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => ArticleRepository(apiService: apiService),
         ),
-         RepositoryProvider(
+        RepositoryProvider(
           create: (context) => BookRepoSitory(apiService: apiService),
         ),
         RepositoryProvider(
@@ -56,16 +58,21 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc(apiService)),
         BlocProvider(
             create: (context) =>
-                VideoBloc(videoRepository: context.read<VideoRepository>())..add(GetVideosEvent())),
+                VideoBloc(videoRepository: context.read<VideoRepository>())
+                  ..add(GetVideosEvent())),
         BlocProvider(
             create: (context) => ArticleBloc(
                 articleRepository: context.read<ArticleRepository>())),
         BlocProvider(
-            create: (context) => AudiosBloc(
-                audiosRepository: context.read<AudiosRepository>())),
+            create: (context) =>
+                AudiosBloc(audiosRepository: context.read<AudiosRepository>())
+                  ..add(GetAudiosEvent())),
         BlocProvider(
-            create: (context) => BookBloc(
-                bookRepoSitory: context.read<BookRepoSitory>())),
+            create: (context) =>
+                BookBloc(bookRepoSitory: context.read<BookRepoSitory>())),
+        BlocProvider(
+            create: (context) => AudiosCubit(
+                audiosRepository: context.read<AudiosRepository>())),
         BlocProvider(
             create: (context) =>
                 CategoriesBloc(appRepository: context.read<AppRepository>())
