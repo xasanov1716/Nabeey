@@ -25,8 +25,7 @@ class RatingItem extends StatelessWidget {
       child: Row(children: [
         Text("${rating+1}.", style: TextStyle(color: isSelected ? AppColors.white : AppColors.C_111111, fontSize: 18.sp, fontWeight: FontWeight.w500),),
         SizedBox(width: 12.w,),
-        Text(name, style: TextStyle(color: isSelected ? AppColors.white : AppColors.C_111111, fontSize: 18.sp, fontWeight: FontWeight.w500),),
-        const Spacer(),
+        Expanded(child: Text(name, style: TextStyle(color: isSelected ? AppColors.white : AppColors.C_111111, fontSize: 18.sp, fontWeight: FontWeight.w500,),overflow: TextOverflow.ellipsis,)),
         Container(
           height: 36.w,
           width: 36.w,

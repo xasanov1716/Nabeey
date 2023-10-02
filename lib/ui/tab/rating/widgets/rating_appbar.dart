@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../utils/colors.dart';
@@ -69,7 +70,7 @@ class _RatingAppBarState extends State<RatingAppBar> {
               title: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Visibility(visible: isPined, child: SizedBox(width: 35 * width / 375)),
+                  Visibility(visible: isPined, child: SizedBox(width: 10 * width / 375)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,

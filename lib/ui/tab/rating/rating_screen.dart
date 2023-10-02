@@ -32,7 +32,7 @@ class _RatingScreenState extends State<RatingScreen> {
               color: AppColors.C_F59C16
             ),),
             SizedBox(height: 14.h,),
-            ...List.generate(30, (index) => RatingItem(rating: index, name: "Jamshid Maruf", ratingBall: "${153-5*index}", isSelected: index==2))
+            ...List.generate(30, (index) => RatingItem(rating: index, name: "Dilshodbek Sayitqulov", ratingBall: "${153-5*index}", isSelected: index==2))
           ],
         ),
       ),
