@@ -1,43 +1,46 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/utils/colors.dart';
+import 'package:contest_app/utils/constants.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-
 class AudioPlayerItem extends StatefulWidget {
-  const AudioPlayerItem({super.key, required this.title, required this.audioPath});
+  const AudioPlayerItem(
+      {super.key,
+      required this.title,
+      required this.audioPath,
+      this.index = 0,
+      required this.player, required this.skipButton});
 
   final String title;
   final String audioPath;
-
+  final int index;
+  final AudioPlayer player;
+  final VoidCallback skipButton;
 
   @override
   State<AudioPlayerItem> createState() => _AudioPlayerItemState();
 }
 
 class _AudioPlayerItemState extends State<AudioPlayerItem> {
-
-  final AudioPlayer player = AudioPlayer();
-
   Duration duration = Duration.zero;
   Duration currentDuration = Duration.zero;
   bool isPlaying = false;
 
   bool isCheck = false;
 
-
   _init() async {
-    player.onDurationChanged.listen((Duration d) {
+    widget.player.onDurationChanged.listen((Duration d) {
       setState(() {
         duration = d;
       });
     });
 
-    player.onPlayerComplete.listen((event) {
+    widget.player.onPlayerComplete.listen((event) {
       setState(() {
         isPlaying = false;
         duration = Duration.zero;
@@ -45,7 +48,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
       });
     });
 
-    player.onPositionChanged.listen((Duration d) {
+    widget.player.onPositionChanged.listen((Duration d) {
       currentDuration = d;
       setState(() {});
     });
@@ -53,7 +56,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
 
   @override
   void initState() {
-  _init();
+    _init();
     super.initState();
   }
 
@@ -82,14 +85,17 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  ZoomTapAnimation(onTap: (){
-                    isCheck = true;
-                    setState(() {
-
-                    });
-                    StorageRepository.putBool('check', isCheck);
-                    debugPrint(StorageRepository.getBool('check').toString());
-                  },child: SvgPicture.asset(AppIcons.remove))
+                  ZoomTapAnimation(
+                      onTap: () {
+                        isCheck = true;
+                        setState(() {
+                          StorageRepository.putBool("check", false);
+                        });
+                        StorageRepository.putBool('check', isCheck);
+                        debugPrint(
+                            StorageRepository.getBool('check').toString());
+                      },
+                      child: SvgPicture.asset(AppIcons.remove))
                 ],
               ),
               Slider(
@@ -98,7 +104,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                 max: duration.inSeconds.toDouble(),
                 activeColor: AppColors.C_F59C16,
                 onChanged: (double value) async {
-                  await player.seek(Duration(seconds: value.toInt()));
+                  await widget.player.seek(Duration(seconds: value.toInt()));
                   setState(() {});
                 },
               ),
@@ -139,25 +145,34 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                         AppColors.black.withOpacity(0.5), BlendMode.srcIn),
                   ),
                   SizedBox(width: 13.w),
-                  ZoomTapAnimation(child: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 50,
-                  ),onTap: (){
-                    setState(() {
-                      if (!isPlaying) {
-                        // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
-                        player.play(UrlSource(''));
-                        isPlaying = true;
-                      } else {
-                        // context.read<AudioBloc>().add(PauseAudio());
-                        player.pause();
-                        isPlaying = false;
-                      }
-                    });
-                  },),
+                  ZoomTapAnimation(
+                    child: Icon(
+                      isPlaying ? Icons.pause : Icons.play_arrow,
+                      size: 50,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        if (!isPlaying) {
+                          // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
+                          widget.player
+                              .play(AssetSource(assetsAudios[widget.index]));
+                          isPlaying = true;
+                        } else {
+                          // context.read<AudioBloc>().add(PauseAudio());
+                          widget.player.pause();
+                          isPlaying = false;
+                        }
+                      });
+                    },
+                  ),
                   SizedBox(width: 13.w),
-                  SvgPicture.asset(
-                    AppIcons.skipForward1,
+                  GestureDetector(
+                    onTap: (){
+
+                    },
+                    child: SvgPicture.asset(
+                      AppIcons.skipForward1,
+                    ),
                   ),
                 ],
               )

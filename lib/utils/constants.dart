@@ -4,10 +4,8 @@ const defaultImageConstant = "Select Image";
 
 const baseUrl = "https://thejama.uz";
 
-
 // const baseUrl = "https://api.restful-api.dev/objects";
 // const baseUrlForImage = "http://159.89.98.34:5545";
-
 
 class TimeOutConstants {
   static int connectTimeout = 30;
@@ -17,4 +15,12 @@ class TimeOutConstants {
 
 const String token = "";
 
-String exampleText = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
+String exampleText =
+    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
+
+List<String> assetsAudios = [
+  "musics/susana.m4a",
+  "musics/student.mp3",
+  "musics/yoshlik.mp3",
+  "musics/mix.mp3",
+];
