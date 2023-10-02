@@ -47,8 +47,8 @@ class _BooksScreenState extends State<BooksScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20,vertical:24 ),
                     child: BookItem(image: AppIcons.books, title: book.title, subtitle: book.author, height: height, width: width, onTap: (){
-                      // Navigator.pushNamed(context, RouteNames.booksDetail);
-                      // context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
+                      context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
+                      Navigator.pushNamed(context, RouteNames.booksDetail,arguments: book.title);
                     }),
                   );
                 }
