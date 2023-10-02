@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 
@@ -24,7 +23,7 @@ class BookItem extends StatelessWidget {
           Image.asset(image,height: height * 148/812,width: width * 121 / 375,),
           Column(
             children: [
-          Text(title,style: TextStyle(fontSize: 20),),
+          Text(title,style: const TextStyle(fontSize: 20),),
           Text(subtitle),
     
             ],
