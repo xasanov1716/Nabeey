@@ -1,3 +1,6 @@
+import '../ui/tab/app_routes.dart';
+import 'icons.dart';
+
 const String adminEmail = "admin@gmail.com";
 
 const defaultImageConstant = "Select Image";
@@ -17,4 +20,27 @@ class TimeOutConstants {
 
 const String token = "";
 
-String exampleText = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
+List<String> backgrounds = [
+  AppIcons.articleBackground,
+  AppIcons.youtubeBackground,
+  AppIcons.audioBackground,
+  AppIcons.bookBackground,
+];
+List<String> icons = [
+  AppIcons.article,
+  AppIcons.youtube,
+  AppIcons.audio,
+  AppIcons.book,
+];
+List<String> titles = [
+  "Article",
+  "Video",
+  "Audio",
+  "Book",
+];
+List<dynamic> navigators = [
+  RouteNames.articles,
+  RouteNames.videoScreen,
+  RouteNames.audioScreen,
+  RouteNames.booksScreen,
+];

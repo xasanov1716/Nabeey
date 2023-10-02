@@ -66,48 +66,52 @@ class _GlobalAppBarState extends State<GlobalAppBar> {
             automaticallyImplyLeading: true,
             backgroundColor: AppColors.white,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.only(left: width / 18, bottom: 16.0), // Adjust padding as needed
-              title: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Visibility(visible: isPined, child: SizedBox(width: 35 * width / 375)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Visibility(visible: isPined, child: SizedBox(height: 15 * height / 812)),
-                      Text(
-                        widget.title,
-                        style: TextStyle(
-                          fontFamily: "Urbanist",
-                          fontSize: 18 * width / 375,
-                          fontWeight: FontWeight.w700,
-                          color: isPined ? AppColors.black : AppColors.white,
-                        ),
-                        // maxLines: 1,
-                        // overflow: TextOverflow.ellipsis,
+              titlePadding: EdgeInsets.only(left: 20 * width / 375, bottom: 10 * height / 812), // Adjust padding as needed
+              title: Padding(
+                padding: EdgeInsets.only(bottom: isPined ? 0 : 5 * height / 812),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Visibility(visible: isPined, child: SizedBox(width: 35 * width / 375)),
+                    SizedBox(
+                      width: 135 * width / 375,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontFamily: "Urbanist",
+                              fontSize: 16 * width / 375,
+                              fontWeight: FontWeight.w700,
+                              color: isPined ? AppColors.black : AppColors.white,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            widget.subtitle,
+                            style: TextStyle(
+                              fontFamily: "Urbanist",
+                              fontSize: 10 * width / 375,
+                              fontWeight: FontWeight.w400,
+                              color: isPined ? AppColors.black : AppColors.white,
+                            ),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
-                      Text(
-                        widget.subtitle,
-                        style: TextStyle(
-                          fontFamily: "Urbanist",
-                          fontSize: 10 * width / 375,
-                          fontWeight: FontWeight.w400,
-                          color: isPined ? AppColors.black : AppColors.white,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10 * width / 375),
-                    child: ZoomTapAnimation(
+                    ),
+                    const Spacer(),
+                    ZoomTapAnimation(
                       onTap: widget.onTap,
                       child: Container(
                         height: 45 * height / 812,
                         width: 90 * width / 375,
+                        margin: EdgeInsets.only(right: 10 * width / 375),
                         decoration:
                             BoxDecoration(borderRadius: BorderRadius.circular(width / 5.5), color: AppColors.C_F59C16),
                         child: Center(
@@ -123,8 +127,8 @@ class _GlobalAppBarState extends State<GlobalAppBar> {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               background: ClipRRect(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(20 * width / 375)),
