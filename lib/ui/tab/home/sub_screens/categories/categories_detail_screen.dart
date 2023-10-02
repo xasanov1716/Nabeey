@@ -1,5 +1,6 @@
 import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
+import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/categories/widgets/global_container.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/categories/widgets/main_app_bar.dart';
 import 'package:contest_app/utils/colors.dart';
@@ -46,6 +47,7 @@ class _CategoriesDetailScreenState extends State<CategoriesDetailScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, navigators[index]);
                         BlocProvider.of<ArticleBloc>(context).add(GetArticlesEvent());
+                        BlocProvider.of<BookBloc>(context).add(GetBooksEvent());
                         setState(() {
                           selectedContainer = index + 1;
                         });
