@@ -1,4 +1,5 @@
 import 'package:contest_app/ui/tab/home/home_screen.dart';
+import 'package:contest_app/ui/tab/profile/not_registered.dart';
 import 'package:contest_app/ui/tab/profile/profile_screen.dart';
 import 'package:contest_app/ui/tab/quiz/quiz_screen.dart';
 import 'package:contest_app/ui/tab/rating/rating_screen.dart';
@@ -25,7 +26,8 @@ class _TabBoxState extends State<TabBox> {
       const HomeScreen(),
       const QuizScreen(),
       const RatingScreen(),
-      const ProfileScreen(),
+      // const ProfileScreen(),
+      const NotRegistered(),
     ];
     super.initState();
   }
