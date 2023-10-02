@@ -6,7 +6,6 @@ import 'package:contest_app/ui/tab/home/sub_screens/categories/widgets/main_app_
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../../../utils/constants.dart';
 
@@ -22,7 +21,6 @@ class _CategoriesDetailScreenState extends State<CategoriesDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.white,

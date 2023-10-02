@@ -21,43 +21,43 @@ class _BooksScreenState extends State<BooksScreen> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: BlocBuilder<BookBloc,BookState>(
-        builder: (context,state){
-          if(state.status == FormStatus.failure){
-            return Center(child: Text(state.errorText));
-          }
-          if(state.status == FormStatus.loading){
-            return const Center(child: CircularProgressIndicator());
-          }
-          return GlobalAppBar(
-            title: 'Lorem Ipsum',
+    return Scaffold(body: BlocBuilder<BookBloc, BookState>(
+      builder: (context, state) {
+        // if(state.status == FormStatus.failure){
+        //   return Center(child: Text(state.errorText));
+        // }
+        // if(state.status == FormStatus.loading){
+        //   return const Center(child: CircularProgressIndicator());
+        // }
+        return GlobalAppBar(
+          title: 'Lorem Ipsum',
           subtitle: 'Kitob',
           image: AppIcons.image3,
-          onTap: (){
-            
-          },
+          onTap: () {},
           body: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812,),),
-              SliverList(delegate: SliverChildBuilderDelegate(
-                childCount: state.books.length,
-                (context, index){
-                  BookModel book = state.books[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical:24 ),
-                    child: BookItem(image: AppIcons.books, title: book.title, subtitle: book.author, height: height, width: width, onTap: (){
-                      context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
-                      Navigator.pushNamed(context, RouteNames.booksDetail,arguments: book.title);
-                    }),
-                  );
-                }
-              ))
+              SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812)),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(childCount: state.books.length, (context, index) {
+                BookModel book = state.books[index];
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20 * width /375, vertical: 24 * height /812),
+                  child: BookItem(
+                      image: AppIcons.books,
+                      title: book.title,
+                      subtitle: book.author,
+                      height: height,
+                      width: width,
+                      onTap: () {
+                        context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
+                        Navigator.pushNamed(context, RouteNames.booksDetail, arguments: book.title);
+                      }),
+                );
+              }))
             ],
           ),
-          );
-        },
-      )
-    );
+        );
+      },
+    ));
   }
 }
