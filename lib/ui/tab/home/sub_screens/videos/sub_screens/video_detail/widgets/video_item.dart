@@ -14,13 +14,16 @@ class VideoItem extends StatefulWidget {
 class _VideoItemState extends State<VideoItem> {
   late YoutubePlayerController youtubePlayerController;
 
+
+
   @override
   void initState() {
     final videoId = YoutubePlayer.convertUrlToId(widget.videoModel.videoLink);
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: videoId!,
       flags: const YoutubePlayerFlags(
-        autoPlay: false
+        autoPlay: false,
+        showLiveFullscreenButton: true,
       )
     );
     super.initState();
@@ -28,30 +31,36 @@ class _VideoItemState extends State<VideoItem> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 215.h,
-          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+          height: size.width > 500 ? size.height : 215.h,
+          margin: EdgeInsets.symmetric(horizontal: size.width > 500 ? 0 : 20.w, vertical: size.width > 500 ? 0 : 12.h),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.r),
-            child: YoutubePlayer(
-              controller: youtubePlayerController,
-              showVideoProgressIndicator: true,
-              bottomActions: [
-                CurrentPosition(),
-                ProgressBar(
-                  isExpanded: true,
-                  colors: ProgressBarColors(
-                    playedColor: const Color(0xFFF59C16),
-                    handleColor: const Color(0xFFF59C16),
-                    backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.5),
+            borderRadius: BorderRadius.circular(size.width > 500 ? 0 : 20.r),
+            child: YoutubePlayerBuilder(
+              builder: (context, player){
+                return const SizedBox();
+              },
+              player: YoutubePlayer(
+                controller: youtubePlayerController,
+                showVideoProgressIndicator: true,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(
+                    isExpanded: true,
+                    colors: ProgressBarColors(
+                      playedColor: const Color(0xFFF59C16),
+                      handleColor: const Color(0xFFF59C16),
+                      backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.5),
+                    ),
                   ),
-                ),
-                RemainingDuration(),
-                FullScreenButton()
-              ],
+                  RemainingDuration(),
+                  FullScreenButton(controller: youtubePlayerController)
+                ],
+              ),
             )
           ),
         ),
