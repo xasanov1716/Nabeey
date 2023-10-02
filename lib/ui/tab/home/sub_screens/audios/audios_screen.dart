@@ -1,7 +1,7 @@
 import 'package:contest_app/blocs/audios_bloc/audios_bloc.dart';
 import 'package:contest_app/blocs/audios_bloc/audios_state.dart';
 import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_list.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/audios/widgets/audio_player_item.dart';
 import 'package:contest_app/utils/icons.dart';

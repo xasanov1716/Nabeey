@@ -1,5 +1,5 @@
 import 'package:contest_app/data/models/article/article_model.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable

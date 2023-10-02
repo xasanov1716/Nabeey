@@ -1,6 +1,6 @@
 import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/widgets/book_item.dart';
 import 'package:contest_app/ui/widgets/global_app_bar.dart';

@@ -3,7 +3,7 @@ import 'package:contest_app/blocs/article_bloc/article_state.dart';
 import 'package:contest_app/data/helper/helper_model.dart';
 import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,14 +26,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
                 articles: [],
               ),
               image: HelperModel(id: 0, fileName: '', filePath: ''),
-              // user: UserModel(
-              //     id: 0,
-              //     firstName: '',
-              //     lastName: '',
-              //     email: '',
-              //     phone: '',
-              //     userRole: 0,
-              //     asset: HelperModel(id: 0, fileName: '', filePath: '')),
             ),
             articles: const [],
           ),

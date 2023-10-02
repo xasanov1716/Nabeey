@@ -1,5 +1,5 @@
 import 'package:contest_app/blocs/book/book_bloc.dart';
-import 'package:contest_app/data/status/form_status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

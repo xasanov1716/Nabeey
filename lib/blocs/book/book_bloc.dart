@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/helper/helper_model.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
 import 'package:contest_app/data/repository/book_repository.dart';
-import 'package:contest_app/data/status/form_status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -2,14 +2,13 @@ import 'package:contest_app/blocs/article_bloc/article_bloc.dart';
 import 'package:contest_app/blocs/article_bloc/article_event.dart';
 import 'package:contest_app/blocs/article_bloc/article_state.dart';
 import 'package:contest_app/data/models/article/article_model.dart';
-import 'package:contest_app/data/models/status.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/articles/sub_screen/widgets/article_items_widget.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
-import '../../../../../utils/colors.dart';
 import '../../../../widgets/global_app_bar.dart';
 
 class ArticlesScreen extends StatefulWidget {
@@ -43,7 +42,9 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             title: "Lorem Ipsum",
             subtitle: "Article",
             image: AppIcons.image2,
-            onTap: (){},
+            onTap: (){
+              Navigator.pushNamed(context, RouteNames.quizRoute);
+            },
             body: CustomScrollView(
               slivers: <Widget>[
                 SliverToBoxAdapter(child: SizedBox(height: 20 * height / 812)),
