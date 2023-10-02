@@ -52,19 +52,57 @@ class _TabBoxState extends State<TabBox> {
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: const TextStyle(
+              fontFamily: "SF Pro Display",
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Color(0xfff59c16),
+              height: 17 / 14,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontFamily: "SF Pro Display",
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff111111),
+              height: 17 / 14,
+            ),
             unselectedItemColor: Colors.black,
             selectedItemColor: AppColors.C_F59C16,
-            unselectedIconTheme: IconThemeData(color: AppColors.black),
-            selectedIconTheme: IconThemeData(color: AppColors.C_F59C16),
+            unselectedIconTheme: const IconThemeData(color: AppColors.black),
+            selectedIconTheme: const IconThemeData(color: AppColors.C_F59C16),
             items: [
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppIcons.home), label: "Home"),
+                  icon: SvgPicture.asset(
+                    AppIcons.home,
+                    colorFilter: ColorFilter.mode(
+                        currentIndex == 0 ? AppColors.C_F59C16 : Color(0xff111111),
+                        BlendMode.srcIn),
+                  ),
+                  label: "Home"),
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppIcons.quiz), label: "Quiz"),
+                  icon: SvgPicture.asset(
+                    AppIcons.quiz,
+                    colorFilter: ColorFilter.mode(
+                        currentIndex == 1 ? AppColors.C_F59C16 : Color(0xff111111),
+                        BlendMode.srcIn),
+                  ),
+                  label: "Quiz"),
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppIcons.rating), label: "Rating"),
+                  icon: SvgPicture.asset(
+                    AppIcons.rating,
+                    colorFilter: ColorFilter.mode(
+                        currentIndex == 2 ? AppColors.C_F59C16 : Color(0xff111111),
+                        BlendMode.srcIn),
+                  ),
+                  label: "Rating"),
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppIcons.profile), label: "Profile"),
+                  icon: SvgPicture.asset(
+                    AppIcons.profile,
+                    colorFilter: ColorFilter.mode(
+                        currentIndex == 3 ? AppColors.C_F59C16 :Color(0xff111111),
+                        BlendMode.srcIn),
+                  ),
+                  label: "Profile"),
             ],
             currentIndex: currentIndex,
             onTap: (index) {
