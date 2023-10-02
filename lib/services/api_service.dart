@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
@@ -154,19 +155,18 @@ class ApiService {
     String password,
   ) async {
     try {
-      print(phone);
       final response =
           await _dio.post("/api/auth/login?phone=$phone&password=$password");
-      print(response.data);
       if (response.statusCode == 200) {
-        return Result.success(null);
+        return Result.success(response.data["data"]);
       }
       return Result.fail(
           "StatusCode is not equal to 200!\nCurrent StatusCode equal to ${response.statusCode}");
     } on DioError catch (e) {
       if (e.response != null && e.response!.statusCode == 404) {
         return Result.fail(e.response?.data['message'].toString());
-      } if (e.response != null && e.response!.statusCode == 400) {
+      }
+      if (e.response != null && e.response!.statusCode == 400) {
         return Result.fail(e.response?.data['message'].toString());
       }
       return Result.fail(e.toString());
@@ -175,17 +175,19 @@ class ApiService {
     }
   }
 
-  Future<UniversalData> getAllBook()async{
+  Future<UniversalData> getAllBook() async {
     Response response;
-    try{
+    try {
       response = await _dio.get('/api/books/get-all');
-      if(response.statusCode! >= 200 && response.statusCode! < 300){
-      return UniversalData(data: (response.data['data'] as List?)?.map((e) => BookModel.fromJson(e)).toList());
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+            data: (response.data['data'] as List?)
+                ?.map((e) => BookModel.fromJson(e))
+                .toList());
       }
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-       if (e.response != null) {
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {
         return UniversalData(error: e.message!);
@@ -201,11 +203,10 @@ class ApiService {
     try {
       response = await _dio.get("/api/content-audios/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print("api service ${response.data['data']}");
-        return UniversalData(
+          return UniversalData(
           data: (response.data['data'] as List?)
-              ?.map((e) => AudioModel.fromJson(e))
-              .toList() ??
+                  ?.map((e) => AudioModel.fromJson(e))
+                  .toList() ??
               [],
         );
       }
@@ -227,8 +228,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/content-audios/get/$id");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        return UniversalData(
-            data: AudioModel.fromJson(response.data['data']));
+        return UniversalData(data: AudioModel.fromJson(response.data['data']));
       }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {
@@ -243,18 +243,16 @@ class ApiService {
     }
   }
 
-
-  Future<UniversalData> getBookById(int id)async{
+  Future<UniversalData> getBookById(int id) async {
     Response response;
-    try{
+    try {
       response = await _dio.get('/api/books/get/$id');
-      if(response.statusCode! >= 200 && response.statusCode! < 300){
-      return UniversalData(data: BookModel.fromJson(response.data['data']));
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(data: BookModel.fromJson(response.data['data']));
       }
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-       if (e.response != null) {
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {
         return UniversalData(error: e.message!);
@@ -265,23 +263,21 @@ class ApiService {
     }
   }
 
-
-  Future<UniversalData> getBookByIds(int id)async{
+  Future<UniversalData> getBookByIds(int id) async {
     Response response;
-    try{
+    try {
       response = await _dio.get('/api/books/get/$id');
-      if(response.statusCode! >= 200 && response.statusCode! < 300 ){
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return UniversalData(data: BookModel.fromJson(response.data['data']));
       }
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-      if(e.response != null){
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
-      }else{
+      } else {
         return UniversalData(error: e.message!);
       }
-    }catch(e){
+    } catch (e) {
       return UniversalData(error: e.toString());
     }
   }
@@ -294,8 +290,8 @@ class ApiService {
         print("response:$response");
         return UniversalData(
           data: (response.data['data'] as List?)
-              ?.map((e) => QuizItem.fromJson(e))
-              .toList() ??
+                  ?.map((e) => QuizItem.fromJson(e))
+                  .toList() ??
               [],
         );
       }
@@ -309,6 +305,45 @@ class ApiService {
       }
     } catch (e) {
       return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<Result> auth(
+    String name,
+    String lastname,
+    String phone,
+    String password,
+    String email,
+    File image,
+  ) async {
+    try {
+      final FormData data = FormData.fromMap({
+        "FirstName":name,
+        "LastName":lastname,
+        "Email":email,
+        "Phone":phone,
+        "Password":password,
+        "Image":await MultipartFile.fromFile(image.path,filename: image.uri.pathSegments.last),
+      });
+      final response = await _dio.post("/api/user/create",data: data);
+      if (response.statusCode == 200) {
+        return Result.success(null);
+      }
+      return Result.fail(
+          "StatusCode is not equal to 200!\nCurrent StatusCode equal to ${response.statusCode}");
+    } on DioError catch (e) {
+      if (e.response != null && e.response!.statusCode == 404) {
+        return Result.fail(e.response?.data['message'].toString());
+      }
+      if (e.response != null && e.response!.statusCode == 400) {
+        return Result.fail(e.response?.data['message'].toString());
+      }
+      if (e.response != null && e.response!.statusCode == 500) {
+        return Result.fail(e.response?.data['message'].toString());
+      }
+      return Result.fail(e.toString());
+    } catch (e) {
+      return Result.fail(e.toString());
     }
   }
 }

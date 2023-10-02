@@ -1,3 +1,4 @@
+import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/ui/widgets/global_button.dart';
 import 'package:contest_app/ui/widgets/global_textfield.dart';
 import 'package:contest_app/utils/colors.dart';
@@ -41,7 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is LoginStateSuccess){
             Navigator.of(context).pop();
-            Navigator.pushNamed(context, RouteNames.profile);
+            StorageRepository.putString('token', state.token);
+            print(StorageRepository.getString('token'));
+            Navigator.pushNamedAndRemoveUntil(context, RouteNames.tabBox, (route) => false);
           }
         },
         child: LayoutBuilder(builder: (context, constraints) {
@@ -164,7 +167,9 @@ void showErrorDialog(BuildContext context, String errorMessage) {
 }String convertPhoneNumber(String input) {
   String digitsOnly = input.replaceAll(RegExp(r'[^\d]'), '');
 
-  String result = "%2B$digitsOnly";
+  if (digitsOnly.length >= 2) {
+    digitsOnly = digitsOnly.substring(3);
+  }
 
-  return result;
+  return digitsOnly;
 }

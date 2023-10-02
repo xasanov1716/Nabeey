@@ -14,22 +14,24 @@ class NotRegistered extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
       ),
-      body: Column(
-        children: [
-          Text("Now you do not have an account!"),
-          Image.asset(AppIcons.logo),
-          Text("You can create your account here!"),
-          SizedBox(height: 20),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: AppColors.C_F59C16,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, RouteNames.login);
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text("Currently you do not have an account!"),
+            Image.asset(AppIcons.logo),
+            Text("You can create your account here!"),
+            SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: AppColors.C_F59C16,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, RouteNames.login);
 
-            }, child: Text("Create an account",style: TextStyle(color: AppColors.white),),
-          ),
-        ],
+              }, child: Text("Create an account",style: TextStyle(color: AppColors.white),),
+            ),
+          ],
+        ),
       ),
     );
   }
