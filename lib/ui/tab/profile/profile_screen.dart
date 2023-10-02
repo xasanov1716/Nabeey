@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   selectedImagePath != null
                       ? Container(
-                          height: 240.h,
+                          height: 270.h,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(20),
