@@ -9,6 +9,7 @@ import 'package:contest_app/blocs/login_bloc/login_bloc.dart';
 import 'package:contest_app/blocs/quizzes_bloc/quizzes_bloc.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
 import 'package:contest_app/cubit/audios/audios_cubit.dart';
+import 'package:contest_app/cubit/download/downloader_cubit.dart';
 import 'package:contest_app/data/repository/app_repository.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:contest_app/data/repository/audios_repository.dart';
@@ -60,6 +61,7 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(providers: [
         BlocProvider(create: (context) => AudioBloc()),
+        BlocProvider(create: (context) => DownLoaderCubit()),
         BlocProvider(create: (context) => LoginBloc(apiService)),
         BlocProvider(
             create: (context) =>
