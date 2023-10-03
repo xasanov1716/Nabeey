@@ -164,14 +164,14 @@ class _AuthScreenState extends State<AuthScreen> {
                           print([
                             nameController.text,
                             lastnameController.text,
-                            phoneController.text,
+                            convertPhoneNumber(phoneController.text),
                             passwordController.text,
                             selectedImagePath
                           ]);
                           if(selectedImagePath != null){
-                            context.read<AuthCubit>().auth(name: nameController.text, lastname: lastnameController.text, phone: phoneController.text, password: passwordController.text, email: emailController.text, image: File(selectedImagePath!));
+                            context.read<AuthCubit>().auth(name: nameController.text, lastname: lastnameController.text, phone: convertPhoneNumber(phoneController.text), password: passwordController.text, email: emailController.text, image: File(selectedImagePath!));
                           }else{
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Profil rasmini xato kiritildi!")));
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Profil rasmini kiriting!")));
                           }
                         },
                         color: AppColors.C_F59C16,
@@ -233,10 +233,12 @@ void showErrorDialog(BuildContext context, String errorMessage) {
   );
 }
 
-String convertPhoneNumber(String input) {
-  String digitsOnly = input.replaceAll(RegExp(r'[^\d]'), '');
+  String convertPhoneNumber(String input) {
+    String digitsOnly = input.replaceAll(RegExp(r'[^\d]'), '');
 
-  String result = "%2B$digitsOnly";
+    if (digitsOnly.length >= 2) {
+      digitsOnly = digitsOnly.substring(3);
+    }
 
-  return result;
-}
+    return digitsOnly;
+  }
