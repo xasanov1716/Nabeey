@@ -1,5 +1,6 @@
 import 'package:contest_app/ui/tab/profile/widgets/global_button.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/page_view_column.dart';
+import 'package:contest_app/ui/tab/quiz/widgets/quiz_result_page.dart';
 import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
@@ -33,12 +34,12 @@ class _QuizScreenState extends State<QuizScreen> {
                 Expanded(
                   child: ListView(
                     children: [
-                      SizedBox(height: 20 * height / 812),
                       SizedBox(
                         height: 500,
                         child: PageView(
                           children: [
-                            ...List.generate(2, (index) => const PageViewColumn())
+                            ...List.generate(2, (index) => const PageViewColumn()),
+                            QuizResultPage(),
                           ],
                         ),
                       ),
@@ -46,8 +47,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                 ),
                 Padding(
-                  padding:
-                  EdgeInsets.only(bottom: 20.h, left: 20.w, right: 20.w),
+                  padding: EdgeInsets.only(bottom: 20.h, left: 20.w, right: 20.w),
                   child: GlobalButton(text: "Keyingi", onTap: () {}, color: AppColors.white),
                 )
               ],
