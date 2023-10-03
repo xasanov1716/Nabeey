@@ -2,8 +2,14 @@ import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OptionContainer extends StatelessWidget {
-  const OptionContainer({super.key, required this.option, required this.questionText, required this.icon, required this.borderColor, required this.onTap});
+class OptionContainer extends StatefulWidget {
+  const OptionContainer(
+      {super.key,
+      required this.option,
+      required this.questionText,
+      required this.icon,
+      required this.borderColor,
+      required this.onTap});
 
   final String option;
   final String questionText;
@@ -11,24 +17,28 @@ class OptionContainer extends StatelessWidget {
   final Border borderColor;
   final VoidCallback onTap;
 
+  @override
+  State<OptionContainer> createState() => _OptionContainerState();
+}
+
+class _OptionContainerState extends State<OptionContainer> {
+  int isSelected=0;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return Padding(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50.r),
-            color: AppColors.white,
-            border: borderColor),
-        child: ListTile(
-          onTap: onTap,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50.r),
+          color: AppColors.white,
+          border: widget.borderColor),
+      child: ListTile(
+          onTap: widget.onTap,
           minLeadingWidth: 0,
           contentPadding: EdgeInsets.zero,
           leading: Text(
-            option,
+            widget.option,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 14.sp,
@@ -36,16 +46,14 @@ class OptionContainer extends StatelessWidget {
                 color: AppColors.black),
           ),
           title: Text(
-            questionText,
+            widget.questionText,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 14.sp,
                 fontFamily: "Urbanist",
                 color: AppColors.black),
           ),
-          trailing: icon
-        ),
-      ),
+          trailing: widget.icon),
     );
   }
 }

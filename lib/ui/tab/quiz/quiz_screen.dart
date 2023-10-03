@@ -1,10 +1,8 @@
 import 'package:contest_app/ui/tab/profile/widgets/global_button.dart';
-import 'package:contest_app/ui/tab/quiz/widgets/option_container.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/page_view_column.dart';
 import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,43 +33,12 @@ class _QuizScreenState extends State<QuizScreen> {
                 Expanded(
                   child: ListView(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Savol#1",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.sp,
-                                fontFamily: "Urbanist",
-                                color: AppColors.C_007BEC,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20 * height / 812),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Center(
-                          child: Text(
-                            "Rosululloh Sollallohu alayhi vasallam qachon tug'ilganlar?",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
-                              fontFamily: "Urbanist",
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                      ),
                       SizedBox(height: 20 * height / 812),
                       SizedBox(
-                        height: 400,
+                        height: 500,
                         child: PageView(
                           children: [
-                            ...List.generate(10, (index) => PageViewColumn())
+                            ...List.generate(2, (index) => const PageViewColumn())
                           ],
                         ),
                       ),
