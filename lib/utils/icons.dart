@@ -8,8 +8,7 @@ class AppIcons {
   static const String articleDetail = "assets/images/article_detail.png";
   static const String profileMan = "assets/images/profile.png";
   static const String quizImage = "assets/images/quiz_image.png";
-  static const String logo = "assets/images/logo.png";
-  static const String logoYellow = "assets/images/logo_yellow.png";
+  static const String sertifikat = "assets/images/sertifikat.png";
 
   // svg
   static const String articleBackground = "assets/svg/article_background.svg";
@@ -39,4 +38,6 @@ class AppIcons {
   static const String send = "assets/svg/send.svg";
   static const String calendar = "assets/svg/calendar.svg";
   static const String eye = "assets/svg/eye.svg";
+  static const String done = "assets/svg/done.svg";
+  static const String error = "assets/svg/error.svg";
 }

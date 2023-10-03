@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ImageButton extends StatelessWidget {
-  const ImageButton({super.key, required this.onTap, required this.path});
+  const ImageButton({super.key, required this.onTap});
 
   final VoidCallback onTap;
-  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +24,6 @@ class ImageButton extends StatelessWidget {
               ),
             ),
             child: const Text('Rasm joylash'),
-          ),
-        ),
-        SizedBox(width: 10.w),
-        Visibility(
-          visible: path.isEmpty ? false : true,
-          child: Image.file(
-            File(path),
-            height: 50.w,
-            width: 50.w,
           ),
         ),
         const Spacer(),

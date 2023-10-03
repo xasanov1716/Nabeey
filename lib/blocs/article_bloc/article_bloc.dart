@@ -6,7 +6,6 @@ import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
@@ -33,7 +32,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
         ) {
     on<GetArticlesEvent>(getAllArticles);
     on<GetArticleByIdEvent>(getAllArticleById);
-    on<CreateArticleEvent>(createArticle);
   }
 
   final ArticleRepository articleRepository;
@@ -71,32 +69,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
           status: FormStatus.success,
           statusText: "SUCCESS",
           articleModel: response.data as ArticleModel,
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          status: FormStatus.failure,
-          statusText: response.error,
-        ),
-      );
-    }
-  }
-
-  Future<void> createArticle(
-      CreateArticleEvent createArticleEvent, Emitter<ArticleState> emit) async {
-    emit(state.copyWith(status: FormStatus.loading, statusText: 'Loading...'));
-    UniversalData response = await articleRepository
-        .createArticle(createArticleEvent.createArticleModel);
-    debugPrint("""
-    Data: ${response.data}
-    Error: ${response.error}
-    """);
-    if (response.error.isEmpty) {
-      emit(
-        state.copyWith(
-          status: FormStatus.success,
-          statusText: "SUCCESS",
         ),
       );
     } else {

@@ -5,6 +5,7 @@ abstract class LoginState {}
 
 class LoginInitial extends LoginState {}
 
+class LoginStateInitial extends LoginState {}
 
 class LoginStateLoading extends LoginState {}
 
@@ -14,7 +15,4 @@ class LoginStateError extends LoginState {
   LoginStateError(this.errorMessage);
 }
 
-class LoginStateSuccess extends LoginState {
-  final String token;
-  LoginStateSuccess(this.token);
-}
+class LoginStateSuccess extends LoginState {}

@@ -45,12 +45,18 @@ class _CategoriesDetailScreenState extends State<CategoriesDetailScreen> {
                         });
                       },
                       child: GlobalContainer(
-                          iconColor: selectedContainer == index + 1 ? AppColors.white : AppColors.black,
+                          iconColor: selectedContainer == index + 1
+                              ? AppColors.white
+                              : AppColors.black,
                           imageBackground: backgrounds[index],
                           image: icons[index],
                           text: titles[index],
-                          color: selectedContainer == index + 1 ? AppColors.C_F59C16 : AppColors.white,
-                          textColor: selectedContainer == index + 1 ? AppColors.white : AppColors.black),
+                          color: selectedContainer == index + 1
+                              ? AppColors.C_F59C16
+                              : AppColors.white,
+                          textColor: selectedContainer == index + 1
+                              ? AppColors.white
+                              : AppColors.black),
                     ),
                   )
                 ],

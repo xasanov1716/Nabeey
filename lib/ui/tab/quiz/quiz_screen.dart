@@ -1,13 +1,14 @@
-import 'package:contest_app/blocs/quizzes_bloc/quizzes_bloc.dart';
-import 'package:contest_app/data/models/status/form_status.dart';
+import 'package:contest_app/ui/tab/quiz/widgets/page_view_column.dart';
+import 'package:contest_app/ui/tab/quiz/widgets/quiz_result_page.dart';
+import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
+import 'package:contest_app/ui/widgets/global_button.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'widgtes/ansver_selected.dart';
-import 'widgtes/global_button.dart';
-import 'widgtes/text_widgets.dart';
+import '../../../blocs/categories_bloc/categories_bloc.dart';
+import '../../../blocs/categories_bloc/categories_state.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -17,76 +18,116 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  @override
-  void initState() {
-    context.read<QuizzesBloc>().add(GetAllQuizzes());
-    super.initState();
-  }
+  PageController pageViewController = PageController();
 
-  int count = 0;
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-        body: BlocConsumer<QuizzesBloc, QuizzesState>(
-      builder: (BuildContext context, QuizzesState state) {
-        if (state.status == FormStatus.success) {
-          return Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: controller,
-                  itemCount: state.quiz.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        TextWidgets(
-                          text: state.quiz[count].question.text,
-                          fontSize: 18,
+      backgroundColor: AppColors.white,
+      body: BlocBuilder<CategoriesBloc, CategoriesState>(
+        builder: (context, state) {
+          return RatingAppBar(
+            title: "Test",
+            subtitle: "Payg’ambarlikdan oldingi davr",
+            image: AppIcons.image2,
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SizedBox(
+                        height: 500,
+                        child: PageView(
+                          controller: pageViewController,
+                          onPageChanged: (value) => activeIndex,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: [
+                            ...List.generate(
+                                3, (index) =>  PageViewColumn(index: index+1,)),
+                            const QuizResultPage(),
+                          ],
                         ),
-                        SizedBox(
-                          height: height * (20 / 812),
-                        ),
-                        ...List.generate(
-                          state.quiz[count].question.answers.length,
-                          (index) => Align(
-                              alignment: Alignment.centerLeft,
-                              child: AnswerSelect(
-                                text:
-                                    "A.${state.quiz[count].question.answers[index].text}",
-                              )),
-                        )
-                      ],
-                    );
-                  },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: height * 0.8, left: width * 0.05, right: width * 0.05),
-                child: GlobalButton(
-                  text: 'Keyingi',
-                  onTap: () {
-                    setState(() {
-                      count++;
-                      if (count == state.quiz.length) count = 0;
-                    });
-                  },
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex != 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      title: "Keyingi",
+                      color: AppColors.C_F59C16,
+                      textColor: AppColors.white,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex == 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      title: "Reyting ko'rish",
+                      color: AppColors.C_F59C16,
+                      textColor: AppColors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16 * height / 812),
+                Padding(
+                  padding:
+                      EdgeInsets.only(bottom: 22.h, left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex == 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      borderColor: AppColors.C_F59C16,
+                      title: "Reyting ko'rish",
+                      color: AppColors.white,
+                      textColor: AppColors.C_F59C16,
+                    ),
+                  ),
+                )
+              ],
+            ),
           );
-        }
-        return Text("Something wen wrong: Current status:${state.status.name}");
-        ;
-      },
-      listener: (BuildContext context, QuizzesState state) {},
-    ));
+        },
+      ),
+    );
   }
 }

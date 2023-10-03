@@ -1,5 +1,3 @@
-import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
-import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
@@ -20,8 +18,7 @@ class LogoutDialog extends StatelessWidget {
           ),
           CupertinoDialogAction(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, RouteNames.tabBox, (route) => false);
-              StorageRepository.deleteString("token");
+              Navigator.of(context).pop(true);
             },
             child: Text('Logout',style: TextStyle(color: Colors.red),),
           ),
@@ -40,8 +37,7 @@ class LogoutDialog extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, RouteNames.tabBox, (route) => false);
-              StorageRepository.deleteString("token");
+              Navigator.of(context).pop(true);
             },
             child: Text('Logout',style: TextStyle(color: Colors.red),),
           ),

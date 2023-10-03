@@ -32,7 +32,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
             subtitle: "Article",
             image: AppIcons.image2,
             onTap: (){
-              Navigator.pushNamed(context, RouteNames.quizRoute);
+              Navigator.pushNamed(context, RouteNames.quizScreen);
             },
             body: CustomScrollView(
               slivers: <Widget>[
