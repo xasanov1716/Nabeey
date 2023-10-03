@@ -43,122 +43,123 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
+        children: [
+          Stack(
             children: [
-              Stack(
-                children: [
-                  selectedImagePath != null
-                      ? Container(
-                          height: 270.h,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                            child: Image.file(
-                              File(selectedImagePath!),
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )
-                      : Image.asset(
-                          AppIcons.profileMan,
+              selectedImagePath != null
+                  ? Container(
+                      height: 270.h,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        child: Image.file(
+                          File(selectedImagePath!),
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: height * (20 / 812),
-                      top: height * (200 / 812),
-                      right: width * (16 / 375),
+                      ),
+                    )
+                  : Image.asset(
+                      height: 270,
+                      AppIcons.profileMan,
+                      width: double.infinity,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: height * (20 / 812),
+                  top: height * (200 / 812),
+                  right: width * (16 / 375),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Profile",
-                              style: TextStyle(
-                                fontFamily: "Urbanist",
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.white,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              "Lorem ipsum",
-                              style: TextStyle(
-                                fontFamily: "Urbanist",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.white,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                        Text(
+                          "Profile",
+                          style: TextStyle(
+                            fontFamily: "Urbanist",
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(width: width * (31 / 375)),
-                        ZoomTapAnimation(
-                          onTap: () {
-                            showCameraAndGalleryDialog(context, (imagePath) {
-                              if (imagePath != null) {
-                                setState(() {
-                                  selectedImagePath = imagePath;
-                                });
-                              }
-                            });
-                          },
-                          child: SvgPicture.asset(AppIcons.camera),
+                        Text(
+                          "Lorem ipsum",
+                          style: TextStyle(
+                            fontFamily: "Urbanist",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 72.h),
-                child: Column(
-                  children: [
-                    ProfileButton(
+                    SizedBox(width: width * (31 / 375)),
+                    ZoomTapAnimation(
                       onTap: () {
-                        Navigator.pushNamed(context, RouteNames.auth);
+                        showCameraAndGalleryDialog(context, (imagePath) {
+                          if (imagePath != null) {
+                            setState(() {
+                              selectedImagePath = imagePath;
+                            });
+                          }
+                        });
                       },
-                      suffixIcon: AppIcons.nextArrow,
-                      prefixIcon: AppIcons.edit,
-                      text: 'Profilni tahrirlash',
-                    ),
-                    ProfileButton(
-                      onTap: () {
-                        Navigator.pushNamed(context, RouteNames.articleCreateScreen);
-                      },
-                      suffixIcon: AppIcons.nextArrow,
-                      prefixIcon: AppIcons.send,
-                      text: 'Maqola jo’natish',
-                    ),
-                    ProfileButton(
-                      onTap: () {
-                        _showLogoutDialog(context);
-                      },
-                      suffixIcon: AppIcons.nextArrow,
-                      prefixIcon: AppIcons.cornerDownLeft,
-                      text: 'Chiqish',
+                      child: SvgPicture.asset(AppIcons.camera),
                     ),
                   ],
                 ),
               ),
             ],
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 72.h),
+            child: Column(
+              children: [
+                ProfileButton(
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteNames.profileEdit);
+                  },
+                  suffixIcon: AppIcons.nextArrow,
+                  prefixIcon: AppIcons.edit,
+                  text: 'Profilni tahrirlash',
+                ),
+                ProfileButton(
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, RouteNames.articleCreateScreen);
+                  },
+                  suffixIcon: AppIcons.nextArrow,
+                  prefixIcon: AppIcons.send,
+                  text: 'Maqola jo’natish',
+                ),
+                ProfileButton(
+                  onTap: () {
+                    _showLogoutDialog(context);
+                  },
+                  suffixIcon: AppIcons.nextArrow,
+                  prefixIcon: AppIcons.cornerDownLeft,
+                  text: 'Chiqish',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

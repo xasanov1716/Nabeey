@@ -1,14 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:contest_app/data/local/storage_repository/storage_repository.dart'; // Import your StorageRepository
 import 'package:contest_app/ui/tab/home/home_screen.dart';
+import 'package:contest_app/ui/tab/profile/not_registered.dart';
 import 'package:contest_app/ui/tab/profile/profile_screen.dart';
 import 'package:contest_app/ui/tab/quiz/quiz_screen.dart';
 import 'package:contest_app/ui/tab/rating/rating_screen.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TabBox extends StatefulWidget {
-  const TabBox({super.key});
+  const TabBox({Key? key});
 
   @override
   State<TabBox> createState() => _TabBoxState();
@@ -16,24 +18,30 @@ class TabBox extends StatefulWidget {
 
 class _TabBoxState extends State<TabBox> {
   List<Widget> screens = [];
-
   int currentIndex = 0;
 
   @override
   void initState() {
-    screens = [
-      const HomeScreen(),
-      const QuizScreen(),
-      const RatingScreen(),
-      const ProfileScreen(),
-    ];
+    _checkTokenAndNavigate();
     super.initState();
+  }
+
+  Future<void> _checkTokenAndNavigate() async {
+    final token =  StorageRepository.getString("token");
+    bool tokenExists = token.isNotEmpty;
+
+    setState(() {
+      screens = [
+        const HomeScreen(),
+        const QuizScreen(),
+        const RatingScreen(),
+        if (tokenExists) const ProfileScreen() else const NotRegistered(),
+      ];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: Container(
