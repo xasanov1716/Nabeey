@@ -31,45 +31,42 @@ class GlobalButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding == null ? EdgeInsets.zero : padding!,
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            border: Border.all(width: 1, color: borderColor)),
-        child: Material(
+    return Container(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: color,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(radius),
-            onTap: onTap,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  leftIcon.isEmpty
-                      ? const Text("")
-                      : SvgPicture.asset(leftIcon),
-                  SizedBox(width: 16.w),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      overflow: TextOverflow.ellipsis,
-                      title,
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: textColor,
-                      ),
-                      textAlign: TextAlign.center,
+          border: Border.all(width: 1, color: borderColor)),
+      child: Material(
+        borderRadius: BorderRadius.circular(radius),
+        color: color,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(radius),
+          onTap: onTap,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                leftIcon.isEmpty
+                    ? const Text("")
+                    : SvgPicture.asset(leftIcon),
+                SizedBox(width: 16.w),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    title,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      color: textColor,
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(width: 16.w),
-                  rightIcon.isEmpty
-                      ? const Text("")
-                      : SvgPicture.asset(rightIcon),
-                ],
-              ),
+                ),
+                SizedBox(width: 16.w),
+                rightIcon.isEmpty
+                    ? const Text("")
+                    : SvgPicture.asset(rightIcon),
+              ],
             ),
           ),
         ),
