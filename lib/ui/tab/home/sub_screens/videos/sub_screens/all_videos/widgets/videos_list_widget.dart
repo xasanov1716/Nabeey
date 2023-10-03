@@ -57,7 +57,7 @@ class VideosListWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: height / 4.2,
+          height: height / 4,
           child: ListView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -89,7 +89,7 @@ class VideosListWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: AppColors.black,
-                                fontSize: width / 30,
+                                fontSize: width / 35,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Urbanist",
                               ),
@@ -100,7 +100,7 @@ class VideosListWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: AppColors.black.withOpacity(0.5),
-                                fontSize: width / 36,
+                                fontSize: width / 40,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Urbanist",
                               ),
