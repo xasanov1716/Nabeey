@@ -1,7 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
 import 'package:contest_app/utils/colors.dart';
-import 'package:contest_app/utils/constants.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,18 +7,26 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class AudioPlayerItem extends StatefulWidget {
-  const AudioPlayerItem(
-      {super.key,
-      required this.title,
-      required this.audioPath,
-      this.index = 0,
-      required this.player, required this.skipButton});
+  const AudioPlayerItem({
+    super.key,
+    required this.title,
+    required this.audioPath,
+    this.index = 0,
+    required this.player,
+    required this.skipButton,
+    required this.playButton,
+    required this.removeButton,
+    required this.isPlaying,
+  });
 
   final String title;
   final String audioPath;
   final int index;
   final AudioPlayer player;
   final VoidCallback skipButton;
+  final VoidCallback playButton;
+  final VoidCallback removeButton;
+  final bool isPlaying;
 
   @override
   State<AudioPlayerItem> createState() => _AudioPlayerItemState();
@@ -86,15 +92,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                     textAlign: TextAlign.left,
                   ),
                   ZoomTapAnimation(
-                      onTap: () {
-                        isCheck = true;
-                        setState(() {
-                          StorageRepository.putBool("check", false);
-                        });
-                        StorageRepository.putBool('check', isCheck);
-                        debugPrint(
-                            StorageRepository.getBool('check').toString());
-                      },
+                      onTap: widget.removeButton,
                       child: SvgPicture.asset(AppIcons.remove))
                 ],
               ),
@@ -146,30 +144,15 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                   ),
                   SizedBox(width: 13.w),
                   ZoomTapAnimation(
+                    onTap: widget.playButton,
                     child: Icon(
-                      isPlaying ? Icons.pause : Icons.play_arrow,
+                      widget.isPlaying ? Icons.pause : Icons.play_arrow,
                       size: 50,
                     ),
-                    onTap: () {
-                      setState(() {
-                        if (!isPlaying) {
-                          // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
-                          widget.player
-                              .play(AssetSource("musics/susana.m4a"));
-                          isPlaying = true;
-                        } else {
-                          // context.read<AudioBloc>().add(PauseAudio());
-                          widget.player.pause();
-                          isPlaying = false;
-                        }
-                      });
-                    },
                   ),
                   SizedBox(width: 13.w),
                   GestureDetector(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: SvgPicture.asset(
                       AppIcons.skipForward1,
                     ),
