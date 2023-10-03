@@ -1,21 +1,18 @@
-import 'package:contest_app/utils/icons.dart';
+import 'package:contest_app/data/models/video_model/video_model.dart';
+import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/all_videos/widgets/video_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../../utils/colors.dart';
 
 class VideosListWidget extends StatelessWidget {
   const VideosListWidget({
     super.key,
-    required this.images,
-    required this.titles,
-    required this.subtitles,
+    required this.videos,
     required this.videosName,
     required this.onTap,
   });
 
-  final List<String> images;
-  final List<String> titles;
-  final List<String> subtitles;
+  final List<VideoModel> videos;
   final String videosName;
   final VoidCallback onTap;
 
@@ -66,26 +63,28 @@ class VideosListWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: [
               SizedBox(width: width / 24),
-              ...List.generate(images.length, (index) {
+              ...List.generate(videos.length, (index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: width / 90),
                   child: Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Image.asset(images[index],
-                              width: width / 3.5, height: height / 6),
-                          SvgPicture.asset(AppIcons.play, width: width / 13)
-                        ],
+                      //width: width / 3.5, height: height / 6
+                      Container(
+                          width: width / 3.6, height: height / 6,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r)
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15.r),
+                            child: VideoWidget(videoLink: videos[index].videoLink)),
                       ),
                       SizedBox(
-                        width: width / 3.5,
+                        width: width / 3.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              titles[index],
+                              videos[index].title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -96,7 +95,9 @@ class VideosListWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              subtitles[index],
+                              videos[index].description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: AppColors.black.withOpacity(0.5),
                                 fontSize: width / 36,
