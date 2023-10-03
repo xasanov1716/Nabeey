@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
 import 'package:contest_app/data/local/storage_repository/storage_repository.dart';
@@ -18,6 +19,7 @@ class AudioScreen extends StatefulWidget {
 }
 
 class _AudioScreenState extends State<AudioScreen> {
+  AudioPlayer player =  AudioPlayer();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -46,7 +48,7 @@ class _AudioScreenState extends State<AudioScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: AudioPlayerItem(
                           title: "Audio",
-                          audioPath: state.categoryModel.audios.first.audio.filePath,
+                          audioPath: state.categoryModel.audios.first.audio.filePath, player: player, skipButton: () {  },
                         ),
                       ),
                 ...List.generate(

@@ -155,7 +155,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                         if (!isPlaying) {
                           // context.read<AudioBloc>().add(StartedAudio(audioUrl: 'musics/susana.m4a'));
                           widget.player
-                              .play(AssetSource(assetsAudios[widget.index]));
+                              .play(AssetSource("musics/susana.m4a"));
                           isPlaying = true;
                         } else {
                           // context.read<AudioBloc>().add(PauseAudio());
