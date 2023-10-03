@@ -47,30 +47,40 @@ class _AudioScreenState extends State<AudioScreen> {
                       removeButton: () {
                         setState(() {
                           visible = false;
-                          player.stop();
+                          player.pause();
+
                         });
                       },
                       playButton: () {
-                        setState(() {
-                          if (!isPlaying) {
-                            player.play(AssetSource(audiosData[indexPlay]));
-                            isPlaying = true;
-                          } else {
-                            player.pause();
-                            isPlaying = false;
-                          }
-                        });
+                        if(mounted){
+                          setState(() {
+                            if (!isPlaying) {
+                              isPlaying = true;
+                              player.play(AssetSource(audiosData[indexPlay]));
+                            } else {
+                              isPlaying = false;
+                              player.pause();
+                            }
+                          });
+                        }
                       },
                       title: state.categoryModel.audios[indexPlay].title,
                       audioPath:
                           state.categoryModel.audios.first.audio.filePath,
                       player: player,
                       skipButton: () {
-                        player.pause();
-                        player.play(AssetSource(audiosData[
+                        if(mounted){
+                          setState(() {
+                            player.stop();
+                            isPlaying = false;
+                            player.play(AssetSource(audiosData[
                             state.categoryModel.audios.length - 1 > indexPlay
-                                ? indexPlay++
+                                ? ++indexPlay
                                 : indexPlay]));
+                            isPlaying = true;
+
+                          });
+                        }
                       },
                     ),
                   ),
@@ -84,13 +94,17 @@ class _AudioScreenState extends State<AudioScreen> {
                         child: AudioList(
                             title: state.categoryModel.audios[index].title,
                             onTap: () {
-                              setState(() {
-                                indexPlay = index;
-                                player.pause();
-                                visible = true;
-                                isPlaying = true;
-                                player.play(AssetSource(audiosData[index]));
-                              });
+                              if(mounted){
+                                setState(() {
+                                  indexPlay = index;
+                                  if(visible){
+                                    player.pause();
+                                  }
+                                  visible = true;
+                                  isPlaying = true;
+                                  player.play(AssetSource(audiosData[index]));
+                                });
+                              }
                             }),
                       ),
                     ],

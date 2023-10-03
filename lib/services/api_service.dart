@@ -57,7 +57,6 @@ class ApiService {
     try {
       response = await _dio.get("/api/article/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print("object  Articles");
         return UniversalData(
           data: (response.data['data'] as List?)
                   ?.map((e) => ArticleModel.fromJson(e))
@@ -154,10 +153,8 @@ class ApiService {
     String password,
   ) async {
     try {
-      print(phone);
       final response =
           await _dio.post("/api/auth/login?phone=$phone&password=$password");
-      print(response.data);
       if (response.statusCode == 200) {
         return Result.success(null);
       }
@@ -201,7 +198,6 @@ class ApiService {
     try {
       response = await _dio.get("/api/content-audios/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print("api service ${response.data['data']}");
         return UniversalData(
           data: (response.data['data'] as List?)
               ?.map((e) => AudioModel.fromJson(e))
@@ -289,9 +285,7 @@ class ApiService {
   Future<UniversalData> getAllQuizzes() async {
     try {
       final response = await _dio.get("/api/quiz-questions/get-all");
-      print("response:${response.statusCode}");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print("response:$response");
         return UniversalData(
           data: (response.data['data'] as List?)
               ?.map((e) => QuizItem.fromJson(e))
@@ -299,7 +293,6 @@ class ApiService {
               [],
         );
       }
-      print('ok');
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {
       if (e.response != null) {

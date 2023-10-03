@@ -45,7 +45,7 @@ List<dynamic> navigators = [
 
 List<String> audiosData = [
   "musics/student.mp3",
-  "musics/mix.mp3",
   "musics/susana.m4a",
+  "musics/mix.mp3",
   "musics/yoshlik.mp3",
 ];

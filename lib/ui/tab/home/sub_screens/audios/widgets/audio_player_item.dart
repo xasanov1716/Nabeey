@@ -152,7 +152,7 @@ class _AudioPlayerItemState extends State<AudioPlayerItem> {
                   ),
                   SizedBox(width: 13.w),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: widget.skipButton,
                     child: SvgPicture.asset(
                       AppIcons.skipForward1,
                     ),
