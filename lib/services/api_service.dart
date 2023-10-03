@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
-import 'package:contest_app/data/models/questions/questions_model.dart';
 import 'package:contest_app/data/models/result_model.dart';
 import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:dio/dio.dart';
@@ -11,9 +8,6 @@ import 'package:flutter/cupertino.dart';
 import '../data/models/universal_data.dart';
 import '../utils/constants.dart';
 import 'package:contest_app/data/models/article/article_model.dart';
-import 'package:contest_app/data/models/universal_data.dart';
-import 'package:contest_app/utils/constants.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class ApiService {
@@ -282,32 +276,6 @@ class ApiService {
         return UniversalData(error: e.message!);
       }
     }catch(e){
-      return UniversalData(error: e.toString());
-    }
-  }
-
-  Future<UniversalData> getAllQuizzes() async {
-    try {
-      final response = await _dio.get("/api/quiz-questions/get-all");
-      print("response:${response.statusCode}");
-      if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print("response:$response");
-        return UniversalData(
-          data: (response.data['data'] as List?)
-              ?.map((e) => QuizItem.fromJson(e))
-              .toList() ??
-              [],
-        );
-      }
-      print('ok');
-      return UniversalData(error: 'ERROR');
-    } on DioException catch (e) {
-      if (e.response != null) {
-        return UniversalData(error: e.response!.data['message']);
-      } else {
-        return UniversalData(error: e.message!);
-      }
-    } catch (e) {
       return UniversalData(error: e.toString());
     }
   }

@@ -37,4 +37,6 @@ class AppIcons {
   static const String send = "assets/svg/send.svg";
   static const String calendar = "assets/svg/calendar.svg";
   static const String eye = "assets/svg/eye.svg";
+  static const String done = "assets/svg/done.svg";
+  static const String error = "assets/svg/error.svg";
 }

@@ -60,6 +60,7 @@ class _RatingAppBarState extends State<RatingAppBar> {
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
+            scrolledUnderElevation: 0,
             expandedHeight: 240 * height / 812,
             floating: false,
             pinned: true,

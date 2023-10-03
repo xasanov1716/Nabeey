@@ -1,13 +1,13 @@
-import 'package:contest_app/blocs/quizzes_bloc/quizzes_bloc.dart';
-import 'package:contest_app/data/models/status/form_status.dart';
+import 'package:contest_app/ui/tab/quiz/widgets/option_container.dart';
+import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'widgtes/ansver_selected.dart';
-import 'widgtes/global_button.dart';
-import 'widgtes/text_widgets.dart';
+import '../../../blocs/categories_bloc/categories_bloc.dart';
+import '../../../blocs/categories_bloc/categories_state.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -18,75 +18,82 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   @override
-  void initState() {
-    context.read<QuizzesBloc>().add(GetAllQuizzes());
-    super.initState();
-  }
-
-  int count = 0;
-
-  @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-        body: BlocConsumer<QuizzesBloc, QuizzesState>(
-      builder: (BuildContext context, QuizzesState state) {
-        if (state.status == FormStatus.success) {
-          return Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: controller,
-                  itemCount: state.quiz.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        TextWidgets(
-                          text: state.quiz[count].question.text,
-                          fontSize: 18,
-                        ),
-                        SizedBox(
-                          height: height * (20 / 812),
-                        ),
-                        ...List.generate(
-                          state.quiz[count].question.answers.length,
-                          (index) => Align(
-                              alignment: Alignment.centerLeft,
-                              child: AnswerSelect(
-                                text:
-                                    "A.${state.quiz[count].question.answers[index].text}",
-                              )),
-                        )
-                      ],
-                    );
-                  },
+      backgroundColor: AppColors.white,
+      body: BlocBuilder<CategoriesBloc, CategoriesState>(
+        builder: (context, state) {
+          return RatingAppBar(
+            title: "Test",
+            subtitle: "Payg’ambarlikdan oldingi davr",
+            image: AppIcons.image2,
+            body: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              children: [
+                SizedBox(height: 40 * height / 812),
+                Row(
+                  children: [
+                    Text(
+                      "Savol#1",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
+                          fontFamily: "Urbanist",
+                          color: AppColors.C_007BEC),
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: height * 0.8, left: width * 0.05, right: width * 0.05),
-                child: GlobalButton(
-                  text: 'Keyingi',
-                  onTap: () {
-                    setState(() {
-                      count++;
-                      if (count == state.quiz.length) count = 0;
-                    });
-                  },
+                SizedBox(height: 20 * height / 812),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(color: AppColors.white),
+                  child: Center(
+                    child: Text(
+                      "Rosululloh Sollallohu alayhi vasallam qachon tug'ilganlar?",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.sp,
+                          fontFamily: "Urbanist",
+                          color: AppColors.black),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 20 * height / 812),
+                OptionContainer(
+                  borderColor: Border.all(color: Colors.green),
+                  option: "A.",
+                  questionText: "571 -yil Robbiul-avval 12",
+                  icon: Icon(CupertinoIcons.check_mark_circled_solid,
+                      color: Colors.green, size: 26.r),
+                ),
+                SizedBox(height: 12 * height / 812),
+                OptionContainer(
+                  borderColor: Border.all(color: Colors.red),
+                  option: "B.",
+                  questionText: "571 -yil Robbiul-avval 17",
+                  icon: Icon(CupertinoIcons.clear_circled_solid,
+                      color: Colors.red, size: 26.r),
+                ),
+                SizedBox(height: 12 * height / 812),
+                OptionContainer(
+                  borderColor: Border.all(color: Colors.grey),
+                  option: "C.",
+                  questionText: "571-yil Ramazon 10",
+                  icon: Container(
+                    width: 26.w,
+                    height: 26.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100.r),
+                      border: Border.all(color: Colors.grey)
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
-        }
-        return Text("Something wen wrong: Current status:${state.status.name}");
-        ;
-      },
-      listener: (BuildContext context, QuizzesState state) {},
-    ));
+        },
+      ),
+    );
   }
 }

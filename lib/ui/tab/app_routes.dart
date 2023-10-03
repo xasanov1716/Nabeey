@@ -25,7 +25,7 @@ class RouteNames {
   static const String articles = "/articles";
   static const String auth = "/auth_screen";
   static const String booksDetail = "/books_detail";
-  static const String quizRoute = "/quiz_screen";
+  static const String quizScreen = "/quiz_screen";
   static const String articleCreateScreen = "/article_create_screen";
 }
 
@@ -56,7 +56,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const ArticlesScreen());
       case RouteNames.auth:
         return MaterialPageRoute(builder: (context) => const AuthScreen());
-      case RouteNames.quizRoute:
+      case RouteNames.quizScreen:
         return MaterialPageRoute(builder: (context) => const QuizScreen());
       case RouteNames.articleCreateScreen:
         return MaterialPageRoute(builder: (context) => const ArticleCreateScreen());
