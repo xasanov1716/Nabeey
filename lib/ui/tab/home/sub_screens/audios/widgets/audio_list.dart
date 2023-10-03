@@ -19,17 +19,29 @@ class AudioList extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(15))),
           child: Padding(
             padding: const EdgeInsets.all(18),
-            child: Text(
-              title,
-              style: const TextStyle(
-                overflow: TextOverflow.ellipsis,
-                fontFamily: "SF Pro Display",
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff111111),
-                height: 20 / 18,
-              ),
-              textAlign: TextAlign.left,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontFamily: "SF Pro Display",
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff111111),
+                    height: 20 / 18,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                // Visibility(
+                //   visible: true,
+                //   child: SizedBox(
+                //       width: 50,
+                //       height: 25,
+                //       child: Lottie.asset("assets/audio_playing.json")),
+                // )
+              ],
             ),
           )),
     );

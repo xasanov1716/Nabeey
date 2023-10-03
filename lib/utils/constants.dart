@@ -7,10 +7,8 @@ const defaultImageConstant = "Select Image";
 
 const baseUrl = "https://thejama.uz";
 
-
 // const baseUrl = "https://api.restful-api.dev/objects";
 // const baseUrlForImage = "http://159.89.98.34:5545";
-
 
 class TimeOutConstants {
   static int connectTimeout = 30;
@@ -43,4 +41,11 @@ List<dynamic> navigators = [
   RouteNames.videoScreen,
   RouteNames.audioScreen,
   RouteNames.booksScreen,
+];
+
+List<String> audiosData = [
+  "musics/student.mp3",
+  "musics/susana.m4a",
+  "musics/mix.mp3",
+  "musics/yoshlik.mp3",
 ];

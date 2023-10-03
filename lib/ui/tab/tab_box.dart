@@ -64,7 +64,7 @@ class _TabBoxState extends State<TabBox> {
               fontFamily: "SF Pro Display",
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: Color(0xfff59c16),
+              color: AppColors.C_F59C16,
               height: 17 / 14,
             ),
             unselectedLabelStyle: const TextStyle(
@@ -74,9 +74,9 @@ class _TabBoxState extends State<TabBox> {
               color: Color(0xff111111),
               height: 17 / 14,
             ),
-            unselectedItemColor: Colors.black,
+            unselectedItemColor: Color(0xff111111),
             selectedItemColor: AppColors.C_F59C16,
-            unselectedIconTheme: const IconThemeData(color: AppColors.black),
+            unselectedIconTheme: const IconThemeData(color: Color(0xff111111),),
             selectedIconTheme: const IconThemeData(color: AppColors.C_F59C16),
             items: [
               BottomNavigationBarItem(
