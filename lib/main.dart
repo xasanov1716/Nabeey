@@ -7,6 +7,7 @@ import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/login_bloc/login_bloc.dart';
 import 'package:contest_app/blocs/quizzes_bloc/quizzes_bloc.dart';
+import 'package:contest_app/blocs/rating_bloc/rating_bloc.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
 import 'package:contest_app/cubit/audios/audios_cubit.dart';
 import 'package:contest_app/data/repository/app_repository.dart';
@@ -14,6 +15,7 @@ import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:contest_app/data/repository/audios_repository.dart';
 import 'package:contest_app/data/repository/book_repository.dart';
 import 'package:contest_app/data/repository/quiz_repository.dart';
+import 'package:contest_app/data/repository/rating_repository.dart';
 import 'package:contest_app/data/repository/video_repository.dart';
 import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
@@ -40,6 +42,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(
+          create: (context) => RatingRepository(apiService: apiService),
+        ),
         RepositoryProvider(
           create: (context) => ArticleRepository(apiService: apiService),
         ),
@@ -87,6 +92,9 @@ class App extends StatelessWidget {
             create: (context) =>
                 CategoriesBloc(appRepository: context.read<AppRepository>())
                   ..add(GetCategories())),
+        BlocProvider(
+            create: (context) =>
+            RatingBloc(ratingRepository: context.read<RatingRepository>())),
       ], child: const MyApp()),
     );
   }
