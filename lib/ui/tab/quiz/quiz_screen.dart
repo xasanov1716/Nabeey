@@ -1,7 +1,7 @@
-import 'package:contest_app/ui/tab/profile/widgets/global_button.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/page_view_column.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/quiz_result_page.dart';
 import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
+import 'package:contest_app/ui/widgets/global_button.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: PageView(
                           children: [
                             ...List.generate(2, (index) => const PageViewColumn()),
-                            QuizResultPage(),
+                            const QuizResultPage(),
                           ],
                         ),
                       ),
@@ -48,7 +48,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 20.h, left: 20.w, right: 20.w),
-                  child: GlobalButton(text: "Keyingi", onTap: () {}, color: AppColors.white),
+                  child: GlobalButton(onTap: (){},title: "Keyingi",color: AppColors.C_F59C16,textColor: AppColors.white,),
                 )
               ],
             ),

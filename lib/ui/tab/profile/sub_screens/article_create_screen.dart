@@ -1,6 +1,6 @@
-import 'package:contest_app/ui/tab/profile/widgets/global_button.dart';
 import 'package:contest_app/ui/tab/profile/widgets/global_text_field.dart';
 import 'package:contest_app/ui/tab/profile/widgets/image_button.dart';
+import 'package:contest_app/ui/widgets/global_button.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -71,8 +71,9 @@ class _ArticleCreateScreenState extends State<ArticleCreateScreen> {
               ),
             ),
             GlobalButton(
-              color: AppColors.white,
-              text: 'Jo\'natish',
+              textColor: AppColors.white,
+              color: AppColors.C_F59C16,
+              title: 'Jo\'natish',
               onTap: () {},
             ),
             SizedBox(height: height * (30 / 812)),
