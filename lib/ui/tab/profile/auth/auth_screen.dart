@@ -49,65 +49,71 @@ class _AuthScreenState extends State<AuthScreen> {
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: IntrinsicHeight(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Quiz da qatnashish uchun ",
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.C_007BEC),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Quiz da qatnashish uchun ",
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.C_007BEC),
+                        ),
                       ),
-                      Text(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text(
                         "Ro’yhatdan o’ting",
                         style: TextStyle(
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w800,
                             color: AppColors.C_111111),
                       ),
-                      SizedBox(
-                        height: 28.h,
-                      ),
-                      const GlobalTextField(
-                          hintText: "Username",
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.next,
-                          caption: "Ism"),
-                      const GlobalTextField(
-                          hintText: "Lastname",
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.next,
-                          caption: "Familya"),
-                      GlobalTextField(
-                        controller: phoneController,
-                          hintText: "+(998) 91 234-56-78",
-                          keyboardType: TextInputType.phone,
-                          textInputAction: TextInputAction.next,
-                          caption: "Tel raqam"),
-                      GlobalTextField(
-                        controller: passwordController,
-                          hintText: "********",
-                          keyboardType: TextInputType.visiblePassword,
-                          textInputAction: TextInputAction.done,
-                          caption: "Parol"),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      GlobalButton(
-                        title: "Ro’yhatdan o’tish",
-                        onTap: () {
-                          print("jsdgufygeyuw${phoneController.text}");
-                          context.read<LoginBloc>().add(LoginUser(phone: convertPhoneNumber(phoneController.text), password: passwordController.text));
-                        },
-                        color: AppColors.C_F59C16,
-                        textColor: AppColors.white,
-                      ),
-                      SizedBox(height: 40.h,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 28.h,
+                    ),
+                    const GlobalTextField(
+                        hintText: "Username",
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        caption: "Ism"),
+                    const GlobalTextField(
+                        hintText: "Lastname",
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        caption: "Familya"),
+                    GlobalTextField(
+                      controller: phoneController,
+                        hintText: "+(998) 91 234-56-78",
+                        keyboardType: TextInputType.phone,
+                        textInputAction: TextInputAction.next,
+                        caption: "Tel raqam"),
+                    GlobalTextField(
+                      controller: passwordController,
+                        hintText: "********",
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
+                        caption: "Parol"),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    GlobalButton(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      title: "Login",
+                      onTap: () {
+                        context.read<LoginBloc>().add(LoginUser(phone: convertPhoneNumber(phoneController.text), password: passwordController.text));
+                      },
+                      color: AppColors.C_F59C16,
+                      textColor: AppColors.white,
+                    ),
+                    SizedBox(height: 40.h,),
+                  ],
                 ),
               ),
             ),

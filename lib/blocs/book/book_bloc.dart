@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/helper/helper_model.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/data/models/universal_data.dart';
 import 'package:contest_app/data/repository/book_repository.dart';
-import 'package:contest_app/data/status/form_status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,11 +48,13 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         books: data.data as List<BookModel>,
         status: FormStatus.success,
       ));
+      debugPrint('BlOC SUCCESS');
     }
     emit(state.copyWith(
       errorText: data.error,
       status: FormStatus.failure,
     ));
+    debugPrint('BlOC ERROR');
   }
 
   Future<void> getBookById(
@@ -61,15 +63,17 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   UniversalData data = await bookRepoSitory.getBookById(event.bookId);
     if (data.error.isEmpty) {
       emit(state.copyWith(
-        bookModel: data as BookModel,
+        bookModel: data.data as BookModel,
         status: FormStatus.success,
       ));
-    }
-
-    emit(state.copyWith(
+    debugPrint('BlOC SUCCESS');
+    }else{
+       debugPrint('BlOC ERROR');
+       emit(state.copyWith(
       errorText: data.error,
       status: FormStatus.failure,
     ));
+    }
   }
 
   Future<void> addBook(AddBookEvent event, Emitter<BookState> emit) async {
