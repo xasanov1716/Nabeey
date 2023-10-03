@@ -18,6 +18,10 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  PageController pageViewController = PageController();
+
+  int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -37,8 +41,12 @@ class _QuizScreenState extends State<QuizScreen> {
                       SizedBox(
                         height: 500,
                         child: PageView(
+                          controller: pageViewController,
+                          onPageChanged: (value) => activeIndex,
+                          physics: const NeverScrollableScrollPhysics(),
                           children: [
-                            ...List.generate(2, (index) => const PageViewColumn()),
+                            ...List.generate(
+                                3, (index) => const PageViewColumn()),
                             const QuizResultPage(),
                           ],
                         ),
@@ -47,8 +55,73 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20.h, left: 20.w, right: 20.w),
-                  child: GlobalButton(onTap: (){},title: "Keyingi",color: AppColors.C_F59C16,textColor: AppColors.white,),
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex != 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      title: "Keyingi",
+                      color: AppColors.C_F59C16,
+                      textColor: AppColors.white,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex == 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      title: "Reyting ko'rish",
+                      color: AppColors.C_F59C16,
+                      textColor: AppColors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16 * height / 812),
+                Padding(
+                  padding:
+                      EdgeInsets.only(bottom: 22.h, left: 20.w, right: 20.w),
+                  child: Visibility(
+                    visible: activeIndex == 3,
+                    child: GlobalButton(
+                      onTap: () {
+                        setState(() {});
+                        if (activeIndex < 3) {
+                          activeIndex++;
+                          pageViewController.animateToPage(activeIndex,
+                              duration: activeIndex == 3
+                                  ? const Duration(seconds: 1)
+                                  : const Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        }
+                      },
+                      borderColor: AppColors.C_F59C16,
+                      title: "Reyting ko'rish",
+                      color: AppColors.white,
+                      textColor: AppColors.C_F59C16,
+                    ),
+                  ),
                 )
               ],
             ),
