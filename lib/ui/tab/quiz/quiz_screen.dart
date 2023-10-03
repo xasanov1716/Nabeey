@@ -33,7 +33,6 @@ class _QuizScreenState extends State<QuizScreen> {
                 Expanded(
                   child: ListView(
                     children: [
-                      SizedBox(height: 20 * height / 812),
                       SizedBox(
                         height: 500,
                         child: PageView(
