@@ -71,6 +71,7 @@ class _ArticleCreateScreenState extends State<ArticleCreateScreen> {
               ),
             ),
             GlobalButton(
+              color: AppColors.white,
               text: 'Jo\'natish',
               onTap: () {},
             ),
