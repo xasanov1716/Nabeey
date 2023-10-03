@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:contest_app/data/models/article/create_article_model.dart';
 import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
@@ -309,6 +310,24 @@ class ApiService {
     }
   }
 
+  Future<UniversalData> createArticle({required CreateArticleModel createArticleModel}) async {
+    Response response;
+    _dio.options.headers = {
+      "Accept": "multipart/form-data",
+    };
+    try {
+      response =
+      await _dio.post("/api/article/create", data: await createArticleModel.getFormData());
+      if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
+        debugPrint('Response 200: ${response.data}');
+        return UniversalData(data: response.data['data']);
+      }
+      debugPrint('Error: ${response.data}');
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        debugPrint('Dio exception: ${e.response}');
+        return UniversalData(error: e.response!.data);
 
   Future<Result> auth(
     String name,
@@ -369,8 +388,8 @@ class ApiService {
         return UniversalData(error: e.message!);
       }
     } catch (e) {
+      debugPrint("Caught: $e");
       return UniversalData(error: e.toString());
-
     }
   }
 }
