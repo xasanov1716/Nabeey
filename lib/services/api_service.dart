@@ -205,7 +205,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/content-audios/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-          return UniversalData(
+        return UniversalData(
           data: (response.data['data'] as List?)
                   ?.map((e) => AudioModel.fromJson(e))
                   .toList() ??
@@ -328,6 +328,14 @@ class ApiService {
       if (e.response != null) {
         debugPrint('Dio exception: ${e.response}');
         return UniversalData(error: e.response!.data);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
 
   Future<Result> auth(
     String name,
@@ -339,14 +347,15 @@ class ApiService {
   ) async {
     try {
       final FormData data = FormData.fromMap({
-        "FirstName":name,
-        "LastName":lastname,
-        "Email":email,
-        "Phone":phone,
-        "Password":password,
-        "Image":await MultipartFile.fromFile(image.path,filename: image.uri.pathSegments.last),
+        "FirstName": name,
+        "LastName": lastname,
+        "Email": email,
+        "Phone": phone,
+        "Password": password,
+        "Image": await MultipartFile.fromFile(image.path,
+            filename: image.uri.pathSegments.last),
       });
-      final response = await _dio.post("/api/user/create",data: data);
+      final response = await _dio.post("/api/user/create", data: data);
       if (response.statusCode == 200) {
         return Result.success(null);
       }
@@ -365,6 +374,8 @@ class ApiService {
       return Result.fail(e.toString());
     } catch (e) {
       return Result.fail(e.toString());
+    }
+  }
 
   // -------------------- RATING --------------------
 
@@ -375,8 +386,8 @@ class ApiService {
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return UniversalData(
           data: (response.data['data'] as List?)
-              ?.map((e) => RatingModel.fromJson(e))
-              .toList() ??
+                  ?.map((e) => RatingModel.fromJson(e))
+                  .toList() ??
               [],
         );
       }
