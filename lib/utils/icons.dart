@@ -9,6 +9,7 @@ class AppIcons {
   static const String profileMan = "assets/images/profile.png";
   static const String quizImage = "assets/images/quiz_image.png";
   static const String logo = "assets/images/logo.png";
+  static const String logoYellow = "assets/images/logo_yellow.png";
 
   // svg
   static const String articleBackground = "assets/svg/article_background.svg";

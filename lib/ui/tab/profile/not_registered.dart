@@ -18,7 +18,7 @@ class NotRegistered extends StatelessWidget {
         child: Column(
           children: [
             Text("Currently you do not have an account!"),
-            Image.asset(AppIcons.logo),
+            Image.asset(AppIcons.logoYellow),
             Text("You can create your account here!"),
             SizedBox(height: 20),
             ElevatedButton(
@@ -27,8 +27,7 @@ class NotRegistered extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, RouteNames.login);
-
-              }, child: Text("Create an account",style: TextStyle(color: AppColors.white),),
+              }, child: Text("Login to an account",style: TextStyle(color: AppColors.white),),
             ),
           ],
         ),

@@ -33,18 +33,19 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state is LoginStateLoading){
-            showLoadingDialog(context,"Loading...");
+          if (state is LoginStateLoading) {
+            showLoadingDialog(context, "Loading...");
           }
-          if (state is LoginStateError){
+          if (state is LoginStateError) {
             Navigator.of(context).pop();
-            showErrorDialog(context,state.errorMessage);
+            showErrorDialog(context, state.errorMessage);
           }
-          if (state is LoginStateSuccess){
+          if (state is LoginStateSuccess) {
             Navigator.of(context).pop();
             StorageRepository.putString('token', state.token);
             print(StorageRepository.getString('token'));
-            Navigator.pushNamedAndRemoveUntil(context, RouteNames.tabBox, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+                context, RouteNames.tabBox, (route) => false);
           }
         },
         child: LayoutBuilder(builder: (context, constraints) {
@@ -68,13 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 28.h,
                       ),
                       GlobalTextField(
-                        controller: phoneController,
+                          controller: phoneController,
                           hintText: "+(998) 91 234-56-78",
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.next,
                           caption: "Tel raqam"),
                       GlobalTextField(
-                        controller: passwordController,
+                          controller: passwordController,
                           hintText: "********",
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
@@ -103,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         title: "Login",
                         onTap: () {
-                          context.read<LoginBloc>().add(LoginUser(phone: convertPhoneNumber(phoneController.text), password: passwordController.text));
+                          context.read<LoginBloc>().add(LoginUser(
+                              phone: convertPhoneNumber(phoneController.text),
+                              password: passwordController.text));
                         },
                         color: AppColors.C_F59C16,
                         textColor: AppColors.white,
@@ -120,8 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
 
 
 void showLoadingDialog(BuildContext context, String message) {
@@ -164,7 +165,9 @@ void showErrorDialog(BuildContext context, String errorMessage) {
       );
     },
   );
-}String convertPhoneNumber(String input) {
+}
+
+String convertPhoneNumber(String input) {
   String digitsOnly = input.replaceAll(RegExp(r'[^\d]'), '');
 
   if (digitsOnly.length >= 2) {
@@ -173,3 +176,10 @@ void showErrorDialog(BuildContext context, String errorMessage) {
 
   return digitsOnly;
 }
+
+
+var t = {
+  "statusCode": 200,
+  "message": "Success",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQaG9uZSI6Ijk5MTIzNDU2OCIsIklkIjoiMzAiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTY5NjMzNzUyMCwiZXhwIjoxNjk2MzQxMTIwLCJpYXQiOjE2OTYzMzc1MjB9.X8HF_g8o5Ts8q4BnvoJA5XFwtp5VijbgpR0jwyRjkTQ",
+};
