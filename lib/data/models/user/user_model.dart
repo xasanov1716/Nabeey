@@ -27,7 +27,7 @@ class UserModel {
       email: json['email'] ?? '',
       phone: json['phone'] ?? '',
       userRole: json['userRole'] ?? 0,
-      asset: HelperModel.fromJson(json['asset']),
+      asset: json['asset'] != null ? HelperModel.fromJson(json['asset']) : HelperModel(id: 0, fileName: "", filePath: ""),
     );
   }
 }

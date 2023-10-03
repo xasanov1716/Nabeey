@@ -4,6 +4,7 @@ import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/questions/questions_model.dart';
+import 'package:contest_app/data/models/rating/rating_model.dart';
 import 'package:contest_app/data/models/result_model.dart';
 import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:dio/dio.dart';
@@ -300,6 +301,32 @@ class ApiService {
         );
       }
       print('ok');
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  // -------------------- RATING --------------------
+
+  Future<UniversalData> getAllRating() async {
+    Response response;
+    try {
+      response = await _dio.get("/api/quiz-result/get-rating-list");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+          data: (response.data['data'] as List?)
+              ?.map((e) => RatingModel.fromJson(e))
+              .toList() ??
+              [],
+        );
+      }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {
       if (e.response != null) {
