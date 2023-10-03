@@ -1,4 +1,5 @@
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/video_detail/widgets/video_item.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
         appBar: MediaQuery.of(context).size.width > 500 ? AppBar(
           toolbarHeight: 0,
         ) : AppBar(
-          title: Text("Videolar", style: TextStyle(
+          title: const Text("Videolar", style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 24,
               color: AppColors.C_111111
@@ -33,7 +34,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
             icon: const Icon(Icons.arrow_back),
           ),
         ),
-        body: BlocBuilder<VideoBloc, VideoStates>(
+        body: BlocConsumer<VideoBloc, VideoStates>(
           builder: (context, state){
             return ListView(
               physics: size.width > 500 ? NeverScrollableScrollPhysics() : ScrollPhysics(),
@@ -43,6 +44,12 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                 ))
               ],
             );
+          },
+          listener: (context, state){
+            if(state.status == FormStatus.loading){
+              print("Loading");
+              const Center(child: CircularProgressIndicator(color: Colors.teal),);
+            }
           },
         )
     );
