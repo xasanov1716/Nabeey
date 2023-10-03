@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'option_container.dart';
 
 class PageViewColumn extends StatelessWidget {
-  const PageViewColumn({super.key});
+  const PageViewColumn({super.key, required this.index});
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class PageViewColumn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Savol#1",
+            "Savol#$index",
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14.sp,

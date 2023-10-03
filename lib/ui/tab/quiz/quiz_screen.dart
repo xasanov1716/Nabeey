@@ -46,7 +46,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           children: [
                             ...List.generate(
-                                3, (index) => const PageViewColumn()),
+                                3, (index) =>  PageViewColumn(index: index+1,)),
                             const QuizResultPage(),
                           ],
                         ),
