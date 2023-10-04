@@ -285,7 +285,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/quizzes/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        debugPrint('${response.data} + xatolik');
+        debugPrint(response.data);
         return UniversalData(
             data: (response.data['data'] as List)
                 .map((e) => QuizModel.fromJson(e)).toList());
@@ -309,7 +309,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/quiz-questions/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        debugPrint('${response.data} + xatolik');
+        debugPrint(response.data);
         return UniversalData(
             data: (response.data['data'] as List)
                 .map((e) => QuizModel.fromJson(e)).toList());
