@@ -6,12 +6,14 @@ import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/login_bloc/login_bloc.dart';
+import 'package:contest_app/blocs/quiz_bloc/quiz_bloc.dart';
 import 'package:contest_app/blocs/video_bloc/video_bloc.dart';
 import 'package:contest_app/cubit/audios/audios_cubit.dart';
 import 'package:contest_app/data/repository/app_repository.dart';
 import 'package:contest_app/data/repository/article_repository.dart';
 import 'package:contest_app/data/repository/audios_repository.dart';
 import 'package:contest_app/data/repository/book_repository.dart';
+import 'package:contest_app/data/repository/quiz_repository.dart';
 import 'package:contest_app/data/repository/video_repository.dart';
 import 'package:contest_app/services/api_service.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
@@ -47,6 +49,9 @@ class App extends StatelessWidget {
           create: (context) => BookRepoSitory(apiService: apiService),
         ),
         RepositoryProvider(
+          create: (context) => QuizRepository(apiService: apiService),
+        ),
+        RepositoryProvider(
           create: (context) => VideoRepository(apiService: apiService),
         ),
         RepositoryProvider(
@@ -59,6 +64,9 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(providers: [
         BlocProvider(create: (context) => AudioBloc()),
         BlocProvider(create: (context) => LoginBloc(apiService)),
+        BlocProvider(
+            create: (context) =>
+                QuizBloc(quizRepository: context.read<QuizRepository>())..add(GetQuizzesEvent())),
         BlocProvider(
             create: (context) =>
                 VideoBloc(videoRepository: context.read<VideoRepository>())

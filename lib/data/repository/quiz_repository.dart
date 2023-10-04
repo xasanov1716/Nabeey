@@ -6,6 +6,5 @@ class QuizRepository{
 
   QuizRepository({required this.apiService});
 
-  // Future<UniversalData> getAllQuestions()async=>await apiService.getAllQuestions();
-  // Future<UniversalData> getAllQuestionsById(int id)async=>await apiService.getAllQuestionsById(id);
+  Future<UniversalData> quizzesGetAll() async => await apiService.quizzesGetAll();
 }

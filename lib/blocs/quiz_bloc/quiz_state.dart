@@ -1,6 +1,25 @@
 part of 'quiz_bloc.dart';
 
 @immutable
-abstract class QuizState {}
+class QuizState extends Equatable {
+  final List<QuizModel> quizModel;
+  final FormStatus status;
 
-class QuizInitial extends QuizState {}
+  const QuizState({
+    required this.quizModel,
+    required this.status,
+  });
+
+  @override
+  List<Object?> get props => [
+        quizModel,
+        status,
+      ];
+
+  QuizState copyWith({
+    List<QuizModel>? quizModel,
+    FormStatus? status,
+  }) {
+    return QuizState(quizModel: quizModel ?? this.quizModel, status: status ?? this.status);
+  }
+}

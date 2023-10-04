@@ -1,14 +1,16 @@
+import 'package:contest_app/data/models/article/article_model.dart';
 import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
+import 'package:contest_app/data/models/quiz/quiz_model.dart';
 import 'package:contest_app/data/models/result_model.dart';
 import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
 import '../data/models/universal_data.dart';
 import '../utils/constants.dart';
-import 'package:contest_app/data/models/article/article_model.dart';
-import 'package:flutter/foundation.dart';
 
 class ApiService {
   final _dio = Dio(
@@ -160,7 +162,8 @@ class ApiService {
     } on DioError catch (e) {
       if (e.response != null && e.response!.statusCode == 404) {
         return Result.fail(e.response?.data['message'].toString());
-      } if (e.response != null && e.response!.statusCode == 400) {
+      }
+      if (e.response != null && e.response!.statusCode == 400) {
         return Result.fail(e.response?.data['message'].toString());
       }
       return Result.fail(e.toString());
@@ -169,17 +172,19 @@ class ApiService {
     }
   }
 
-  Future<UniversalData> getAllBook()async{
+  Future<UniversalData> getAllBook() async {
     Response response;
-    try{
+    try {
       response = await _dio.get('/api/books/get-all');
-      if(response.statusCode! >= 200 && response.statusCode! < 300){
-      return UniversalData(data: (response.data['data'] as List?)?.map((e) => BookModel.fromJson(e)).toList());
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(
+            data: (response.data['data'] as List?)
+                ?.map((e) => BookModel.fromJson(e))
+                .toList());
       }
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-       if (e.response != null) {
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {
         return UniversalData(error: e.message!);
@@ -198,8 +203,8 @@ class ApiService {
         print("api service ${response.data['data']}");
         return UniversalData(
           data: (response.data['data'] as List?)
-              ?.map((e) => AudioModel.fromJson(e))
-              .toList() ??
+                  ?.map((e) => AudioModel.fromJson(e))
+                  .toList() ??
               [],
         );
       }
@@ -221,8 +226,69 @@ class ApiService {
     try {
       response = await _dio.get("/api/content-audios/get/$id");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(data: AudioModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getBookById(int id) async {
+    Response response;
+    try {
+      response = await _dio.get('/api/books/get/$id');
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(data: BookModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> getBookByIds(int id) async {
+    Response response;
+    try {
+      response = await _dio.get('/api/books/get/$id');
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return UniversalData(data: BookModel.fromJson(response.data['data']));
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      return UniversalData(error: e.toString());
+    }
+  }
+
+  Future<UniversalData> quizzesGetAll() async {
+    Response response;
+    try {
+      response = await _dio.get("/api/quizzes/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        debugPrint('${response.data} + xatolik');
         return UniversalData(
-            data: AudioModel.fromJson(response.data['data']));
+            data: (response.data['data'] as List)
+                .map((e) => QuizModel.fromJson(e)).toList());
       }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {
@@ -238,44 +304,25 @@ class ApiService {
   }
 
 
-  Future<UniversalData> getBookById(int id)async{
+  Future<UniversalData> getQuizQuestions() async {
     Response response;
-    try{
-      response = await _dio.get('/api/books/get/$id');
-      if(response.statusCode! >= 200 && response.statusCode! < 300){
-      return UniversalData(data: BookModel.fromJson(response.data['data']));
+    try {
+      response = await _dio.get("/api/quiz-questions/get-all");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        debugPrint('${response.data} + xatolik');
+        return UniversalData(
+            data: (response.data['data'] as List)
+                .map((e) => QuizModel.fromJson(e)).toList());
       }
       return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-       if (e.response != null) {
+    } on DioException catch (e) {
+      if (e.response != null) {
         return UniversalData(error: e.response!.data['message']);
       } else {
         return UniversalData(error: e.message!);
       }
     } catch (e) {
       debugPrint("Caught: $e");
-      return UniversalData(error: e.toString());
-    }
-  }
-
-
-  Future<UniversalData> getBookByIds(int id)async{
-    Response response;
-    try{
-      response = await _dio.get('/api/books/get/$id');
-      if(response.statusCode! >= 200 && response.statusCode! < 300 ){
-        return UniversalData(data: BookModel.fromJson(response.data['data']));
-      }
-      return UniversalData(error: 'ERROR');
-    }
-    on DioException catch(e){
-      if(e.response != null){
-        return UniversalData(error: e.response!.data['message']);
-      }else{
-        return UniversalData(error: e.message!);
-      }
-    }catch(e){
       return UniversalData(error: e.toString());
     }
   }
