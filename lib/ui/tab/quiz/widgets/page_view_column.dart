@@ -1,17 +1,24 @@
+import 'package:contest_app/data/models/quiz/quiz_questions_model.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'option_container.dart';
 
-class PageViewColumn extends StatelessWidget {
-  const PageViewColumn({super.key, required this.index});
+class PageViewColumn extends StatefulWidget {
+  const PageViewColumn({super.key, required this.index, required this.questionModel});
 
   final int index;
+  final QuestionModel questionModel;
 
   @override
+  State<PageViewColumn> createState() => _PageViewColumnState();
+}
+
+class _PageViewColumnState extends State<PageViewColumn> {
+  @override
   Widget build(BuildContext context) {
-    int trueAnswer=0;
+    int selectAnswer = 0;
     double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -19,7 +26,7 @@ class PageViewColumn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Savol#$index",
+            "Savol#${widget.index + 1}",
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14.sp,
@@ -29,7 +36,7 @@ class PageViewColumn extends StatelessWidget {
           ),
           SizedBox(height: 20 * height / 812),
           Text(
-            "Rosululloh Sollallohu alayhi vasallam qachon tug'ilganlar?",
+            widget.questionModel.text,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 18.sp,
@@ -40,13 +47,18 @@ class PageViewColumn extends StatelessWidget {
           ...List.generate(
             4,
             (index) => OptionContainer(
-              onTap: (){},
-              borderColor: Border.all(color: index==2?Colors.red:trueAnswer==index?Colors.green:Colors.grey),
+              onTap: (){
+                print("bosildi $index");
+                setState(() {
+                  selectAnswer = index;
+                });
+              },
+              borderColor: Border.all(color: Colors.grey),
               option: "${String.fromCharCode(65+index)}.",
-              questionText: "571 -yil Robbiul-avval 12",
+              questionText: widget.questionModel.answers[index].text,
               icon: Icon(
-                index==2?CupertinoIcons.clear_circled_solid:trueAnswer==index?CupertinoIcons.check_mark_circled_solid:CupertinoIcons.circle,
-                color: index==2?Colors.red:trueAnswer==index?Colors.green:Colors.grey,
+                CupertinoIcons.circle,
+                color: Colors.grey,
                 size: 26.r,
               ),
             ),

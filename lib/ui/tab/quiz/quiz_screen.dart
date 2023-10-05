@@ -1,5 +1,6 @@
 import 'package:contest_app/blocs/quiz_bloc/quiz_bloc.dart';
 import 'package:contest_app/data/models/status/form_status.dart';
+import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/page_view_column.dart';
 import 'package:contest_app/ui/tab/quiz/widgets/quiz_result_page.dart';
 import 'package:contest_app/ui/tab/rating/widgets/rating_appbar.dart';
@@ -34,7 +35,6 @@ class _QuizScreenState extends State<QuizScreen> {
           }
         },
         builder: (context, state) {
-            debugPrint(state.quizModel.first.name);
             return RatingAppBar(
               title: "Test",
               subtitle: "Payg’ambarlikdan oldingi davr",
@@ -52,9 +52,10 @@ class _QuizScreenState extends State<QuizScreen> {
                             physics: const NeverScrollableScrollPhysics(),
                             children: [
                               ...List.generate(
-                                  3,
+                                  state.questionModel.length,
                                   (index) => PageViewColumn(
-                                        index: index + 1,
+                                    questionModel: state.questionModel[index],
+                                        index: index,
                                       )),
                               const QuizResultPage(),
                             ],
@@ -66,14 +67,14 @@ class _QuizScreenState extends State<QuizScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 20.w, right: 20.w),
                     child: Visibility(
-                      visible: activeIndex != 3,
+                      visible: activeIndex != state.questionModel.length,
                       child: GlobalButton(
                         onTap: () {
                           setState(() {});
-                          if (activeIndex < 3) {
+                          if (activeIndex < state.questionModel.length) {
                             activeIndex++;
                             pageViewController.animateToPage(activeIndex,
-                                duration: activeIndex == 3
+                                duration: activeIndex == state.questionModel.length
                                     ? const Duration(seconds: 1)
                                     : const Duration(milliseconds: 500),
                                 curve: Curves.linear);
@@ -88,18 +89,10 @@ class _QuizScreenState extends State<QuizScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 20.w, right: 20.w),
                     child: Visibility(
-                      visible: activeIndex == 3,
+                      visible: activeIndex == state.questionModel.length,
                       child: GlobalButton(
                         onTap: () {
-                          setState(() {});
-                          if (activeIndex < 3) {
-                            activeIndex++;
-                            pageViewController.animateToPage(activeIndex,
-                                duration: activeIndex == 3
-                                    ? const Duration(seconds: 1)
-                                    : const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                          }
+                          Navigator.pushNamed(context, RouteNames.ratingScreen);
                         },
                         title: "Reyting ko'rish",
                         color: AppColors.C_F59C16,
@@ -112,21 +105,13 @@ class _QuizScreenState extends State<QuizScreen> {
                     padding:
                         EdgeInsets.only(bottom: 22.h, left: 20.w, right: 20.w),
                     child: Visibility(
-                      visible: activeIndex == 3,
+                      visible: activeIndex == state.questionModel.length,
                       child: GlobalButton(
                         onTap: () {
-                          setState(() {});
-                          if (activeIndex < 3) {
-                            activeIndex++;
-                            pageViewController.animateToPage(activeIndex,
-                                duration: activeIndex == 3
-                                    ? const Duration(seconds: 1)
-                                    : const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                          }
+                          Navigator.pushReplacementNamed(context, RouteNames.tabBox);
                         },
                         borderColor: AppColors.C_F59C16,
-                        title: "Reyting ko'rish",
+                        title: "Bosh sahifaga o’tish",
                         color: AppColors.white,
                         textColor: AppColors.C_F59C16,
                       ),

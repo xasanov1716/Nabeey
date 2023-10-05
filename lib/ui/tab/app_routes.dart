@@ -10,6 +10,7 @@ import 'package:contest_app/ui/tab/home/sub_screens/videos/sub_screens/video_det
 import 'package:contest_app/ui/tab/profile/auth/auth_screen.dart';
 import 'package:contest_app/ui/tab/profile/sub_screens/article_create_screen.dart';
 import 'package:contest_app/ui/tab/quiz/quiz_screen.dart';
+import 'package:contest_app/ui/tab/rating/rating_screen.dart';
 import 'package:contest_app/ui/tab/tab_box.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,7 @@ class RouteNames {
   static const String booksDetail = "/books_detail";
   static const String quizScreen = "/quiz_screen";
   static const String articleCreateScreen = "/article_create_screen";
+  static const String ratingScreen = "/rating_screen";
 }
 
 class AppRoutes {
@@ -60,6 +62,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const QuizScreen());
       case RouteNames.articleCreateScreen:
         return MaterialPageRoute(builder: (context) => const ArticleCreateScreen());
+      case RouteNames.ratingScreen:
+        return MaterialPageRoute(builder: (context) => const RatingScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
