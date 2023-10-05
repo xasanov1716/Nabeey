@@ -32,7 +32,7 @@ class ArticleItemsWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(width / 18)),
-              child: Image.asset(
+              child: Image.network(
                 image,
                 fit: BoxFit.cover,
                 height: 154 * height / 812,

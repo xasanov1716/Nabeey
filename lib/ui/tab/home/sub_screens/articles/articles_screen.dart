@@ -52,7 +52,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                           dateTime:
                           "${(DateTime.now()).toString().substring(8, 10)}.${(DateTime.now()).toString().substring(5, 7)}.${(DateTime.now()).toString().substring(0, 4)}",
                           views: "2696",
-                          image: AppIcons.articleDetail,
+                          image: article.image.filePath,
                         ),
                       );
                     },

@@ -33,7 +33,7 @@ class ArticleDetailScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: width / 18),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(width / 18),
-                    child: Image.asset(AppIcons.articleDetail, width: double.infinity,fit: BoxFit.cover),
+                    child: Image.network(state.articleModel.image.filePath, width: double.infinity,fit: BoxFit.cover),
                   ),
                 ),
                 Text(

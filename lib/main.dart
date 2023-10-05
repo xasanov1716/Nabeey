@@ -84,9 +84,6 @@ class App extends StatelessWidget {
         BlocProvider(
             create: (context) => AudiosCubit(
                 audiosRepository: context.read<AudiosRepository>())),
-        // BlocProvider(
-        //     create: (context) => QuizzesBloc(
-        //         quizRepository: context.read<QuizRepository>())),
         BlocProvider(
             create: (context) =>
                 CategoriesBloc(appRepository: context.read<AppRepository>())
