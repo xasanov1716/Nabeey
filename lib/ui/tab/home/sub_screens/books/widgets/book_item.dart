@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BookItem extends StatelessWidget {
   const BookItem(
@@ -22,12 +24,25 @@ class BookItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            image,
+          CachedNetworkImage(
+            imageUrl: image,
             height: height * 148 / 812,
             width: width * 121 / 375,
+            placeholder: (context, url) => Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              direction: ShimmerDirection.ltr,
+              highlightColor: Colors.grey.shade100,
+              child:  Container(
+                height: height * 148 / 812,
+                width: width * 121 / 375,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20 * width / 375),
+                  color: Colors.grey.shade300,
+                ),
+              ),
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +50,10 @@ class BookItem extends StatelessWidget {
               Text(title, style: const TextStyle(fontSize: 20)),
               Text(subtitle),
             ],
-          )
+          ),
+          SizedBox(
+            width: 10,
+          ),
         ],
       ),
     );
