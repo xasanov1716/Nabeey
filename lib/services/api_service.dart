@@ -3,6 +3,7 @@ import 'package:contest_app/data/models/audio/audio_model.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
 import 'package:contest_app/data/models/quiz/quiz_model.dart';
+import 'package:contest_app/data/models/quiz/quiz_questions_model.dart';
 import 'package:contest_app/data/models/result_model.dart';
 import 'package:contest_app/data/models/video_model/video_model.dart';
 import 'package:dio/dio.dart';
@@ -285,7 +286,7 @@ class ApiService {
     try {
       response = await _dio.get("/api/quizzes/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        debugPrint(response.data);
+        debugPrint(response.data.toString());
         return UniversalData(
             data: (response.data['data'] as List)
                 .map((e) => QuizModel.fromJson(e)).toList());
@@ -304,15 +305,15 @@ class ApiService {
   }
 
 
-  Future<UniversalData> getQuizQuestions() async {
+  Future<UniversalData> getAllQuizQuestions() async {
     Response response;
     try {
       response = await _dio.get("/api/quiz-questions/get-all");
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        debugPrint(response.data);
+        debugPrint(response.data.toString());
         return UniversalData(
             data: (response.data['data'] as List)
-                .map((e) => QuizModel.fromJson(e)).toList());
+                .map((e) => QuestionModel.fromJson(e["question"])).toList());
       }
       return UniversalData(error: 'ERROR');
     } on DioException catch (e) {

@@ -30,8 +30,7 @@ class _OptionContainerState extends State<OptionContainer> {
     return Column(
       children: [
         SizedBox(height: 20 * height / 812),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+        Ink(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50.r),
               color: AppColors.white,
@@ -39,7 +38,10 @@ class _OptionContainerState extends State<OptionContainer> {
           child: ListTile(
               onTap: widget.onTap,
               minLeadingWidth: 0,
-              contentPadding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.r),
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
               leading: Text(
                 widget.option,
                 style: TextStyle(
