@@ -33,7 +33,7 @@ class DownLoaderCubit extends Cubit<DownLoaderState> {
     Dio dio = Dio();
 
     var directory = await getDownloadPath();
-    String newFileLocation = "${directory?.path}/NABEEY${fileInfo.substring(fileInfo.length - 5, fileInfo.length)}";
+    String newFileLocation = "${directory?.path}/Nabeey${fileInfo.substring(fileInfo.length - 5, fileInfo.length)}";
     var allFiles = directory?.list();
 
 
