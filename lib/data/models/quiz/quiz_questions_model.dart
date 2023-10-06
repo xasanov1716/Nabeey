@@ -10,12 +10,14 @@ class QuestionModel{
   String text;
   String image;
   List<QuestionAnswerModel> answers;
+  bool isSelected;
 
   QuestionModel({
     required this.id,
     required this.text,
     required this.image,
     required this.answers,
+    this.isSelected = false,
 });
 
   QuestionModel copyWith({
@@ -23,6 +25,7 @@ class QuestionModel{
     String? text,
     String? image,
     List<QuestionAnswerModel>? answers,
+    bool? isSelected,
 
   }) =>
       QuestionModel(
@@ -30,6 +33,7 @@ class QuestionModel{
         text: text ?? this.text,
         image: image ?? this.image,
         answers: answers ?? this.answers,
+        isSelected: isSelected ?? this.isSelected,
       );
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
