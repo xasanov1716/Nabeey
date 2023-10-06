@@ -16,9 +16,25 @@ class PageViewColumn extends StatefulWidget {
 }
 
 class _PageViewColumnState extends State<PageViewColumn> {
+
+  int selectAnswer = -1;
+  Color color = Colors.grey;
+  IconData icon = CupertinoIcons.circle;
+  int isSelect=0;
+
+  checkAnswer(int index){
+    if(widget.questionModel.answers[selectAnswer].isTrue && isSelect==0){
+      color = Colors.green;
+      icon = CupertinoIcons.check_mark_circled_solid;
+      isSelect = 1;
+    }else if(isSelect==0){
+      color = Colors.red;
+      icon = CupertinoIcons.clear_circled_solid;
+      isSelect = 1;
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    int selectAnswer = 0;
     double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -48,17 +64,17 @@ class _PageViewColumnState extends State<PageViewColumn> {
             4,
             (index) => OptionContainer(
               onTap: (){
-                print("bosildi $index");
+                debugPrint("bosildi $index");
                 setState(() {
                   selectAnswer = index;
+                  checkAnswer(index);
                 });
               },
-              borderColor: Border.all(color: Colors.grey),
+              borderColor: Border.all(color: selectAnswer == index?color:Colors.grey),
               option: "${String.fromCharCode(65+index)}.",
               questionText: widget.questionModel.answers[index].text,
-              icon: Icon(
-                CupertinoIcons.circle,
-                color: Colors.grey,
+              icon: Icon(selectAnswer == index?icon:CupertinoIcons.circle,
+                color: selectAnswer == index?color:Colors.grey,
                 size: 26.r,
               ),
             ),
