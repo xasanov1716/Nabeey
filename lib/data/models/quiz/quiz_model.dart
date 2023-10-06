@@ -8,8 +8,8 @@ class QuizModel {
   final int questionCount;
   final String startTime;
   final String endTime;
-  final UserModel user;
-  final CategoryModel contentCategory;
+  // final UserModel user;
+  // final CategoryModel contentCategory;
 
   QuizModel({
     required this.id,
@@ -18,8 +18,8 @@ class QuizModel {
     required this.questionCount,
     required this.startTime,
     required this.endTime,
-    required this.user,
-    required this.contentCategory,
+    // required this.user,
+    // required this.contentCategory,
   });
 
   QuizModel copyWith({
@@ -29,8 +29,8 @@ class QuizModel {
     int? questionCount,
     String? startTime,
     String? endTime,
-    UserModel? user,
-    CategoryModel? contentCategory,
+    // UserModel? user,
+    // CategoryModel? contentCategory,
 
   }) =>
       QuizModel(
@@ -40,8 +40,8 @@ class QuizModel {
         questionCount: questionCount ?? this.questionCount,
         startTime: startTime ?? this.startTime,
         endTime: endTime ?? this.endTime,
-        user: user ?? this.user,
-        contentCategory: contentCategory ?? this.contentCategory,
+        // user: user ?? this.user,
+        // contentCategory: contentCategory ?? this.contentCategory,
       );
 
   factory QuizModel.fromJson(Map<String, dynamic> json) => QuizModel(
@@ -51,7 +51,7 @@ class QuizModel {
     questionCount: json["questionCount"] as int? ?? 0,
     startTime: json["startTime"] as String? ?? '',
     endTime: json["endTime"] as String? ?? '',
-    user: UserModel.fromJson(json["user"]),
-    contentCategory: CategoryModel.fromJson(json["contentCategory"]),
+    // user: UserModel.fromJson(json["user"]),
+    // contentCategory: CategoryModel.fromJson(json["contentCategory"]),
   );
 }

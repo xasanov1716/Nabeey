@@ -15,6 +15,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
       : super(const QuizState(quizModel: [], status: FormStatus.pure,questionModel: [])) {
     on<GetQuizzesEvent>(_getQuizzes);
     on<GetQuizQuestionsEvent>(_getQuizQuestions);
+    on<GetQuizQuestionsByIdEvent>(_getQuizQuestionsById);
   }
 
   final QuizRepository quizRepository;
@@ -42,6 +43,24 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     emit(state.copyWith(status: FormStatus.loading));
 
     UniversalData data = await quizRepository.getQuizQuestions();
+
+
+    if (data.error.isEmpty) {
+      emit(state.copyWith(
+        questionModel: data.data,
+        status: FormStatus.success,
+      ));
+    }
+    emit(state.copyWith(
+      status: FormStatus.failure,
+    ));
+  }
+
+  Future<void> _getQuizQuestionsById(
+      GetQuizQuestionsByIdEvent event, Emitter<QuizState> emit) async {
+    emit(state.copyWith(status: FormStatus.loading));
+
+    UniversalData data = await quizRepository.getQuizQuestionsById(event.id);
 
 
     if (data.error.isEmpty) {

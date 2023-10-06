@@ -305,6 +305,29 @@ class ApiService {
   }
 
 
+  Future<UniversalData> getQuizQuestionsById(int id) async {
+    Response response;
+    try {
+      response = await _dio.get("/api/quiz-questions/get-by-quizId/$id");
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        debugPrint(response.data.toString());
+        return UniversalData(
+            data: (response.data['data'] as List)
+                .map((e) => QuestionModel.fromJson(e)).toList());
+      }
+      return UniversalData(error: 'ERROR');
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data['message']);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (e) {
+      debugPrint("Caught: $e");
+      return UniversalData(error: e.toString());
+    }
+  }
+
   Future<UniversalData> getAllQuizQuestions() async {
     Response response;
     try {
