@@ -1,6 +1,7 @@
 import 'package:contest_app/blocs/book/book_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
+import 'package:contest_app/cubit/download/downloader_cubit.dart';
 import 'package:contest_app/data/models/book/book_model.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/ui/tab/home/sub_screens/books/widgets/book_item.dart';
@@ -38,14 +39,15 @@ class _BooksScreenState extends State<BooksScreen> {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20 * width /375, vertical: 24 * height /812),
                   child: BookItem(
-                      image: AppIcons.books,
+                      image: book.image.filePath,
                       title: book.title,
                       subtitle: book.author,
                       height: height,
                       width: width,
                       onTap: () {
-                        context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
-                        Navigator.pushNamed(context, RouteNames.booksDetail, arguments: book.title);
+                        context.read<DownLoaderCubit>().downloadFile(fileInfo: book.file.filePath, context: context);
+                        // context.read<BookBloc>().add(GetByIdBookEvent(bookId: book.id));
+                        // Navigator.pushNamed(context, RouteNames.booksDetail, arguments: book.title);
                       }),
                 );
               }))
