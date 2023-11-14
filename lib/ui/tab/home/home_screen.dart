@@ -2,6 +2,7 @@ import 'package:contest_app/blocs/categories_bloc/categories_bloc.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_event.dart';
 import 'package:contest_app/blocs/categories_bloc/categories_state.dart';
 import 'package:contest_app/data/models/category/category_model.dart';
+import 'package:contest_app/data/models/status/form_status.dart';
 import 'package:contest_app/ui/tab/app_routes.dart';
 import 'package:contest_app/utils/colors.dart';
 import 'package:contest_app/utils/icons.dart';
@@ -37,6 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: BlocBuilder<CategoriesBloc, CategoriesState>(
           builder: (context, state) {
+            if(state.status == FormStatus.loading){
+              return const Center(child: CircularProgressIndicator());
+            }
             return ListView(
               children: [
                 Padding(
